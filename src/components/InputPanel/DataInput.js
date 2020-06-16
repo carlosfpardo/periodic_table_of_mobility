@@ -5,6 +5,7 @@ import uniqueId from 'lodash/uniqueId'
 import InputHelp from './InputHelp'
 import UNITS from '../../data/units.json'
 import './DataInput.css'
+import { useTranslation } from 'react-i18next'
 
 DataInput.propTypes = {
   attribute: PropTypes.shape({
@@ -27,6 +28,7 @@ DataInput.propTypes = {
 function DataInput (props) {
   const { attribute, value, onChange = () => {} } = props
   const { name, definedUnits, defaultUnit, exampleValue } = attribute
+  const { t } = useTranslation()
   const units =
     typeof definedUnits !== 'undefined' ? UNITS[definedUnits] : defaultUnit
 
@@ -74,7 +76,7 @@ function DataInput (props) {
         error={isInvalidInput(inputValue)}
         label={unitLabel}
         labelPosition={unitLabel ? 'right' : undefined}
-        placeholder={`example: ${exampleValue}`}
+        placeholder={`${t('inputPanel.example')}: ${exampleValue}`}
         onChange={handleInputChange}
       />
       <InputHelp attribute={attribute} />

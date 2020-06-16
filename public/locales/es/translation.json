@@ -3,5 +3,9 @@
   "description": {
     "part1": "Traduccion en proceso",
     "part2": "Cambiar lenguaje entre ingles y español usando los botones localizados arriba."
+  },
+  "inputPanel": {
+    "part1": "Input vehicle attributes",
+    "part2": "Please choose from the drop-down menu at the bottom or input specific vehicle attributes."
   }
 }

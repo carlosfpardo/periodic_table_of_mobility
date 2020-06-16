@@ -1,29 +1,11 @@
-import React, { Suspense, Component, useState } from 'react'
-import { useTranslation, withTranslation, Trans } from 'react-i18next'
+import React, { Suspense, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Grid, Divider } from 'semantic-ui-react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
-import PropTypes from 'prop-types'
 import './App.css'
-
-// use hoc for class based components
-class LegacyWelcomeClass extends Component {
-  render () {
-    const { t } = this.props
-    return <h2>{t('title')}</h2>
-  }
-}
-LegacyWelcomeClass.propTypes = {
-  t: PropTypes.string
-}
-const Welcome = withTranslation()(LegacyWelcomeClass)
-
-// Component using the Trans component
-function MyComponent () {
-  return <Trans i18nKey="description.part1" />
-}
 
 // page uses the hook
 function Page () {
@@ -37,13 +19,10 @@ function Page () {
   return (
     <div className="App">
       <div className="App-header">
-        <Welcome />
         <button onClick={() => changeLanguage('es')}>es</button>
         <button onClick={() => changeLanguage('en')}>en</button>
       </div>
-      <div className="App-intro">
-        <MyComponent />
-      </div>
+      <div className="App-intro" />
       <div>{t('description.part2')}</div>
       <Grid stackable>
         <Grid.Row columns={1}>
