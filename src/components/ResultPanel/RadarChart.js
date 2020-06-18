@@ -6,6 +6,7 @@ import downloadSvg, { downloadPng } from 'svg-crowbar'
 import { ATTR_TYPE_DEPENDENT } from '../../constants'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import './RadarChart.css'
+import i18n from '../../i18n'
 import { useTranslation } from 'react-i18next'
 
 RadarChart.propTypes = {
@@ -13,7 +14,7 @@ RadarChart.propTypes = {
 }
 
 function RadarChart ({ levels }) {
-  const { t } = useTranslation()
+  const { t } = useTranslation(['translation', 'attributes'])
   return (
     <>
       <Radar
@@ -52,7 +53,7 @@ function attributesToChartLabels (attributes) {
     .filter(attribute => attribute.type === ATTR_TYPE_DEPENDENT)
     .map(attribute => ({
       key: attribute.id,
-      label: attribute.name
+      label: i18n.t('attributes:' + attribute.name + '.name')
     }))
 }
 

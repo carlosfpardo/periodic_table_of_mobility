@@ -96,7 +96,7 @@ function InputPanel ({ vehicle, setVehicle }) {
       setSuccess(t('inputPanel.savedCorrect'))
     } catch (err) {
       console.error(err)
-      setError(t('saveFail'))
+      setError(t('inputPanel.saveFail'))
     }
 
     setSavePending(false)

@@ -42,7 +42,7 @@ function InputHelp ({ attribute }) {
               // We may gradually relax `allowedTypes` as time goes on,
               // but for now, keep it to only the bare minimum needed
               <ReactMarkdown
-                source={description}
+                source={t('attributes:' + name + '.description')}
                 unwrapDisallowed
                 linkTarget={(url, text, title) => '_blank'}
                 allowedTypes={['root', 'text', 'paragraph', 'link']}

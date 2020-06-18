@@ -28,7 +28,7 @@ DataInput.propTypes = {
 function DataInput (props) {
   const { attribute, value, onChange = () => {} } = props
   const { name, definedUnits, defaultUnit, exampleValue } = attribute
-  const { t } = useTranslation()
+  const { t } = useTranslation(['translation', 'attributes'])
   const units =
     typeof definedUnits !== 'undefined' ? UNITS[definedUnits] : defaultUnit
 
@@ -69,7 +69,7 @@ function DataInput (props) {
 
   return (
     <div className="input-row">
-      <label htmlFor={htmlId}>{name}</label>
+      <label htmlFor={htmlId}>{t('attributes:' + name + '.name')}</label>
       <Input
         id={htmlId}
         value={inputValue}
