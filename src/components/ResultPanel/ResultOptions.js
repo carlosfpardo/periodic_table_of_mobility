@@ -40,12 +40,12 @@ function ResultOptions ({ levels, useCase, vehicle }) {
   return (
     <div className="box">
       <Grid>
-        <Grid.Row columns={3}>
-          <Grid.Column width={6}>
+        <Grid.Row verticalAlign="middle" columns={3} centered>
+          <Grid.Column width={5}>
             {vehicle.name}
             <VehicleImage vehicle={vehicle} />
           </Grid.Column>
-          <Grid.Column width={3} />
+          <Grid.Column width={2} />
           <Grid.Column width={6}>
             <RadarChart levels={levels} />
           </Grid.Column>
@@ -66,7 +66,6 @@ function ResultOptions ({ levels, useCase, vehicle }) {
         {calculateSpaceRequired(levels)}
       </Grid>
       <SummaryPolicy levels={levels} />
-
     </div>
   )
 }

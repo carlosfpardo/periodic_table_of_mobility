@@ -1,5 +1,6 @@
 {
   "title": "Periodic Table of Mobility: A policy guidance tool by NUMO",
+  "language": "Language",
   "description": {
     "part1": "Transaltion in progress",
     "part2": "Switch language between english and spanish using buttons above.",
@@ -14,7 +15,7 @@
     "part4": "Select pre-loaded use cases"
   },
   "resultOptions": {
-    "driverLicense": "Drivers licence",
+    "driverLicense": "Driver's license",
     "operatingLicense": "Operating license",
     "dataRequirements": "Data requirements",
     "dataQuery": "See data requirements",

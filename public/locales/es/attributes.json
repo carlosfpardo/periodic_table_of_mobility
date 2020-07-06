@@ -1,7 +1,7 @@
 {
   "Maximum capacity": {
     "name": "Capacidad máxima",
-    "description": "Por favor agregue la capacidad máxima legal del vehículo como ha sido definido por su fábrica (si es humana/peatón, su capacidad es 1). Utilizaremos este atributo como factor del espacio ocupado - huella - y emisiones"
+    "description": "Por favor agregue la capacidad máxima legal del vehículo como ha sido definido por su fábrica (si es humana/peatón, su capacidad es 1). Utilizaremos este atributo como factor del espacio ocupado - huella - y emisiones."
   },
   "Weight": {
     "name": "Peso",
@@ -17,7 +17,7 @@
   },
   "Emissions": {
     "name": "Emisiones",
-    "description": "Por favor ingrese las emisiones de dióxido de carbono  (CO₂) generadas por este vehículo según sus especificaciones técnicas del fabricante. Utilizaremos la capacidad máxima que nos entregó para calcular las emisiones por pasajero. Un viaje de altas emisiones genera salud (e impactos generales) negativa en una ciudad y el mundo."
+    "description": "Por favor ingrese las emisiones de dióxido de carbono (CO₂) generadas por este vehículo según sus especificaciones técnicas del fabricante. Utilizaremos la capacidad máxima que nos entregó para calcular las emisiones por pasajero. Un viaje de altas emisiones genera salud (e impactos generales) negativa en una ciudad y el mundo."
   },
   "ILL-Health": {
     "name": "NO-Salud",
