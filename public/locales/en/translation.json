@@ -15,7 +15,7 @@
     "part4": "Select pre-loaded use cases"
   },
   "resultOptions": {
-    "driverLicense": "Driver licence",
+    "driverLicense": "Driver license",
     "operatingLicense": "Operating license",
     "dataRequirements": "Data requirements",
     "dataQuery": "See data requirements",
