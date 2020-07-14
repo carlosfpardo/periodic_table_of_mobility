@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Divider } from 'semantic-ui-react'
+import { Grid, Divider, Menu, Dropdown, Input } from 'semantic-ui-react'
 import { ReactComponent as NUMOLogo } from './images/logo_numo.svg'
 import Header from './components/Header'
 import Footer from './components/Footer'
@@ -9,14 +9,6 @@ import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import {
-  Navbar,
-  Nav,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button
-} from 'react-bootstrap'
 
 // page uses the hook
 function Page () {
@@ -60,50 +52,45 @@ function AppRouter () {
   return (
     <Router>
       <div>
-        <Navbar bg="ligt" expand="lg">
-          <Navbar.Brand href="/">
+        <Menu huge secondary>
+          <Menu.Item href="/">
             <NUMOLogo
               style={{
                 height: '2.5em'
               }}
             />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link>
-                <Link to="/">{t('routing.profiles')}</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/about">{t('routing.results')}</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/users">Users</Link>
-              </Nav.Link>
-              <NavDropdown title={t('language')} id="basic-nav-dropdown">
-                <NavDropdown.Item onClick={() => changeLanguage('en')}>
-                  English
-                </NavDropdown.Item>
-                <NavDropdown.Item onClick={() => changeLanguage('es')}>
-                  Español
-                </NavDropdown.Item>
-              </NavDropdown>
-            </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
-        </Navbar>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/">{t('routing.profiles')}</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/policyRecomendations">{t('routing.results')}</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/city">{t('routing.city')}</Link>
+          </Menu.Item>
+          <Dropdown item text={t('language')}>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => changeLanguage('en')}>
+                English
+              </Dropdown.Item>
+              <Dropdown.Item onClick={() => changeLanguage('es')}>
+                Español
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Input icon="search" placeholder="Search..." />
+            </Menu.Item>
+            <Menu.Item name="logout" />
+          </Menu.Menu>
+        </Menu>
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
-          <Route path="/about">
+          <Route path="/policyRecomendations">
             <Grid stackable>
               <Grid.Row columns={1}>
                 <Grid.Column>
@@ -112,7 +99,7 @@ function AppRouter () {
               </Grid.Row>
             </Grid>
           </Route>
-          <Route path="/users" />
+          <Route path="/city" />
           <Route path="/">
             <Page />
           </Route>

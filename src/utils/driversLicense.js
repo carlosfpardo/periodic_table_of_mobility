@@ -10,7 +10,9 @@
 import { DEFAULT_USE_CASE } from '../constants'
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon } from 'semantic-ui-react'
+import { Grid, Segment, Button, Icon, Modal, Header } from 'semantic-ui-react'
+import './utils.css'
+
 export function calculateDriverLevelRequired (levels, useCase) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -37,7 +39,19 @@ export function calculateDriverLevelRequired (levels, useCase) {
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.seeRequirements')}</Button>
+          <Modal
+            trigger={
+              <Button fluid>{i18n.t('resultOptions.seeRequirements')}</Button>
+            }
+          >
+            <Modal.Header>Test Modal</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>TestModal</Header>
+                <p>test</p>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
       </Grid.Row>
     )
