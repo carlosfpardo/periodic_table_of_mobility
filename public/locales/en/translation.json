@@ -62,6 +62,21 @@
     "notHarmfulSum": "This vehicle is not likely to be harmful",
     "notHarmful": "Policies should be aimed at promoting its use. Consider allocating more space to them, don’t request too much data from operators, don’t require a license to operate, and consider subsidizing their usage."
   },
+  "city": {
+    "title": "Please describe your social goals",
+    "subtitle": "Social goals are helpful to provide recomendations towards transport policies",
+    "pregoals": "Pre-load goals",
+    "defgoals": "Define your own goals (below)",
+    "placeholder1": "Name for goal group",
+    "placeholder2": "Describe your social goals in terms of the main policies you have at the noational, local level and specific policies for transportation.",
+    "part1": "Please rank your priorities for improvement acordint to current city policies:",
+    "environment": "Environment",
+    "publicHealth": "Public health",
+    "equity": "Equity",
+    "joyfulness": "Joyfulness",
+    "personalSafety": "Personal safety",
+    "goal1": "Sustainable development goals"
+  },
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
@@ -74,6 +89,7 @@
   },
   "routing": {
     "profiles": "Vehicle profiles",
-    "results": "Policy recommendation"
+    "results": "Policy recommendation",
+    "city": "City priorities"
   }
 }

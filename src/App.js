@@ -9,6 +9,7 @@ import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import CityGoals from './components/CityGoals/CityGoals'
 
 // page uses the hook
 function Page () {
@@ -99,7 +100,9 @@ function AppRouter () {
               </Grid.Row>
             </Grid>
           </Route>
-          <Route path="/city" />
+          <Route path="/city">
+            <CityGoals />
+          </Route>
           <Route path="/">
             <Page />
           </Route>
