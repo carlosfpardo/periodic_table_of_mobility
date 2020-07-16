@@ -21,6 +21,7 @@ function CityGoals () {
   const [goal, setGoal] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
+  const [isDefault, setDefault] = useState(false)
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
@@ -159,6 +160,12 @@ function CityGoals () {
 
     setGoal(newVehicle)
   }
+  function handleSelection (event) {
+    setDefault(true)
+  }
+  function handleSelection1 (event) {
+    setDefault(false)
+  }
   return (
     <div className="App">
       <Header textAlign="center">
@@ -169,28 +176,30 @@ function CityGoals () {
       <Form>
         <Grid>
           <Grid.Row>
-            <Header>{t('city.part1')}</Header>
-          </Grid.Row>
-          <Grid.Row>
             <Form.Field
               label={t('city.pregoals')}
               control="input"
               type="radio"
               name="htmlRadios"
               value="pre"
+              onClick={handleSelection}
             />
-            <Dropdown
-              placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
-              fluid
-              search
-              selection
-              options={profiles.map(item => ({
-                key: item.id,
-                text: item.name,
-                value: item.id
-              }))}
-              onChange={handleDropdownChange}
-            />
+            {isDefault ? (
+              <Dropdown
+                placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
+                fluid
+                search
+                selection
+                options={profiles.map(item => ({
+                  key: item.id,
+                  text: item.name,
+                  value: item.id
+                }))}
+                onChange={handleDropdownChange}
+              />
+            ) : (
+              <Dropdown disabled />
+            )}
           </Grid.Row>
           <Grid.Row>
             <Form.Field
@@ -199,15 +208,23 @@ function CityGoals () {
               type="radio"
               name="htmlRadios"
               value="def"
+              onClick={handleSelection1}
             />
-            <Input
-              id="input-name"
-              placeholder={t('city.placeholder1')}
-              onChange={handleNameChange}
-            />
+            {isDefault ? (
+              <Input disabled />
+            ) : (
+              <Input
+                id="input-name"
+                placeholder={t('city.placeholder1')}
+                onChange={handleNameChange}
+              />
+            )}
           </Grid.Row>
           <Grid.Row>
             <TextArea id="input-name" placeholder={t('city.placeholder2')} />
+          </Grid.Row>
+          <Grid.Row>
+            <Header>{t('city.part1')}</Header>
           </Grid.Row>
           <Grid.Row columns={3}>
             <Grid.Column width={2}>

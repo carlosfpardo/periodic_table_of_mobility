@@ -1,8 +1,9 @@
 [
   {
-    "id": "1",
+    "app:edited": "never",
+    "key": "1",
     "name": "NUMO",
-    "title": "Sustainable Development Goals",
+    "text": "Sustainable Development Goals",
     "attrenvironment": "5",
     "attrpublicHealth": "3",
     "attrequity": "7",
@@ -10,9 +11,10 @@
     "attrpersonalSafety": "8"
   },
   {
-    "id": "1",
+    "app:edited": "never",
+    "key": "2",
     "name": "SprawlVille",
-    "title": "Nothing in the way of progress",
+    "text": "Nothing in the way of progress",
     "attrenvironment": "0",
     "attrpublicHealth": "0",
     "attrequity": "0",

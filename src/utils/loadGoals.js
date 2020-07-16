@@ -1,18 +1,6 @@
 import GOALS from '../data/goals.json'
-
 export async function fetchGoalData () {
-  const result = await fetch(GOALS).catch(err => {
-    if (err) {
-      console.error('Error while retrieving goals from JSON:', err)
-    }
-
-    throw new Error(err)
-  })
-
-  if (!result) return
-
-  const myJson = await result.json()
-  const vehicles = myJson.map(mapToGoals)
+  const vehicles = GOALS.map(mapToGoals)
 
   return vehicles
 }
