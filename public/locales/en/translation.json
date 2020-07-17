@@ -72,13 +72,13 @@
     "notHarmful": "Policies should be aimed at promoting its use. Consider allocating more space to them, don’t request too much data from operators, don’t require a license to operate, and consider subsidizing their usage."
   },
   "city": {
-    "title": "Please describe your social goals",
-    "subtitle": "Social goals are helpful to provide recomendations towards transport policies",
+    "title": "Please describe your social and policy priorities",
+    "subtitle": "Learning about social and policy goals and priorities of a city is helpful to provide well-adjusted recommendations on transport policies",
     "pregoals": "Pre-load goals",
-    "defgoals": "Define your own goals (below)",
+    "defgoals": "Define your own goals and priorities (below)",
     "placeholder1": "Name for goal group",
-    "placeholder2": "Describe your social goals in terms of the main policies you have at the noational, local level and specific policies for transportation.",
-    "part1": "Please rank your priorities for improvement acording to current city policies:",
+    "placeholder2": "Describe the priorities of your city in terms of the main policies you have at the national, local level and specific policies for transportation.",
+    "part1": "Please rank the priorities for improvement according to current city policies (a higher number represents a higher priority):",
     "environment": "Environment",
     "publicHealth": "Public health",
     "equity": "Equity",
