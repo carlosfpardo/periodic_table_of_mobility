@@ -39,6 +39,8 @@
     "none": "None",
     "loose": "Loose",
     "strict": "Strict",
+    "risk": "Risk assessment",
+    "riskDetails": "Assessment Required",
     "save": "Download complete recomendation with details"
   },
   "inputPanel": {

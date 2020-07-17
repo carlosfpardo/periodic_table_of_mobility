@@ -7,6 +7,7 @@ import { calculateDataLevelRequired } from '../../utils/dataRequirement'
 import { calculatePriceRequired } from '../../utils/priceToUse'
 import { calculateSpaceRequired } from '../../utils/spaceAllocation'
 import { calculateSubsidyRequired } from '../../utils/subsidy'
+import { calculateRisk } from '../../utils/riskAssessment'
 import VehicleImage from './VehicleImage'
 import RadarChart from './RadarChart'
 import SummaryPolicy from './SummaryPolicy'
@@ -70,6 +71,7 @@ function ResultOptions ({ levels, useCase, vehicle }) {
                 {calculateDataLevelRequired(levels)}
                 {calculatePriceRequired(levels, useCase)}
                 {calculateSubsidyRequired(levels, useCase)}
+                {calculateRisk(levels)}
               </Grid>
             </div>
           </Grid.Column>
