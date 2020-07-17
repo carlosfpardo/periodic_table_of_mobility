@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Header, Button, Icon } from 'semantic-ui-react'
 import { calculateDriverLevelRequired } from '../../utils/driversLicense'
 import { calculateOperatingLevelRequired } from '../../utils/operatingLicense'
 import { calculateDataLevelRequired } from '../../utils/dataRequirement'
@@ -10,7 +10,7 @@ import { calculateSubsidyRequired } from '../../utils/subsidy'
 import VehicleImage from './VehicleImage'
 import RadarChart from './RadarChart'
 import SummaryPolicy from './SummaryPolicy'
-import i18n from '../../i18n'
+import { useTranslation } from 'react-i18next'
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
     image: PropTypes.string,
@@ -27,8 +27,7 @@ ResultOptions.propTypes = {
 }
 
 function ResultOptions ({ levels, useCase, vehicle }) {
-  // const { t } = useTranslation()
-
+  const { t } = useTranslation()
   if (!levels) return null
 
   // Require ALL dependent variables to be set
@@ -39,33 +38,59 @@ function ResultOptions ({ levels, useCase, vehicle }) {
 
   return (
     <div className="box">
-      <Grid>
-        <Grid.Row verticalAlign="middle" columns={3} centered>
-          <Grid.Column width={5}>
-            {vehicle.name}
-            <VehicleImage vehicle={vehicle} />
-          </Grid.Column>
-          <Grid.Column width={2} />
+      <Header>{vehicle.name}</Header>
+      <Grid centered>
+        <Grid.Row stretched columns={2}>
           <Grid.Column width={6}>
-            <RadarChart levels={levels} />
+            <div className="box1">
+              <Grid centered>
+                <Grid.Row>
+                  <Header>{t('resultOptions.summary')}</Header>
+                </Grid.Row>
+                <Grid.Row>
+                  <VehicleImage vehicle={vehicle} />
+                </Grid.Row>
+                <Grid.Row>
+                  <RadarChart levels={levels} />
+                </Grid.Row>
+                <Grid.Row>
+                  <SummaryPolicy levels={levels} />
+                </Grid.Row>
+              </Grid>
+            </div>
+          </Grid.Column>
+          <Grid.Column width={10}>
+            <div className="box1">
+              <Grid centered>
+                <Grid.Row>
+                  <Header>{t('resultOptions.detail')}</Header>
+                </Grid.Row>
+                {calculateDriverLevelRequired(levels, useCase)}
+                {calculateOperatingLevelRequired(levels, useCase)}
+                {calculateDataLevelRequired(levels)}
+                {calculatePriceRequired(levels, useCase)}
+                {calculateSubsidyRequired(levels, useCase)}
+              </Grid>
+            </div>
           </Grid.Column>
         </Grid.Row>
-
-        {calculateDriverLevelRequired(levels, useCase)}
-        {calculateOperatingLevelRequired(levels, useCase)}
-        {calculateDataLevelRequired(levels)}
-        {calculatePriceRequired(levels, useCase)}
-        {calculateSubsidyRequired(levels, useCase)}
-        <Grid.Row>
-          <Grid.Column textAlign="center">
-            <Segment basic textAlign="center">
-              {i18n.t('resultOptions.streetAllocation')}
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-        {calculateSpaceRequired(levels)}
+        <div className="box2">
+          <Grid.Row>
+            <Grid.Column textAlign="center">
+              <Segment basic textAlign="center">
+                {t('resultOptions.streetAllocation')}
+              </Segment>
+            </Grid.Column>
+            <Grid relaxed>{calculateSpaceRequired(levels)}</Grid>
+          </Grid.Row>
+        </div>
       </Grid>
-      <SummaryPolicy levels={levels} />
+      <Segment basic>
+        <Button fluid color="green" icon labelPosition="left">
+          <Icon name="download" />
+          {t('resultOptions.save')}
+        </Button>
+      </Segment>
     </div>
   )
 }

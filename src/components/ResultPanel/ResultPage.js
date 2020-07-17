@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import { Header, Dropdown, Message, Button, Icon } from 'semantic-ui-react'
+import { Header, Dropdown, Message } from 'semantic-ui-react'
 import find from 'lodash/find'
 import { fetchData } from '../../utils/gsheets'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,6 @@ import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import { DEFAULT_USE_CASE } from '../../constants'
 import { useCases } from '../../utils/useCase'
-import downloadSvg, { downloadPng } from 'svg-crowbar'
 
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
@@ -118,25 +117,8 @@ function ResultPage ({ vehicle, setVehicle }) {
       {success && <Message success>{success}</Message>}
 
       <ResultOptions levels={levels} useCase={useCase} vehicle={vehicle} />
-      <div className="download-buttons">
-        <Button icon labelPosition="left" onClick={savePNG} fluid>
-          <Icon name="download" />
-          {t('description.downloadPNG')}
-        </Button>
-        <Button icon labelPosition="left" onClick={saveSVG} fluid>
-          <Icon name="download" />
-          {t('description.downloadSVG')}
-        </Button>
-      </div>
     </div>
   )
-}
-function saveSVG () {
-  downloadSvg(document.querySelector('svg'), 'vehicle_profile')
-}
-
-function savePNG () {
-  downloadPng(document.querySelector('svg'), 'vehicle_profile')
 }
 
 export default ResultPage

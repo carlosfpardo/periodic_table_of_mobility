@@ -4,13 +4,27 @@
   box-shadow: 0 2px 5px 0 rgba(14, 30, 37, 0.08);
   padding: 1.5em;
 }
-
+.box1 {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 0 rgba(7, 33, 44, 0.555);
+  padding: 1.5em;
+}
+.box2 {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px 0 rgba(7, 33, 44, 0.555);
+  padding: 1.5em;
+  width: 90vw;
+}
 .App {
   max-width: 900px;
   margin: 0 auto;
   margin-bottom: 2em;
 }
-
+.padButton {
+  padding-top: 50px;
+}
 /* Override Semantic UI removing the paragraph margin after a Header */
 h1 + p {
   margin-top: 1em;

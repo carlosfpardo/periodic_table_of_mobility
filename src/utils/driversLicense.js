@@ -22,15 +22,15 @@ export function calculateDriverLevelRequired (levels, useCase) {
   }
   if (array.length > 0) {
     for (const element of keys) {
-      if (element === 'weight' || element === 'speed') {
-        if (levels[element] > 2) {
-          counter++
-        }
+      if (element === 'weight' && levels[element] > 1) {
+        counter++
+      } else if (element === 'speed' && levels[element] > 2) {
+        counter++
       }
     }
   }
 
-  if (counter > 0) {
+  if (counter > 1) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>

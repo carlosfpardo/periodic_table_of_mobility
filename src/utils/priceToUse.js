@@ -1,6 +1,9 @@
 /**
  * This is the method used to determine if the vehicle needs for a price to be set for use, at the moment
  * it only has a need/does not need binary result but it will be expanded in the future
+ * IF weight > 1 OR speed > 2 OR OR space efficiency > 2 OR exhaust-emissions efficiency > 1 THEN = “High”
+ * IF weight = 1 OR speed =2 OR OR space efficiency = 2 OR exhaust-emissions efficiency = 1 THEN = “Low”
+ * IF weight <=1 OR speed <=1 OR OR space efficiency <=1 OR exhaust-emissions efficiency < 1 THEN = “NA”
  * @param {Object} levels - An object where each key-value pair is attribute id
  *          and the level between 1-4. This is the same object that is
  *          passed to react-d3-radar.
@@ -20,24 +23,43 @@ export function calculatePriceRequired (levels, useCase) {
   }
   if (array.length > 0) {
     for (const element of keys) {
-      if (
-        element === 'footprint' ||
-        element === 'emissions' ||
-        element === 'speed'
-      ) {
-        if (levels[element] > 3) {
-          counter++
+      if (element === 'footprint' || element === 'speed') {
+        if (levels[element] > 2) {
+          counter = 2
+        } else if (levels[element] === 2) {
+          counter = 1
+        }
+      } else if (element === 'weight' || element === 'emissions') {
+        if (levels[element] > 1) {
+          counter = 2
+        } else if (levels[element] === 1) {
+          counter = 1
         }
       }
     }
   }
 
-  if (counter > 0) {
+  if (counter === 2) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
           <Segment basic textAlign="center">
-            {i18n.t('resultOptions.price')} <Icon name="check" />
+            {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceHigh')}{' '}
+            <Icon name="check" />
+          </Segment>
+        </Grid.Column>
+        <Grid.Column>
+          <Button fluid>{i18n.t('resultOptions.priceDetails')}</Button>
+        </Grid.Column>
+      </Grid.Row>
+    )
+  } else if (counter === 1) {
+    return (
+      <Grid.Row columns={2}>
+        <Grid.Column>
+          <Segment basic textAlign="center">
+            {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceLow')}{' '}
+            <Icon name="check" />
           </Segment>
         </Grid.Column>
         <Grid.Column>
@@ -50,7 +72,8 @@ export function calculatePriceRequired (levels, useCase) {
     <Grid.Row columns={2}>
       <Grid.Column>
         <Segment disabled basic textAlign="center">
-          {i18n.t('resultOptions.price')} <Icon name="dont" />
+          {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceNA')}{' '}
+          <Icon name="dont" />
         </Segment>
       </Grid.Column>
       <Grid.Column>
