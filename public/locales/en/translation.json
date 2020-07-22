@@ -101,7 +101,10 @@
     "name": "Input city name",
     "nameLabel": "Name of city",
     "title": "Please determine the threshold levels for",
-    "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city"
+    "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city",
+    "preload": "Preload thresholds",
+    "defname": "Define new",
+    "placeholder1": "Threshold name"
   },
   "header": {
     "title": "Periodic Table of Mobility",

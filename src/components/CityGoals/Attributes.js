@@ -13,9 +13,7 @@ import {
 import { Link } from 'react-router-dom'
 import find from 'lodash/find'
 import UnitSelection from './UnitSelection'
-import {
-  fetchAttributeData /*, saveAttributeData */
-} from '../../utils/attributes'
+import { fetchAttributeData /*, saveAttributeData */ } from '../../utils/city'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import { useTranslation } from 'react-i18next'
 

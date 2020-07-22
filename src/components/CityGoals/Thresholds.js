@@ -4,18 +4,30 @@ import {
   Header,
   Form,
   Input,
-  TextArea,
-  Label,
   Grid,
   Button,
   Icon,
   Message
 } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { Slider } from 'react-semantic-ui-range'
-import { fetchGoalData, saveData } from '../../utils/loadGoals'
+import ATTRIBUTES from '../../data/attributes_numo.json'
+import { fetchGoalData, saveData } from '../../utils/loadThresholds'
 import { getNewGoalsId } from '../../utils/uniqueid'
 import find from 'lodash/find'
+import TInput from './TInput'
+
+function Attributes ({ values = {}, onChange = () => {} }) {
+  return ATTRIBUTES.map(attribute => (
+    <TInput
+      key={attribute.id}
+      attribute={attribute}
+      value={values[attribute.id]}
+      onChange={value => {
+        onChange({ ...values, [attribute.id]: value })
+      }}
+    />
+  ))
+}
 
 function Thresholds () {
   const [goal, setGoal] = useState({})
@@ -27,66 +39,7 @@ function Thresholds () {
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const { t } = useTranslation()
-  const [value, setValue] = useState(5)
-  const [value1, setValue1] = useState(3)
-  const [value2, setValue2] = useState(7)
-  const [value3, setValue3] = useState(2)
-  const [value4, setValue4] = useState(8)
-  const settings = {
-    start: 2,
-    min: 0,
-    max: 10,
-    step: 1,
-    onChange: value => {
-      setValue(value)
-    }
-  }
-  const settings1 = {
-    start: 2,
-    min: 0,
-    max: 10,
-    step: 1,
-    onChange: value1 => {
-      setValue1(value1)
-    }
-  }
-  const settings2 = {
-    start: 2,
-    min: 0,
-    max: 10,
-    step: 1,
-    onChange: value2 => {
-      setValue2(value2)
-    }
-  }
-  const settings3 = {
-    start: 2,
-    min: 0,
-    max: 10,
-    step: 1,
-    onChange: value3 => {
-      setValue3(value3)
-    }
-  }
-  const settings4 = {
-    start: 2,
-    min: 0,
-    max: 10,
-    step: 1,
-    onChange: value4 => {
-      setValue4(value4)
-    }
-  }
-  const handleValueChange = e => {
-    let value = Number.parseInt(e.target.value)
-    if (!value) {
-      value = 0
-    }
-    if (value > 10) {
-      value = 10
-    }
-    setValue(value)
-  }
+
   useEffect(() => {
     async function fetchVehicleProfiles () {
       setLoadingProfiles(true)
@@ -166,7 +119,7 @@ function Thresholds () {
         // <Input label={t('thresholds.nameLabel')} placeholder={t('thresholds.name')} />
       }
       <Header textAlign="center">
-        {t('thresholds.title')}
+        {t('thresholds.title')} PLACEHOLDER
         <Header.Subheader>{t('thresholds.subtitle')}</Header.Subheader>
       </Header>
 
@@ -174,7 +127,7 @@ function Thresholds () {
         <Grid>
           <Grid.Row>
             <Form.Field
-              label={t('city.pregoals')}
+              label={t('thresholds.preload')}
               control="input"
               type="radio"
               name="htmlRadios"
@@ -200,7 +153,7 @@ function Thresholds () {
           </Grid.Row>
           <Grid.Row>
             <Form.Field
-              label={t('city.defgoals')}
+              label={t('thresholds.defname')}
               control="input"
               type="radio"
               name="htmlRadios"
@@ -212,92 +165,12 @@ function Thresholds () {
             ) : (
               <Input
                 id="input-name"
-                placeholder={t('city.placeholder1')}
+                placeholder={t('thresholds.placeholder1')}
                 onChange={handleNameChange}
               />
             )}
           </Grid.Row>
-          <Grid.Row>
-            <TextArea id="input-name" placeholder={t('city.placeholder2')} />
-          </Grid.Row>
-          <Grid.Row>
-            <Header>{t('city.part1')}</Header>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={2}>
-              <Label>{t('city.environment')}</Label>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Slider discrete value={value} color="red" settings={settings} />
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Input value={value} maxValue="10" onChange={handleValueChange} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={2}>
-              <Label>{t('city.publicHealth')}</Label>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Slider
-                discrete
-                value={value1}
-                color="red"
-                settings={settings1}
-              />
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Input value={value1} max="10" onChange={handleValueChange} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={2}>
-              <Label>{t('city.equity')}</Label>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Slider
-                discrete
-                value={value2}
-                color="red"
-                settings={settings2}
-              />
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Input value={value2} max="10" onChange={handleValueChange} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={2}>
-              <Label>{t('city.joyfulness')}</Label>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Slider
-                discrete
-                value={value3}
-                color="red"
-                settings={settings3}
-              />
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Input value={value3} max="10" onChange={handleValueChange} />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row columns={3}>
-            <Grid.Column width={2}>
-              <Label>{t('city.personalSafety')}</Label>
-            </Grid.Column>
-            <Grid.Column width={8}>
-              <Slider
-                discrete
-                value={value4}
-                color="red"
-                settings={settings4}
-              />
-            </Grid.Column>
-            <Grid.Column width={2}>
-              <Input value={value4} max="10" onChange={handleValueChange} />
-            </Grid.Column>
-          </Grid.Row>
+          <Attributes />
         </Grid>
       </Form>
       <Button

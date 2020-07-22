@@ -1,6 +1,6 @@
-import ATTRIBUTES from '../data/attributes.json'
+import CITY from '../data/city.json'
 export async function fetchAttributeData () {
-  const vehicles = ATTRIBUTES.map(attribute => attribute)
+  const vehicles = CITY.map(attribute => attribute)
 
   return vehicles
 }
@@ -20,13 +20,13 @@ export async function saveAttributeData (method, data) {
 
   const meta = ['id', 'app:edited', 'save', 'del', '_xml']
 
-  Object.keys(data.attributes).forEach(attribute => {
+  Object.keys(data.city).forEach(attribute => {
     if (meta.includes(attribute)) return
-    vehicle[`attr${attribute}`] = data.attributes[attribute].value
-    vehicle[`units${attribute}`] = data.attributes[attribute].units || ''
+    vehicle[`attr${attribute}`] = data.city[attribute].value
+    vehicle[`units${attribute}`] = data.city[attribute].units || ''
   })
 
-  return fetch(ATTRIBUTES, {
+  return fetch(CITY, {
     method,
     body: JSON.stringify({ vehicle })
   }).catch(err => {
