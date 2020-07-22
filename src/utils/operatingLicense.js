@@ -11,7 +11,7 @@
  */
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 export function calculateOperatingLevelRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -31,11 +31,13 @@ export function calculateOperatingLevelRequired (levels) {
       <Grid.Row columns={2}>
         <Grid.Column>
           <Segment textAlign="center" basic>
-            {i18n.t('resultOptions.operatingLicense')} <Icon name="check" />
+            {i18n.t('resultOptions.operatingLicense')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.application')}</Button>
+          <Segment inverted color="red" textAlign="center">
+            {i18n.t('resultOptions.application')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -43,14 +45,14 @@ export function calculateOperatingLevelRequired (levels) {
   return (
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Segment basic disabled textAlign="center">
-          {i18n.t('resultOptions.operatingLicense')} <Icon name="dont" />
+        <Segment basic textAlign="center">
+          {i18n.t('resultOptions.operatingLicense')}
         </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Button disabled fluid>
+        <Segment textAlign="center">
           {i18n.t('resultOptions.notNecessary')}
-        </Button>
+        </Segment>
       </Grid.Column>
     </Grid.Row>
   )

@@ -13,7 +13,7 @@
 import { DEFAULT_USE_CASE } from '../constants'
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 export function calculatePriceRequired (levels, useCase) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -49,12 +49,13 @@ export function calculatePriceRequired (levels, useCase) {
       <Grid.Row columns={2}>
         <Grid.Column>
           <Segment basic textAlign="center">
-            {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceHigh')}{' '}
-            <Icon name="check" />
+            {i18n.t('resultOptions.price')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.priceDetails')}</Button>
+          <Segment inverted color="red" textAlign="center">
+            {i18n.t('resultOptions.priceHigh')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -63,12 +64,13 @@ export function calculatePriceRequired (levels, useCase) {
       <Grid.Row columns={2}>
         <Grid.Column>
           <Segment basic textAlign="center">
-            {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceLow')}{' '}
-            <Icon name="check" />
+            {i18n.t('resultOptions.price')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.priceDetails')}</Button>
+          <Segment textAlign="center" inverted color="orange">
+            {i18n.t('resultOptions.priceLow')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -76,15 +78,12 @@ export function calculatePriceRequired (levels, useCase) {
   return (
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Segment disabled basic textAlign="center">
-          {i18n.t('resultOptions.price')} {i18n.t('resultOptions.priceNA')}{' '}
-          <Icon name="dont" />
+        <Segment basic textAlign="center">
+          {i18n.t('resultOptions.price')}
         </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Button disabled fluid>
-          {i18n.t('resultOptions.notNecessary')}
-        </Button>
+        <Segment textAlign="center">{i18n.t('resultOptions.priceNA')}</Segment>
       </Grid.Column>
     </Grid.Row>
   )

@@ -1,0 +1,32 @@
+[
+  {
+    "city": 1,
+    "attribute": "capacity",
+    "thresholds": ""
+  },
+  {
+    "city": 1,
+    "attribute": "weight",
+    "thresholds": 1
+  },
+  {
+    "city": 1,
+    "attribute": "speed",
+    "thresholds": 2
+  },
+  {
+    "city": 1,
+    "attribute": "footprint",
+    "thresholds": 3
+  },
+  {
+    "city": 1,
+    "attribute": "emissions",
+    "thresholds": 4
+  },
+  {
+    "city": 1,
+    "attribute": "health",
+    "thresholds": 5
+  }
+]

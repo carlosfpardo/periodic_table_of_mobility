@@ -1,15 +1,17 @@
 import React, { Suspense, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Grid, Divider, Menu, Dropdown, Input } from 'semantic-ui-react'
-import { ReactComponent as NUMOLogo } from './images/logo_numo.svg'
+import { Grid, Divider, Menu, Dropdown /* Input */ } from 'semantic-ui-react'
+// import { ReactComponent as NUMOLogo } from './images/logo_numo.svg'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
+import Attributes from './components/CityGoals/Attributes'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CityGoals from './components/CityGoals/CityGoals'
+import Thresholds from './components/CityGoals/Thresholds'
 
 // page uses the hook
 function Page () {
@@ -46,6 +48,7 @@ function Page () {
 }
 function AppRouter () {
   const [vehicle, setVehicle] = useState({})
+  const [attributes, setAttributes] = useState({})
   const { t, i18n } = useTranslation()
   const changeLanguage = lng => {
     i18n.changeLanguage(lng)
@@ -55,11 +58,11 @@ function AppRouter () {
       <div>
         <Menu huge secondary>
           <Menu.Item href="/">
-            <NUMOLogo
+            {/* <NUMOLogo
               style={{
                 height: '2.5em'
               }}
-            />
+            /> */}
           </Menu.Item>
           <Menu.Item>
             <Link to="/">{t('routing.profiles')}</Link>
@@ -69,6 +72,12 @@ function AppRouter () {
           </Menu.Item>
           <Menu.Item>
             <Link to="/city">{t('routing.city')}</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/attributes">{t('routing.attributes')}</Link>
+          </Menu.Item>
+          <Menu.Item>
+            <Link to="/thresholds">{t('routing.thresholds')}</Link>
           </Menu.Item>
           <Dropdown item text={t('language')}>
             <Dropdown.Menu>
@@ -80,12 +89,13 @@ function AppRouter () {
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
+          {/*
           <Menu.Menu position="right">
             <Menu.Item>
               <Input icon="search" placeholder="Search..." />
             </Menu.Item>
             <Menu.Item name="logout" />
-          </Menu.Menu>
+          </Menu.Menu> */}
         </Menu>
 
         {/* A <Switch> looks through its children <Route>s and
@@ -102,6 +112,27 @@ function AppRouter () {
           </Route>
           <Route path="/city">
             <CityGoals />
+          </Route>
+          <Route path="/attributes">
+            <Grid stackable>
+              <Grid.Row columns={1}>
+                <Grid.Column>
+                  <Attributes
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </Route>
+          <Route path="/thresholds">
+            <Grid stackable>
+              <Grid.Row columns={1}>
+                <Grid.Column>
+                  <Thresholds />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Route>
           <Route path="/">
             <Page />

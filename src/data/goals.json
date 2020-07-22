@@ -4,21 +4,21 @@
     "key": "1",
     "name": "NUMO",
     "text": "Sustainable Development Goals",
-    "attrenvironment": "5",
-    "attrpublicHealth": "3",
-    "attrequity": "7",
-    "attrjoyfulness": "2",
-    "attrpersonalSafety": "8"
+    "environment": "5",
+    "publicHealth": "3",
+    "equity": "7",
+    "joyfulness": "2",
+    "personalSafety": "8"
   },
   {
     "app:edited": "never",
     "key": "2",
     "name": "SprawlVille",
     "text": "Nothing in the way of progress",
-    "attrenvironment": "0",
-    "attrpublicHealth": "0",
-    "attrequity": "0",
-    "attrjoyfulness": "0",
-    "attrpersonalSafety": "0"
+    "environment": "0",
+    "publicHealth": "0",
+    "equity": "0",
+    "joyfulness": "0",
+    "personalSafety": "0"
   }
 ]

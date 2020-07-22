@@ -10,7 +10,7 @@
 import { DEFAULT_USE_CASE } from '../constants'
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon, Modal, Header } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import './utils.css'
 
 export function calculateDriverLevelRequired (levels, useCase) {
@@ -35,23 +35,13 @@ export function calculateDriverLevelRequired (levels, useCase) {
       <Grid.Row columns={2}>
         <Grid.Column>
           <Segment basic textAlign="center">
-            {i18n.t('resultOptions.driverLicense')} <Icon name="check" />
+            {i18n.t('resultOptions.driverLicense')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Modal
-            trigger={
-              <Button fluid>{i18n.t('resultOptions.seeRequirements')}</Button>
-            }
-          >
-            <Modal.Header>Test Modal</Modal.Header>
-            <Modal.Content>
-              <Modal.Description>
-                <Header>TestModal</Header>
-                <p>test</p>
-              </Modal.Description>
-            </Modal.Content>
-          </Modal>
+          <Segment color="red" inverted textAlign="center">
+            {i18n.t('resultOptions.seeRequirements')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -59,14 +49,14 @@ export function calculateDriverLevelRequired (levels, useCase) {
   return (
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Segment basic disabled textAlign="center">
-          {i18n.t('resultOptions.driverLicense')} <Icon name="dont" />
+        <Segment basic textAlign="center">
+          {i18n.t('resultOptions.driverLicense')}
         </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Button disabled fluid>
+        <Segment textAlign="center">
           {i18n.t('resultOptions.notNecessary')}
-        </Button>
+        </Segment>
       </Grid.Column>
     </Grid.Row>
   )

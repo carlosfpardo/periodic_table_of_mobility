@@ -9,7 +9,7 @@
  */
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 export function calculateRisk (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -35,11 +35,12 @@ export function calculateRisk (levels) {
         <Grid.Column>
           <Segment basic textAlign="center">
             {i18n.t('resultOptions.risk')}
-            <Icon name="check" />
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.riskDetails')}</Button>
+          <Segment inverted color="red" textAlign="center">
+            {i18n.t('resultOptions.required')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -47,15 +48,14 @@ export function calculateRisk (levels) {
   return (
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Segment disabled basic textAlign="center">
+        <Segment basic textAlign="center">
           {i18n.t('resultOptions.risk')}
-          <Icon name="dont" />
         </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Button disabled fluid>
+        <Segment textAlign="center">
           {i18n.t('resultOptions.notNecessary')}
-        </Button>
+        </Segment>
       </Grid.Column>
     </Grid.Row>
   )

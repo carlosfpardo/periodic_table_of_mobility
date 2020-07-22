@@ -32,6 +32,7 @@ function ResultPage ({ vehicle, setVehicle }) {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
+  const [lastUpdate] = useState(new Date().toISOString())
   const levels = mapAttributeValuesToLevel(vehicle.attributes)
   const useCase = useCases(DEFAULT_USE_CASE)
   const { t } = useTranslation()
@@ -51,7 +52,7 @@ function ResultPage ({ vehicle, setVehicle }) {
     }
 
     fetchVehicleProfiles()
-  })
+  }, [lastUpdate])
 
   function handleDropdownChange (event, data) {
     const vehicle = find(profiles, { id: data.value })
@@ -64,7 +65,7 @@ function ResultPage ({ vehicle, setVehicle }) {
   }
 
   return (
-    <div className="App">
+    <div className="Policy">
       <Header as="h3" dividing>
         {t('resultPage.part1')}
       </Header>

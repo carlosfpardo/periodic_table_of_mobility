@@ -11,7 +11,7 @@
  */
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Button, Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 export function calculateDataLevelRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -45,7 +45,9 @@ export function calculateDataLevelRequired (levels) {
           <Segment basic>{i18n.t('resultOptions.dataRequirements')}</Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.loose')}</Button>
+          <Segment inverted color="orange" textAlign="center">
+            {i18n.t('resultOptions.loose')}
+          </Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -56,7 +58,7 @@ export function calculateDataLevelRequired (levels) {
           <Segment basic>{i18n.t('resultOptions.dataRequirements')}</Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button fluid>{i18n.t('resultOptions.strict')}</Button>
+          <Segment>{i18n.t('resultOptions.strict')}</Segment>
         </Grid.Column>
       </Grid.Row>
     )
@@ -64,14 +66,10 @@ export function calculateDataLevelRequired (levels) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column textAlign="center">
-          <Segment basic disabled>
-            {i18n.t('resultOptions.dataRequirements')}
-          </Segment>
+          <Segment basic>{i18n.t('resultOptions.dataRequirements')}</Segment>
         </Grid.Column>
         <Grid.Column>
-          <Button disabled fluid>
-            {i18n.t('resultOptions.none')}
-          </Button>
+          <Segment textAlign="center">{i18n.t('resultOptions.none')}</Segment>
         </Grid.Column>
       </Grid.Row>
     )

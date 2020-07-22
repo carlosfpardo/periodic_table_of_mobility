@@ -11,7 +11,7 @@
 
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment, Button, Icon } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 export function calculateSubsidyRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -34,23 +34,17 @@ export function calculateSubsidyRequired (levels) {
   return (
     <Grid.Row columns={2}>
       <Grid.Column>
-        {counter && elevation !== 1 ? (
-          <Segment basic textAlign="center">
-            {i18n.t('resultOptions.subsidy')} <Icon name="check" />
-          </Segment>
-        ) : (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.subsidy')} <Icon name="check" />
-          </Segment>
-        )}
+        <Segment basic textAlign="center">
+          {i18n.t('resultOptions.subsidy')}
+        </Segment>
       </Grid.Column>
       <Grid.Column>
         {counter && elevation !== 1 ? (
-          <Button fluid>{i18n.t('resultOptions.formRequest')}</Button>
+          <Segment textAlign="center" inverted color="green">
+            {i18n.t('resultOptions.formRequest')}
+          </Segment>
         ) : (
-          <Button disabled fluid>
-            {i18n.t('resultOptions.none')}
-          </Button>
+          <Segment textAlign="center">{i18n.t('resultOptions.none')}</Segment>
         )}
       </Grid.Column>
     </Grid.Row>

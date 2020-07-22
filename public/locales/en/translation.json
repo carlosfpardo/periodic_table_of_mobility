@@ -21,20 +21,19 @@
     "operatingLicense": "Operating license",
     "dataRequirements": "Data requirements",
     "dataQuery": "See data requirements",
-    "price": "Price to use",
+    "price": "Fees and fines",
     "priceNA": "NA",
     "priceLow": "Low",
     "priceHigh": "High",
-    "priceDetails": "See pricing details",
-    "subsidy": "Eligible for subsidy",
-    "formRequest": "Download form ATLANTIS2 to request",
+    "subsidy": "Subsidy",
+    "formRequest": "Yes",
     "streetAllocation": "Right of way zone allowance",
     "sidewalk": "A: Ped realm ",
-    "nextPUDO": "B: Flex Zone",
+    "nextPUDO": "B: Flex Zone*",
     "nextMove": "C: Travel close",
     "farMove": "D: Travel far",
     "application": "Download application",
-    "seeRequirements": "See requirements",
+    "seeRequirements": "Required",
     "notNecessary": "Not necessary",
     "none": "None",
     "loose": "Loose",
@@ -88,6 +87,22 @@
     "personalSafety": "Personal safety",
     "goal1": "Sustainable development goals"
   },
+  "attributes": {
+    "part1": "Please indicate what attributes you will use to define vehicles",
+    "part2": "The attributes selected (with capacity, weight, speed, footprint, emissions and health being the default) will determine what attributes are required for your city",
+    "part3": "Retrieving profiles...",
+    "part4": "Select pre-loaded attributes",
+    "defValues": "Define my own values (below)",
+    "namePlaceholder": "add name",
+    "setAttributes": "Set Attributes",
+    "next": "Next"
+  },
+  "thresholds": {
+    "name": "Input city name",
+    "nameLabel": "Name of city",
+    "title": "Please determine the threshold levels for",
+    "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city"
+  },
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
@@ -101,6 +116,8 @@
   "routing": {
     "profiles": "Vehicle profiles",
     "results": "Policy recommendation",
-    "city": "City priorities"
+    "city": "City priorities",
+    "attributes": "City Attributes",
+    "thresholds": "Thresholds"
   }
 }

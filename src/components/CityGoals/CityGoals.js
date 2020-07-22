@@ -27,13 +27,13 @@ function CityGoals () {
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const { t } = useTranslation()
-  const [value, setValue] = useState(5)
-  const [value1, setValue1] = useState(3)
-  const [value2, setValue2] = useState(7)
-  const [value3, setValue3] = useState(2)
-  const [value4, setValue4] = useState(8)
+  const [value, setValue] = useState(0)
+  const [value1, setValue1] = useState(0)
+  const [value2, setValue2] = useState(0)
+  const [value3, setValue3] = useState(0)
+  const [value4, setValue4] = useState(0)
   const settings = {
-    start: 2,
+    start: value,
     min: 0,
     max: 10,
     step: 1,
@@ -42,7 +42,7 @@ function CityGoals () {
     }
   }
   const settings1 = {
-    start: 2,
+    start: value1,
     min: 0,
     max: 10,
     step: 1,
@@ -51,7 +51,7 @@ function CityGoals () {
     }
   }
   const settings2 = {
-    start: 2,
+    start: value2,
     min: 0,
     max: 10,
     step: 1,
@@ -60,7 +60,7 @@ function CityGoals () {
     }
   }
   const settings3 = {
-    start: 2,
+    start: value3,
     min: 0,
     max: 10,
     step: 1,
@@ -69,7 +69,7 @@ function CityGoals () {
     }
   }
   const settings4 = {
-    start: 2,
+    start: value4,
     min: 0,
     max: 10,
     step: 1,
@@ -141,6 +141,11 @@ function CityGoals () {
 
     setGoal(goals)
 
+    setValue(goals.environment)
+    setValue1(goals.publicHealth)
+    setValue2(goals.equity)
+    setValue3(goals.joyfulness)
+    setValue4(goals.personalSafety)
     // Reset error state.
     setSuccess('')
     setError('')
@@ -150,12 +155,6 @@ function CityGoals () {
     const newVehicle = {
       ...goal,
       name: event.target.value
-    }
-
-    // Delete the goal image on name change so that
-    // edited vehicles don't end up with the wrong image
-    if (Object.prototype.hasOwnProperty.call(newVehicle, 'image')) {
-      delete newVehicle.image
     }
 
     setGoal(newVehicle)

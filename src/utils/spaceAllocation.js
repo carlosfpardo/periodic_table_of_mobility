@@ -12,12 +12,11 @@
  */
 import React from 'react'
 import i18n from '../i18n'
-import { Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment, Modal, Header } from 'semantic-ui-react'
 export function calculateSpaceRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counterA = false
-  let counterB = false
   let counterC = false
   let counterD = false
   let elevation = 0
@@ -42,34 +41,28 @@ export function calculateSpaceRequired (levels) {
       } else if (element === 'speed') {
         if (levels[element] === 1) {
           counterA = true
-          counterB = true
           counterC = false
           counterD = false
         } else if (levels[element] === 2) {
           counterA = false
-          counterB = true
           counterC = true
           counterD = false
         } else {
           counterA = false
-          counterB = false
           counterC = false
           counterD = true
         }
       } else if (element === 'footprint') {
         if (levels[element] === 1) {
           counterA = true
-          counterB = true
           counterC = false
           counterD = false
         } else if (levels[element] === 2) {
           counterA = false
-          counterB = true
           counterC = true
           counterD = false
         } else {
           counterA = false
-          counterB = false
           counterC = false
           counterD = true
         }
@@ -80,24 +73,17 @@ export function calculateSpaceRequired (levels) {
         if (levels[element] > 2) {
           counterC = false
         }
-        if (levels[element] !== 5) {
-          counterB = false
-          counterD = false
-        }
       } else if (element === 'emissions') {
         if (levels[element] === 1) {
           counterA = true
-          counterB = true
           counterC = false
           counterD = false
         } else if (levels[element] === 2) {
           counterA = false
-          counterB = true
           counterC = true
           counterD = false
         } else {
           counterA = false
-          counterB = false
           counterC = false
           counterD = true
         }
@@ -119,15 +105,23 @@ export function calculateSpaceRequired (levels) {
         )}
       </Grid.Column>
       <Grid.Column textAlign="center">
-        {counterB || elevation === 1 ? (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.nextPUDO')}
-          </Segment>
-        ) : (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.nextPUDO')}
-          </Segment>
-        )}
+        <Modal
+          trigger={
+            <Segment basic textAlign="center">
+              {i18n.t('resultOptions.nextPUDO')}
+            </Segment>
+          }
+        >
+          <Modal.Header>Has caveats</Modal.Header>
+          <Modal.Content>
+            <Modal.Description>
+              <Header>
+                Most vehicles only have PUDO (pick-up dropoff) privilages in
+                this area
+              </Header>
+            </Modal.Description>
+          </Modal.Content>
+        </Modal>
       </Grid.Column>
       <Grid.Column textAlign="center">
         {counterC && elevation !== 1 ? (
