@@ -74,7 +74,7 @@ function TInput (props) {
           ''
         ) : (
           <>
-            <label htmlFor={htmlId}>{t('attributes:' + name + '.name')}</label>
+            <label htmlFor={htmlId}>{t('attributes:' + name + '.name')} </label>
             <InputHelp attribute={attribute} />
             <Grid>
               <Grid.Row columns={4}>

@@ -9,9 +9,6 @@
  * @param {String} useCase - The use case of the vehicle in question, it impacts the necesity of the licence
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
-import React from 'react'
-import i18n from '../i18n'
-import { Grid, Segment } from 'semantic-ui-react'
 export function calculateOperatingLevelRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -25,35 +22,5 @@ export function calculateOperatingLevelRequired (levels) {
       }
     }
   }
-
-  if (counter > 0) {
-    return (
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <Segment textAlign="center" basic>
-            {i18n.t('resultOptions.operatingLicense')}
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <Segment inverted color="red" textAlign="center">
-            {i18n.t('resultOptions.application')}
-          </Segment>
-        </Grid.Column>
-      </Grid.Row>
-    )
-  }
-  return (
-    <Grid.Row columns={2}>
-      <Grid.Column>
-        <Segment basic textAlign="center">
-          {i18n.t('resultOptions.operatingLicense')}
-        </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        <Segment textAlign="center">
-          {i18n.t('resultOptions.notNecessary')}
-        </Segment>
-      </Grid.Column>
-    </Grid.Row>
-  )
+  return counter
 }

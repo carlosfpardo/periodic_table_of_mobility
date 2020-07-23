@@ -66,9 +66,6 @@ function Thresholds ({ attributes }) {
 
   return (
     <div className="App">
-      {
-        // <Input label={t('thresholds.nameLabel')} placeholder={t('thresholds.name')} />
-      }
       <Header textAlign="center">
         {t('thresholds.title')} PLACEHOLDER
         <Header.Subheader>{t('thresholds.subtitle')}</Header.Subheader>

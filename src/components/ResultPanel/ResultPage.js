@@ -93,27 +93,6 @@ function ResultPage ({ vehicle, setVehicle }) {
         />
       </div>
 
-      {/* <div className="input-row">
-        <Dropdown
-          className="icon"
-          id="use"
-          placeholder={
-            isLoadingProfiles ? t('resultPage.part3') : t('resultPage.part4')
-          }
-          fluid
-          search
-          selection
-          value=""
-          loading={isLoadingProfiles}
-          options={profiles.map(item => ({
-            key: item.id,
-            text: item.name,
-            value: item.id
-          }))}
-          onChange={handleDropdownChange}
-        />
-        </div> */}
-
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
 

@@ -37,6 +37,7 @@
     "i18next": "19.4.3",
     "i18next-browser-languagedetector": "4.2.0",
     "i18next-http-backend": "1.0.15",
+    "jspdf": "^1.5.3",
     "lodash": "^4.17.15",
     "mathjs": "^6.5.0",
     "react": "^16.12.0",

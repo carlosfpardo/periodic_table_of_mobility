@@ -10,15 +10,13 @@
  *          passed to react-d3-radar.
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
-import React from 'react'
-import i18n from '../i18n'
-import { Grid, Segment, Modal, Header } from 'semantic-ui-react'
 export function calculateSpaceRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counterA = false
   let counterC = false
   let counterD = false
+  const space = {}
   let elevation = 0
   if (array.length > 0) {
     for (const element of keys) {
@@ -90,61 +88,9 @@ export function calculateSpaceRequired (levels) {
       }
     }
   }
+  space[0] = counterA && elevation !== 1
+  space[1] = counterC && elevation !== 1
+  space[2] = elevation === 1 || counterD
 
-  return (
-    <Grid.Row columns={4}>
-      <Grid.Column textAlign="center">
-        {counterA && elevation !== 1 ? (
-          <Segment basic textAlign="center">
-            {i18n.t('resultOptions.sidewalk')}
-          </Segment>
-        ) : (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.sidewalk')}
-          </Segment>
-        )}
-      </Grid.Column>
-      <Grid.Column textAlign="center">
-        <Modal
-          trigger={
-            <Segment basic textAlign="center">
-              {i18n.t('resultOptions.nextPUDO')}
-            </Segment>
-          }
-        >
-          <Modal.Header>Has caveats</Modal.Header>
-          <Modal.Content>
-            <Modal.Description>
-              <Header>
-                Most vehicles only have PUDO (pick-up dropoff) privilages in
-                this area
-              </Header>
-            </Modal.Description>
-          </Modal.Content>
-        </Modal>
-      </Grid.Column>
-      <Grid.Column textAlign="center">
-        {counterC && elevation !== 1 ? (
-          <Segment basic textAlign="center">
-            {i18n.t('resultOptions.nextMove')}
-          </Segment>
-        ) : (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.nextMove')}
-          </Segment>
-        )}
-      </Grid.Column>
-      <Grid.Column textAlign="center">
-        {elevation === 1 || counterD ? (
-          <Segment basic textAlign="center">
-            {i18n.t('resultOptions.farMove')}
-          </Segment>
-        ) : (
-          <Segment basic disabled textAlign="center">
-            {i18n.t('resultOptions.farMove')}
-          </Segment>
-        )}
-      </Grid.Column>
-    </Grid.Row>
-  )
+  return space
 }

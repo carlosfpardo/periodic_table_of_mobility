@@ -7,9 +7,6 @@
  *          passed to react-d3-radar.
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
-import React from 'react'
-import i18n from '../i18n'
-import { Grid, Segment } from 'semantic-ui-react'
 export function calculateRisk (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
@@ -28,35 +25,5 @@ export function calculateRisk (levels) {
       }
     }
   }
-
-  if (counter === 1) {
-    return (
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <Segment basic textAlign="center">
-            {i18n.t('resultOptions.risk')}
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <Segment inverted color="red" textAlign="center">
-            {i18n.t('resultOptions.required')}
-          </Segment>
-        </Grid.Column>
-      </Grid.Row>
-    )
-  }
-  return (
-    <Grid.Row columns={2}>
-      <Grid.Column>
-        <Segment basic textAlign="center">
-          {i18n.t('resultOptions.risk')}
-        </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        <Segment textAlign="center">
-          {i18n.t('resultOptions.notNecessary')}
-        </Segment>
-      </Grid.Column>
-    </Grid.Row>
-  )
+  return counter
 }

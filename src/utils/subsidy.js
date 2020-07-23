@@ -9,14 +9,10 @@
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
 
-import React from 'react'
-import i18n from '../i18n'
-import { Grid, Segment } from 'semantic-ui-react'
 export function calculateSubsidyRequired (levels) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counter = false
-  let elevation = 0
   if (array.length > 0) {
     for (const element of keys) {
       if (element === 'emissions' || element === 'health') {
@@ -24,29 +20,8 @@ export function calculateSubsidyRequired (levels) {
           counter = true
         }
       }
-      if (element === 'elevation') {
-        elevation = levels[element]
-      }
       if (element === 'company' && levels[element] === 'local') counter = true
     }
   }
-
-  return (
-    <Grid.Row columns={2}>
-      <Grid.Column>
-        <Segment basic textAlign="center">
-          {i18n.t('resultOptions.subsidy')}
-        </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        {counter && elevation !== 1 ? (
-          <Segment textAlign="center" inverted color="green">
-            {i18n.t('resultOptions.formRequest')}
-          </Segment>
-        ) : (
-          <Segment textAlign="center">{i18n.t('resultOptions.none')}</Segment>
-        )}
-      </Grid.Column>
-    </Grid.Row>
-  )
+  return counter
 }
