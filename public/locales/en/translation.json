@@ -104,7 +104,11 @@
     "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city",
     "preload": "Preload thresholds",
     "defname": "Define new",
-    "placeholder1": "Threshold name"
+    "placeholder1": "Threshold name",
+    "minvalue": "Minimum value",
+    "th1": "Threshold 1",
+    "th2": "Threshold 2",
+    "th3": "Threshold 3"
   },
   "header": {
     "title": "Periodic Table of Mobility",

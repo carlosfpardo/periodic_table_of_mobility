@@ -1,9 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Input, Dropdown } from 'semantic-ui-react'
+import { Input, Dropdown, Grid } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
 import UNITS from '../../data/units.json'
 import { useTranslation } from 'react-i18next'
+import './TInput.css'
+import InputHelp from '../InputPanel/InputHelp'
 
 TInput.propTypes = {
   attribute: PropTypes.shape({
@@ -25,7 +27,7 @@ TInput.propTypes = {
 
 function TInput (props) {
   const { attribute, value, onChange = () => {} } = props
-  const { name, definedUnits, defaultUnit, exampleValue } = attribute
+  const { name, definedUnits, defaultUnit, thresholds } = attribute
   const { t } = useTranslation(['translation', 'attributes'])
   const units =
     typeof definedUnits !== 'undefined' ? UNITS[definedUnits] : defaultUnit
@@ -66,38 +68,51 @@ function TInput (props) {
     null
 
   return (
-    <div className="input-row">
-      <label htmlFor={htmlId}>{t('attributes:' + name + '.name')}</label>
-      <Input
-        id={htmlId}
-        value={inputValue}
-        error={isInvalidInput(inputValue)}
-        label={unitLabel}
-        labelPosition={unitLabel ? 'right' : undefined}
-        placeholder={`${t('inputPanel.example')}: ${exampleValue}`}
-        onChange={handleInputChange}
-      />
-    </div>
+    <Grid.Row>
+      <div className="input-row">
+        {unitLabel === null ? (
+          ''
+        ) : (
+          <>
+            <label htmlFor={htmlId}>{t('attributes:' + name + '.name')}</label>
+            <InputHelp attribute={attribute} />
+            <Grid>
+              <Grid.Row columns={4}>
+                <Grid.Column>
+                  <Input
+                    label={t('thresholds.minvalue')}
+                    value={thresholds[0][0]}
+                    onChange={handleInputChange}
+                  />
+                </Grid.Column>
+                <Grid.Column>
+                  <Input
+                    label={t('thresholds.th1')}
+                    value={thresholds[1][0]}
+                    onChange={handleInputChange}
+                  />
+                </Grid.Column>
+                <Grid.Column>
+                  <Input
+                    label={t('thresholds.th2')}
+                    value={thresholds[2][0]}
+                    onChange={handleInputChange}
+                  />
+                </Grid.Column>
+                <Grid.Column>
+                  <Input
+                    label={t('thresholds.th3')}
+                    value={thresholds[3][0]}
+                    onChange={handleInputChange}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
+          </>
+        )}
+      </div>
+    </Grid.Row>
   )
-}
-
-/**
- * Is the input invalid?
- * Returns true if NaN (cannot be parsed by parseFloat) or negative value
- * Do not return false if the value hasn't been defined yet (or is null or empty string)
- *
- * @param {Any} value
- */
-function isInvalidInput (value) {
-  if (
-    typeof value === 'undefined' ||
-    value === null ||
-    (typeof value === 'string' && value.trim() === '')
-  ) {
-    return false
-  }
-  const val = Number.parseFloat(value)
-  return Number.isNaN(val) || val < 0
 }
 
 export default TInput

@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import {
-  Dropdown,
-  Header,
-  Form,
-  Input,
-  Grid,
-  Button,
-  Icon,
-  Message
-} from 'semantic-ui-react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import { Header, Form, Grid, Button, Icon, Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import ATTRIBUTES from '../../data/attributes_numo.json'
-import { fetchGoalData, saveData } from '../../utils/loadThresholds'
+import { saveData } from '../../utils/loadThresholds'
 import { getNewGoalsId } from '../../utils/uniqueid'
-import find from 'lodash/find'
 import TInput from './TInput'
 
+Thresholds.propTypes = {
+  attributes: PropTypes.shape({
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    units: PropTypes.string
+  })
+}
 function Attributes ({ values = {}, onChange = () => {} }) {
   return ATTRIBUTES.map(attribute => (
     <TInput
@@ -29,34 +26,13 @@ function Attributes ({ values = {}, onChange = () => {} }) {
   ))
 }
 
-function Thresholds () {
+function Thresholds ({ attributes }) {
   const [goal, setGoal] = useState({})
-  const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
-  const [isDefault, setDefault] = useState(false)
-  const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const { t } = useTranslation()
 
-  useEffect(() => {
-    async function fetchVehicleProfiles () {
-      setLoadingProfiles(true)
-
-      try {
-        const profiles = await fetchGoalData()
-        setProfiles(profiles)
-      } catch (err) {
-        console.error(err)
-        setError(err.message)
-      }
-
-      setLoadingProfiles(false)
-    }
-
-    fetchVehicleProfiles()
-  }, [lastUpdate])
   function handleSaveProfile (event) {
     const clone = {
       ...goal,
@@ -79,7 +55,6 @@ function Thresholds () {
     try {
       const result = await saveData('POST', goal)
       if (!result) return
-      setLastUpdate(new Date().toISOString())
       setSuccess(t('inputPanel.savedCorrect'))
     } catch (err) {
       console.error(err)
@@ -89,30 +64,6 @@ function Thresholds () {
     setSavePending(false)
   }
 
-  function handleDropdownChange (event, data) {
-    const goals = find(profiles, { id: data.value })
-
-    setGoal(goals)
-
-    // Reset error state.
-    setSuccess('')
-    setError('')
-  }
-
-  function handleNameChange (event, data) {
-    const newVehicle = {
-      ...goal,
-      name: event.target.value
-    }
-
-    setGoal(newVehicle)
-  }
-  function handleSelection (event) {
-    setDefault(true)
-  }
-  function handleSelection1 (event) {
-    setDefault(false)
-  }
   return (
     <div className="App">
       {
@@ -125,51 +76,6 @@ function Thresholds () {
 
       <Form>
         <Grid>
-          <Grid.Row>
-            <Form.Field
-              label={t('thresholds.preload')}
-              control="input"
-              type="radio"
-              name="htmlRadios"
-              value="pre"
-              onClick={handleSelection}
-            />
-            {isDefault ? (
-              <Dropdown
-                placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
-                fluid
-                search
-                selection
-                options={profiles.map(item => ({
-                  key: item.id,
-                  text: item.name,
-                  value: item.id
-                }))}
-                onChange={handleDropdownChange}
-              />
-            ) : (
-              <Dropdown disabled />
-            )}
-          </Grid.Row>
-          <Grid.Row>
-            <Form.Field
-              label={t('thresholds.defname')}
-              control="input"
-              type="radio"
-              name="htmlRadios"
-              value="def"
-              onClick={handleSelection1}
-            />
-            {isDefault ? (
-              <Input disabled />
-            ) : (
-              <Input
-                id="input-name"
-                placeholder={t('thresholds.placeholder1')}
-                onChange={handleNameChange}
-              />
-            )}
-          </Grid.Row>
           <Attributes />
         </Grid>
       </Form>
