@@ -42,6 +42,22 @@
     "riskDetails": "Assessment Required",
     "save": "Download complete recomendation with details"
   },
+  "document": {
+    "driversReq": "Driver license is required for this vehicle, more information can be found in this link ",
+    "driversNotReq": "Driver license is not required to operate this vehicle",
+    "operatingReq": "Operating license is required for this vehicle, more information can be found in this link ",
+    "operatingNotReq": "Driver license is not required to operate this vehicle",
+    "dataLoose": "A moderate amount of data is needed to be provided for this vehicle",
+    "dataStrict": "A great amount of data is needed to be provided for this vehicle",
+    "dataNone": "No data is needed to be gathered for this vehicle",
+    "pricesLow": "This vehicle should have low fees and fines attached to it in legislation",
+    "pricesHigh": "This vehicle should have high fees and fines attached to it in legislation",
+    "pricesNA": "This vehicle should have no fees and fines attached to it in legislation",
+    "subsidyGiven": "This vehicle should have its use incentiviced",
+    "subsidyNone": "This vehicle should not have subsidies",
+    "riskReq": "Risk assessment is required for this vehicle",
+    "riskNotReq": "Risk assessment is required for this vehicle"
+  },
   "inputPanel": {
     "part1": "Input vehicle attributes",
     "part2": "Please choose from the drop-down menu at the bottom or input specific vehicle attributes.",

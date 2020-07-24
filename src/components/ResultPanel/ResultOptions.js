@@ -12,7 +12,7 @@ import VehicleImage from './VehicleImage'
 import RadarChart from './RadarChart'
 import SummaryPolicy from './SummaryPolicy'
 import { useTranslation } from 'react-i18next'
-import { jsPDF as JsPDF } from 'jspdf'
+import * as JsPDF from 'jspdf'
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
@@ -323,15 +323,42 @@ function ResultOptions ({ levels, vehicle }) {
     )
   }
   function GeneratePDF () {
-    var Doc = new JsPDF()
-    Doc.text(vehicle.name, 35, 20)
-    Doc.text('' + drivers)
-    Doc.text('' + operating)
-    Doc.text('' + data)
-    Doc.text('' + price)
-    Doc.text('' + subsidy)
-    Doc.text('' + risk)
-    Doc.save('generated.pdf')
+    var doc = new JsPDF()
+    doc.setFontSize(10)
+    doc.text(vehicle.name, 35, 20)
+    if (drivers > 1) {
+      doc.text(t('document.driversReq'), 35, 30)
+    } else {
+      doc.text(t('document.driversNotReq'), 35, 30)
+    }
+    if (operating > 0) {
+      doc.text(t('document.operatingReq'), 35, 40)
+    } else {
+      doc.text(t('document.operatingNotReq'), 35, 40)
+    }
+    if (data > 1) {
+      doc.text(t('document.dataLoose'), 35, 50)
+    } else {
+      doc.text(t('document.dataNone'), 35, 50)
+    }
+    if (price === 2) {
+      doc.text(t('document.pricesHigh'), 35, 60)
+    } else if (price === 1) {
+      doc.text(t('document.pricesLow'), 35, 60)
+    } else {
+      doc.text(t('document.pricesNA'), 35, 60)
+    }
+    if (subsidy) {
+      doc.text(t('document.subsidyGiven'), 35, 70)
+    } else {
+      doc.text(t('document.subsidyNone'), 35, 70)
+    }
+    if (risk > 0) {
+      doc.text(t('document.riskReq'), 35, 80)
+    } else {
+      doc.text(t('document.riskNotReq'), 35, 80)
+    }
+    doc.save('generated.pdf')
   }
 
   return (
