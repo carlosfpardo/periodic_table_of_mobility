@@ -124,7 +124,7 @@ function AppRouter () {
             <Grid stackable>
               <Grid.Row columns={1}>
                 <Grid.Column>
-                  <Thresholds />
+                  <Thresholds attributes={attributes} />
                 </Grid.Column>
               </Grid.Row>
             </Grid>

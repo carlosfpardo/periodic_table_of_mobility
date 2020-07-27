@@ -111,7 +111,13 @@
     "defValues": "Define my own values (below)",
     "namePlaceholder": "add name",
     "setAttributes": "Set Attributes",
-    "next": "Next"
+    "next": "Next",
+    "capacity": "Maximum capacity",
+    "emissions": "Emissions",
+    "footprint": "Space occupied",
+    "health": "ILL-Health",
+    "speed": "Top speed",
+    "weight": "Weight"
   },
   "thresholds": {
     "name": "Input city name",

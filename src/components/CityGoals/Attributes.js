@@ -10,8 +10,8 @@ function Attribute ({ attributes, values = {}, onChange = () => {} }) {
   return attributes.map(attribute => (
     <UnitSelection
       key={attribute.attrib_id + attribute.city_id}
-      attrib_id={attribute.attrib_id}
-      city_id={attribute.city_id}
+      attribId={attribute.attrib_id}
+      cityId={attribute.city_id}
       onChange={value => {
         onChange({ ...values, [attribute.id]: value })
       }}
@@ -30,7 +30,7 @@ Attributes.propTypes = {
 
 function Attributes ({ city, attributes, setAttributes }) {
   const [isLoadingProfiles, setLoadingProfiles] = useState(true)
-  const [isSettingAttributes, setAttributesSet] = useState(true)
+  const [isSettingAttributes, setAttributesSet] = useState(false)
   useEffect(() => {
     async function fetchAttributes () {
       setLoadingProfiles(true)
@@ -47,7 +47,7 @@ function Attributes ({ city, attributes, setAttributes }) {
 
     fetchAttributes()
   }, [city, setAttributes])
-  function handleAttributeset (event) {
+  function handleAttributeset () {
     setAttributesSet(true)
   }
   const { t } = useTranslation()
@@ -69,11 +69,11 @@ function Attributes ({ city, attributes, setAttributes }) {
         </Button>
 
         {!isSettingAttributes ? (
+          ''
+        ) : (
           <Link to="/thresholds">
             <Button floated="right">{t('attributes.next')}</Button>
           </Link>
-        ) : (
-          ''
         )}
       </Segment>
     </div>

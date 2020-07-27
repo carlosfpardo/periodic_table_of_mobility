@@ -15,9 +15,9 @@ Thresholds.propTypes = {
 function Attributes ({ attributes, values = {}, onChange = () => {} }) {
   return attributes.map(attribute => (
     <TInput
-      key={attribute.id}
+      key={attribute.attrib_id}
+      name={attribute.attrib_id}
       attribute={attribute}
-      value={values[attribute.id]}
       onChange={value => {
         onChange({ ...values, [attribute.id]: value })
       }}

@@ -96,13 +96,19 @@ export async function saveData (method, data) {
 }
 
 function mapToGoal (row) {
+  const ids = Object.keys(row).filter(key => key.startsWith('threshold'))
+
+  const thresholds = ids.reduce((obj, id) => {
+    const name = id.replace(/^threshold/, '')
+    obj[name] = {
+      value: row[id]
+    }
+    return obj
+  }, {})
   return {
     ...row,
     attrib_id: row.attrib_id,
     city_id: row.city_id,
-    threshold1: row.threshold1,
-    threshold2: row.threshold2,
-    threshold3: row.threshold3,
-    threshold4: row.threshold4
+    thresholds
   }
 }
