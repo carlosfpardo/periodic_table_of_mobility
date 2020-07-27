@@ -16,8 +16,24 @@ import { Slider } from 'react-semantic-ui-range'
 import { fetchGoalData, saveData } from '../../utils/loadGoals'
 import { getNewGoalsId } from '../../utils/uniqueid'
 import find from 'lodash/find'
+import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 
-function CityGoals () {
+CityGoals.propTypes = {
+  city: PropTypes.shape({
+    name: PropTypes.string,
+    editdate: PropTypes.string,
+    text: PropTypes.string,
+    environment: PropTypes.number,
+    publicHealth: PropTypes.number,
+    equity: PropTypes.number,
+    joyfulness: PropTypes.number,
+    personalSafety: PropTypes.number
+  }),
+  setCity: PropTypes.func
+}
+
+function CityGoals ({ setCity }) {
   const [goal, setGoal] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
@@ -88,7 +104,7 @@ function CityGoals () {
     setValue(value)
   }
   useEffect(() => {
-    async function fetchVehicleProfiles () {
+    async function fetchGoals () {
       setLoadingProfiles(true)
 
       try {
@@ -102,7 +118,7 @@ function CityGoals () {
       setLoadingProfiles(false)
     }
 
-    fetchVehicleProfiles()
+    fetchGoals()
   }, [lastUpdate])
   function handleSaveProfile (event) {
     const clone = {
@@ -140,7 +156,7 @@ function CityGoals () {
     const goals = find(profiles, { id: data.value })
 
     setGoal(goals)
-
+    setCity(goals.name)
     setValue(goals.environment)
     setValue1(goals.publicHealth)
     setValue2(goals.equity)
@@ -233,7 +249,7 @@ function CityGoals () {
               <Slider discrete value={value} color="red" settings={settings} />
             </Grid.Column>
             <Grid.Column width={2}>
-              <Input value={value} maxValue="10" onChange={handleValueChange} />
+              <Input value={value} max="10" onChange={handleValueChange} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
@@ -302,26 +318,28 @@ function CityGoals () {
           </Grid.Row>
         </Grid>
       </Form>
-      <Button
-        fluid
-        color="green"
-        icon
-        labelPosition="left"
-        onClick={handleSaveProfile}
-        disabled={isSavePending || (goal && !goal.name)}
-      >
-        {isSavePending ? (
-          <>
-            <Icon loading name="spinner" />
-            {t('inputPanel.savePlaceholder')}
-          </>
-        ) : (
-          <>
-            <Icon name="save" />
-            {t('inputPanel.save')}
-          </>
-        )}
-      </Button>
+      <Link to="/attributes">
+        <Button
+          fluid
+          color="green"
+          icon
+          labelPosition="left"
+          onClick={handleSaveProfile}
+          disabled={isSavePending || (goal && !goal.name)}
+        >
+          {isSavePending ? (
+            <>
+              <Icon loading name="spinner" />
+              {t('inputPanel.savePlaceholder')}
+            </>
+          ) : (
+            <>
+              <Icon name="save" />
+              {t('inputPanel.save')}
+            </>
+          )}
+        </Button>
+      </Link>
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
     </div>

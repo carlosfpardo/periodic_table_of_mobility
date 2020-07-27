@@ -16,7 +16,6 @@ import Thresholds from './components/CityGoals/Thresholds'
 // page uses the hook
 function Page () {
   const [vehicle, setVehicle] = useState({})
-
   return (
     <div className="App">
       <Grid stackable>
@@ -49,6 +48,7 @@ function Page () {
 function AppRouter () {
   const [vehicle, setVehicle] = useState({})
   const [attributes, setAttributes] = useState({})
+  const [city, setCity] = useState({})
   const { t, i18n } = useTranslation()
   const changeLanguage = lng => {
     i18n.changeLanguage(lng)
@@ -72,12 +72,6 @@ function AppRouter () {
           </Menu.Item>
           <Menu.Item>
             <Link to="/city">{t('routing.city')}</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/attributes">{t('routing.attributes')}</Link>
-          </Menu.Item>
-          <Menu.Item>
-            <Link to="/thresholds">{t('routing.thresholds')}</Link>
           </Menu.Item>
           <Dropdown item text={t('language')}>
             <Dropdown.Menu>
@@ -111,13 +105,14 @@ function AppRouter () {
             </Grid>
           </Route>
           <Route path="/city">
-            <CityGoals />
+            <CityGoals setCity={setCity} />
           </Route>
           <Route path="/attributes">
             <Grid stackable>
               <Grid.Row columns={1}>
                 <Grid.Column>
                   <Attributes
+                    city={city}
                     attributes={attributes}
                     setAttributes={setAttributes}
                   />
@@ -134,7 +129,7 @@ function AppRouter () {
               </Grid.Row>
             </Grid>
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Page />
           </Route>
         </Switch>

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Form, Grid, Button, Icon, Message } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import ATTRIBUTES from '../../data/attributes_numo.json'
 import { saveData } from '../../utils/loadThresholds'
 import { getNewGoalsId } from '../../utils/uniqueid'
 import TInput from './TInput'
@@ -13,8 +12,8 @@ Thresholds.propTypes = {
     units: PropTypes.string
   })
 }
-function Attributes ({ values = {}, onChange = () => {} }) {
-  return ATTRIBUTES.map(attribute => (
+function Attributes ({ attributes, values = {}, onChange = () => {} }) {
+  return attributes.map(attribute => (
     <TInput
       key={attribute.id}
       attribute={attribute}
@@ -73,7 +72,7 @@ function Thresholds ({ attributes }) {
 
       <Form>
         <Grid>
-          <Attributes />
+          <Attributes attributes={attributes} />
         </Grid>
       </Form>
       <Button

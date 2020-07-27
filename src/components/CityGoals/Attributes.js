@@ -1,28 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import {
-  Header,
-  Dropdown,
-  Button,
-  Input,
-  Message,
-  Segment,
-  Form,
-  Grid
-} from 'semantic-ui-react'
+import { Header, Button, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
-import find from 'lodash/find'
 import UnitSelection from './UnitSelection'
 import { fetchAttributeData /*, saveAttributeData */ } from '../../utils/city'
-import ATTRIBUTES from '../../data/attributes_numo.json'
 import { useTranslation } from 'react-i18next'
 
-function Attribute ({ values = {}, onChange = () => {} }) {
-  return ATTRIBUTES.map(attribute => (
+function Attribute ({ attributes, values = {}, onChange = () => {} }) {
+  return attributes.map(attribute => (
     <UnitSelection
-      key={attribute.id}
-      attribute={attribute}
-      value={values[attribute.id]}
+      key={attribute.attrib_id + attribute.city_id}
+      attrib_id={attribute.attrib_id}
+      city_id={attribute.city_id}
       onChange={value => {
         onChange({ ...values, [attribute.id]: value })
       }}
@@ -31,6 +20,7 @@ function Attribute ({ values = {}, onChange = () => {} }) {
 }
 
 Attributes.propTypes = {
+  city: PropTypes.string,
   attributes: PropTypes.shape({
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     units: PropTypes.string
@@ -38,124 +28,43 @@ Attributes.propTypes = {
   setAttributes: PropTypes.func
 }
 
-function Attributes ({ attributes, setAttributes }) {
-  const [profiles, setProfiles] = useState([])
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
-  const [isLoadingProfiles, setLoadingProfiles] = useState(false)
-  const [isSettingAttributes, setSettingAttributes] = useState(true)
-  const [isDefault, setDefault] = useState(false)
-  const { t } = useTranslation()
+function Attributes ({ city, attributes, setAttributes }) {
+  const [isLoadingProfiles, setLoadingProfiles] = useState(true)
+  const [isSettingAttributes, setAttributesSet] = useState(true)
   useEffect(() => {
     async function fetchAttributes () {
       setLoadingProfiles(true)
 
       try {
-        const profiles = await fetchAttributeData()
-        setProfiles(profiles)
+        const profiles = await fetchAttributeData(city)
+        setAttributes(profiles)
       } catch (err) {
         console.error(err)
-        setError(err.message)
       }
 
       setLoadingProfiles(false)
     }
 
     fetchAttributes()
-  }, [])
-
-  function handleSelection (event) {
-    setDefault(true)
+  }, [city, setAttributes])
+  function handleAttributeset (event) {
+    setAttributesSet(true)
   }
-  function handleSelection1 (event) {
-    setDefault(false)
-  }
-
-  function attributesSet () {
-    setSettingAttributes(false)
-  }
-
-  function handleDropdownChange (event, data) {
-    const attributes = find(profiles, { id: data.value })
-
-    setAttributes(attributes)
-
-    // Reset error state.
-    setSuccess('')
-    setError('')
-  }
-
-  function handleNameChange (event, data) {
-    setSettingAttributes(false)
-    const newAttribute = {
-      ...attributes,
-      name: event.target.value
-    }
-    setAttributes(newAttribute)
-  }
+  const { t } = useTranslation()
 
   return (
     <div className="App1">
       <Header as="h3" dividing>
         {t('attributes.part1')}
       </Header>
-
+      {city}
       <p>{t('attributes.part2')}</p>
 
-      <div className="input-row">
-        <Form>
-          <Grid>
-            <Grid.Row>
-              <Form.Field
-                label={t('city.pregoals')}
-                control="input"
-                type="radio"
-                name="htmlRadios"
-                value="pre"
-                onClick={handleSelection}
-              />
-              {isDefault ? (
-                <Dropdown
-                  placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
-                  fluid
-                  search
-                  selection
-                  options={profiles.map(item => ({
-                    key: item.id,
-                    text: item.name,
-                    value: item.id
-                  }))}
-                  onChange={handleDropdownChange}
-                />
-              ) : (
-                <Dropdown disabled />
-              )}
-            </Grid.Row>
-            <Grid.Row>
-              <Form.Field
-                label={t('city.defgoals')}
-                control="input"
-                type="radio"
-                name="htmlRadios"
-                value="def"
-                onClick={handleSelection1}
-              />
-              {isDefault ? (
-                <Input disabled />
-              ) : (
-                <Input
-                  id="input-name"
-                  placeholder={t('city.placeholder1')}
-                  onChange={handleNameChange}
-                />
-              )}
-            </Grid.Row>
-          </Grid>
-        </Form>
-      </div>
-      <Attribute values={attributes} />
+      <div className="input-row" />
+      {isLoadingProfiles ? '' : <Attribute attributes={attributes} />}
+
       <Segment basic>
-        <Button icon labelPosition="right" onClick={attributesSet}>
+        <Button icon labelPosition="right" onClick={handleAttributeset}>
           {t('attributes.setAttributes')}
         </Button>
 
@@ -167,8 +76,6 @@ function Attributes ({ attributes, setAttributes }) {
           ''
         )}
       </Segment>
-      {error && <Message error>{error}</Message>}
-      {success && <Message success>{success}</Message>}
     </div>
   )
 }
