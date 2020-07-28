@@ -1,3 +1,10 @@
 [build]
-  command = 'npm run build'
-  publish = 'build/'
+  functions = "functions-build"
+  # This will be run the site build
+  command = "yarn run build"
+  # This is the directory is publishing to netlify's CDN
+  publish = "build"
+
+[dev]
+  # Local dev command. A.k.a npm start
+  command = "yarn start"

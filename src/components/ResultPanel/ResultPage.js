@@ -9,6 +9,7 @@ import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import { DEFAULT_USE_CASE } from '../../constants'
 import { useCases } from '../../utils/useCase'
+import Test from '../test/test'
 
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
@@ -71,7 +72,7 @@ function ResultPage ({ vehicle, setVehicle }) {
       </Header>
 
       <p>{t('resultPage.part2')}</p>
-
+      <Test />
       <div className="input-row">
         <Dropdown
           className="icon"
