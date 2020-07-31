@@ -106,7 +106,11 @@ function CityGoals ({ setCity }) {
 
       try {
         api.readAll().then(city => {
-          const profiles = [city[0].data, city[1].data]
+          let profiles = []
+          if (city.length !== 0) {
+            profiles = [city[0].data, city[1].data]
+          }
+
           setProfiles(profiles)
         })
       } catch (err) {
