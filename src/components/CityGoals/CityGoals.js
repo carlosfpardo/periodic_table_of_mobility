@@ -37,10 +37,12 @@ function CityGoals ({ setCity }) {
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
   const [isDefault, setDefault] = useState(false)
+  const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const { t } = useTranslation()
+  const [description, setDescription] = useState([])
   const [value, setValue] = useState(0)
   const [value1, setValue1] = useState(0)
   const [value2, setValue2] = useState(0)
@@ -126,11 +128,13 @@ function CityGoals ({ setCity }) {
     }
 
     fetchGoals()
-  }, [])
+  }, [lastUpdate])
   function handleSaveProfile (event) {
     setSavePending(true)
+    setLastUpdate(new Date().toISOString())
     const todoValue = goal.name
-    const id = find(city, { data: goal })
+    const cityref = find(city, { data: goal })
+    const id = getCityId(cityref)
     if (!todoValue) {
       alert('Please add City Name')
       return false
@@ -138,6 +142,7 @@ function CityGoals ({ setCity }) {
 
     const todoInfo = {
       name: todoValue,
+      description: description,
       environment: value,
       publicHealth: value1,
       equity: value2,
@@ -165,6 +170,7 @@ function CityGoals ({ setCity }) {
     const goals = find(profiles, { name: data.value })
     setGoal(goals)
     setCity(goals.name)
+    setDescription(goals.description)
     setValue(goals.environment)
     setValue1(goals.publicHealth)
     setValue2(goals.equity)
@@ -179,6 +185,15 @@ function CityGoals ({ setCity }) {
     const newVehicle = {
       ...goal,
       name: event.target.value
+    }
+
+    setGoal(newVehicle)
+  }
+  function handleDescriptionChange (event, data) {
+    setDescription(event.target.value)
+    const newVehicle = {
+      ...goal,
+      description: event.target.value
     }
 
     setGoal(newVehicle)
@@ -244,7 +259,12 @@ function CityGoals ({ setCity }) {
             )}
           </Grid.Row>
           <Grid.Row>
-            <TextArea id="input-name" placeholder={t('city.placeholder2')} />
+            <TextArea
+              id="input-name"
+              value={description}
+              placeholder={t('city.placeholder2')}
+              onChange={handleDescriptionChange}
+            />
           </Grid.Row>
           <Grid.Row>
             <Header>{t('city.part1')}</Header>
@@ -350,5 +370,11 @@ function CityGoals ({ setCity }) {
       {success && <Message success>{success}</Message>}
     </div>
   )
+}
+function getCityId (todo) {
+  if (!todo.ref) {
+    return null
+  }
+  return todo.ref['@ref'].id
 }
 export default CityGoals
