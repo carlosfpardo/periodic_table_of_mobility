@@ -29,7 +29,7 @@
     "formRequest": "Yes",
     "streetAllocation": "Right of way zone allowance",
     "sidewalk": "A: Ped realm ",
-    "nextPUDO": "B: Flex Zone*",
+    "nextPUDO": "B: Flex Zone",
     "nextMove": "C: Travel close",
     "farMove": "D: Travel far",
     "application": "Download application",
@@ -69,7 +69,7 @@
     "savePlaceholder": "Saving ...",
     "save": "Save profile",
     "example": "Example",
-    "savedCorrect": "Saved vehicle to google sheets.",
+    "savedCorrect": "Saved vehicle to our database.",
     "saveFail": "Unable to save vehicle profile."
   },
   "inputHelp": {
@@ -92,10 +92,10 @@
   "city": {
     "title": "Please describe your social and policy priorities",
     "subtitle": "Learning about social and policy goals and priorities of a city is helpful to provide well-adjusted recommendations on transport policies",
-    "pregoals": "Pre-load goals",
+    "pregoals": "Pre-load list of priorities",
     "defgoals": "Define your own goals and priorities (below)",
-    "placeholder1": "Name for goal group",
-    "placeholder2": "Describe the priorities of your city in terms of the main policies you have at the national, local level and specific policies for transportation.",
+    "placeholder1": "Name for new list of priorities",
+    "placeholder2": "Describe the priorities of your city according to the main policies you have at the national, local level and specific policies for transportation.",
     "part1": "Please rank the priorities for improvement according to current city policies (a higher number represents a higher priority):",
     "environment": "Environment",
     "publicHealth": "Public health",
@@ -124,7 +124,7 @@
     "name": "Input city name",
     "nameLabel": "Name of city",
     "title": "Please determine the threshold levels for",
-    "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city",
+    "subtitle": "Thresholds below determine the price indication for use of a vehicle in your city",
     "preload": "Preload thresholds",
     "defname": "Define new",
     "placeholder1": "Threshold name",
@@ -136,7 +136,7 @@
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
-    "part1": "This platform helps assess the impact of any vehicle (existing or hypothetical) depending on its attributes. There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
     "link": "Learn why this tool exists and how to offer feedback."
   },
   "footer": {
