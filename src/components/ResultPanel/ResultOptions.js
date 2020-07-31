@@ -281,18 +281,15 @@ function ResultOptions ({ levels, vehicle }) {
         <Grid.Column textAlign="center">
           <Modal
             trigger={
-              <Segment basic textAlign="center">
+              <Segment textAlign="center">
                 {t('resultOptions.nextPUDO')}
               </Segment>
             }
           >
-            <Modal.Header>Has caveats</Modal.Header>
+            <Modal.Header>{t('resultOptions.flexTitle')}</Modal.Header>
             <Modal.Content>
               <Modal.Description>
-                <Header>
-                  Most vehicles only have PUDO (pick-up dropoff) privilages in
-                  this area
-                </Header>
+                <Header>{t('resultOptions.flextext')}</Header>
               </Modal.Description>
             </Modal.Content>
           </Modal>

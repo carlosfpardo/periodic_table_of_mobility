@@ -16,6 +16,7 @@ import { Slider } from 'react-semantic-ui-range'
 import find from 'lodash/find'
 import PropTypes from 'prop-types'
 import api from '../../utils/api'
+import { Link } from 'react-router-dom'
 
 CityGoals.propTypes = {
   city: PropTypes.shape({
@@ -366,6 +367,13 @@ function CityGoals ({ setCity }) {
           </>
         )}
       </Button>
+      {isSavePending || (goal && !goal.name) ? (
+        ''
+      ) : (
+        <Link to="/attributes">
+          <Button>Set attributes</Button>
+        </Link>
+      )}
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
     </div>

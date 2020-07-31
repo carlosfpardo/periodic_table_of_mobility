@@ -14,6 +14,11 @@ const readAll = () => {
     return response.json()
   })
 }
+const readAllAttributes = () => {
+  return fetch('/.netlify/functions/attribs-read-all').then(response => {
+    return response.json()
+  })
+}
 
 const update = (todoId, data) => {
   return fetch(`/.netlify/functions/todos-update/${todoId}`, {
@@ -46,6 +51,7 @@ const batchDeleteTodo = todoIds => {
 export default {
   create: create,
   readAll: readAll,
+  readAllAttributes: readAllAttributes,
   update: update,
   delete: deleteTodo,
   batchDelete: batchDeleteTodo
