@@ -9,7 +9,7 @@ import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import { DEFAULT_USE_CASE } from '../../constants'
 import { useCases } from '../../utils/useCase'
-import Test from '../test/test'
+import api from '../../utils/api'
 
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
@@ -31,6 +31,7 @@ function ResultPage ({ vehicle, setVehicle }) {
   // const [profiles, setProfiles] = useState(VEHICLE_PROFILES)
   const [profiles, setProfiles] = useState([])
   const [error, setError] = useState('')
+  const [city, setCity] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [lastUpdate] = useState(new Date().toISOString())
@@ -64,7 +65,32 @@ function ResultPage ({ vehicle, setVehicle }) {
     setSuccess('')
     setError('')
   }
+  function handleNameChange (event, data) {
+    setCity(event.target.value)
+  }
+  function saveCity (e) {
+    const todoValue = city
 
+    if (!todoValue) {
+      alert('Please add City Name')
+      return false
+    }
+
+    const todoInfo = {
+      name: todoValue,
+      completed: false
+    }
+
+    // Make API request to create new todo
+    api
+      .create(todoInfo)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(e => {
+        console.log('An API error occurred', e)
+      })
+  }
   return (
     <div className="Policy">
       <Header as="h3" dividing>
@@ -72,7 +98,19 @@ function ResultPage ({ vehicle, setVehicle }) {
       </Header>
 
       <p>{t('resultPage.part2')}</p>
-      <Test />
+      <input
+        className="todo-create-input"
+        placeholder="Add a todo item"
+        name="name"
+        autoComplete="off"
+        style={{ marginRight: 20 }}
+        onChange={handleNameChange}
+      />
+      <div className="todo-actions">
+        <button className="todo-create-button" onClick={saveCity}>
+          Create todo
+        </button>
+      </div>
       <div className="input-row">
         <Dropdown
           className="icon"
@@ -101,5 +139,4 @@ function ResultPage ({ vehicle, setVehicle }) {
     </div>
   )
 }
-
 export default ResultPage

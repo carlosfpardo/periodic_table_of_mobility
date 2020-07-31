@@ -13,11 +13,9 @@ import {
 } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import { Slider } from 'react-semantic-ui-range'
-import { fetchGoalData, saveData } from '../../utils/loadGoals'
-import { getNewGoalsId } from '../../utils/uniqueid'
 import find from 'lodash/find'
 import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
+import api from '../../utils/api'
 
 CityGoals.propTypes = {
   city: PropTypes.shape({
@@ -41,7 +39,6 @@ function CityGoals ({ setCity }) {
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
-  const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const { t } = useTranslation()
   const [value, setValue] = useState(0)
   const [value1, setValue1] = useState(0)
@@ -108,8 +105,10 @@ function CityGoals ({ setCity }) {
       setLoadingProfiles(true)
 
       try {
-        const profiles = await fetchGoalData()
-        setProfiles(profiles)
+        api.readAll().then(city => {
+          const profiles = [city[0].data, city[1].data]
+          setProfiles(profiles)
+        })
       } catch (err) {
         console.error(err)
         setError(err.message)
@@ -119,42 +118,40 @@ function CityGoals ({ setCity }) {
     }
 
     fetchGoals()
-  }, [lastUpdate])
+  }, [])
   function handleSaveProfile (event) {
-    const clone = {
-      ...goal,
-      id: getNewGoalsId(),
-      name: `${goal.name}`
-    }
-    setGoal(clone)
-    saveToApi('POST', clone)
-  }
-
-  // async function updateToApi () {
-  //   saveToApi('PUT', goal)
-  // }
-
-  async function saveToApi (method, goal) {
-    setSuccess('')
-    setError('')
     setSavePending(true)
+    const todoValue = goal.name
 
-    try {
-      const result = await saveData('POST', goal)
-      if (!result) return
-      setLastUpdate(new Date().toISOString())
-      setSuccess(t('inputPanel.savedCorrect'))
-    } catch (err) {
-      console.error(err)
-      setError(t('inputPanel.saveFail'))
+    if (!todoValue) {
+      alert('Please add City Name')
+      return false
     }
+
+    const todoInfo = {
+      name: todoValue,
+      environment: value,
+      publicHealth: value1,
+      equity: value2,
+      joyfulness: value3,
+      personalSafety: value4
+    }
+
+    // Make API request to create new todo
+    api
+      .create(todoInfo)
+      .then(response => {
+        console.log(response)
+      })
+      .catch(e => {
+        console.log('An API error occurred', e)
+      })
 
     setSavePending(false)
   }
 
   function handleDropdownChange (event, data) {
-    const goals = find(profiles, { id: data.value })
-
+    const goals = find(profiles, { name: data.value })
     setGoal(goals)
     setCity(goals.name)
     setValue(goals.environment)
@@ -206,9 +203,9 @@ function CityGoals ({ setCity }) {
                 search
                 selection
                 options={profiles.map(item => ({
-                  key: item.id,
+                  key: item.name,
                   text: item.name,
-                  value: item.id
+                  value: item.name
                 }))}
                 onChange={handleDropdownChange}
               />
@@ -318,28 +315,26 @@ function CityGoals ({ setCity }) {
           </Grid.Row>
         </Grid>
       </Form>
-      <Link to="/attributes">
-        <Button
-          fluid
-          color="green"
-          icon
-          labelPosition="left"
-          onClick={handleSaveProfile}
-          disabled={isSavePending || (goal && !goal.name)}
-        >
-          {isSavePending ? (
-            <>
-              <Icon loading name="spinner" />
-              {t('inputPanel.savePlaceholder')}
-            </>
-          ) : (
-            <>
-              <Icon name="save" />
-              {t('inputPanel.save')}
-            </>
-          )}
-        </Button>
-      </Link>
+      <Button
+        fluid
+        color="green"
+        icon
+        labelPosition="left"
+        onClick={handleSaveProfile}
+        disabled={isSavePending || (goal && !goal.name)}
+      >
+        {isSavePending ? (
+          <>
+            <Icon loading name="spinner" />
+            {t('inputPanel.savePlaceholder')}
+          </>
+        ) : (
+          <>
+            <Icon name="save" />
+            {t('inputPanel.save')}
+          </>
+        )}
+      </Button>
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
     </div>

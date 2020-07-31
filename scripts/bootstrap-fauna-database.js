@@ -36,15 +36,157 @@ function createFaunaDB (key) {
   const client = new faunadb.Client({
     secret: key
   })
-
   /* Based on your requirements, change the schema here */
-  return client
-    .query(q.Create(q.Ref('classes'), { name: 'todos' }))
+  // city table
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'citygoals' }))
     .then(() => {
-      return client.query(
+      client.query(
         q.Create(q.Ref('indexes'), {
-          name: 'all_todos',
-          source: q.Ref('classes/todos')
+          name: 'get_all_citygoals',
+          source: q.Ref('classes/citygoals')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_citygoals',
+          source: q.Ref('classes/citygoals'),
+          terms: [{ field: ['data', 'name'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
+  // unit table
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'definedunit' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_definedunit',
+          source: q.Ref('classes/definedunit')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_definedunits',
+          source: q.Ref('classes/definedunit'),
+          terms: [{ field: ['data', 'name'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
+  // vehicle table
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'vehicle' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_vehicle',
+          source: q.Ref('classes/vehicle')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_definedunits',
+          source: q.Ref('classes/definedunit'),
+          terms: [{ field: ['data', 'name'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'vehicle_attribute' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_vehicle_attribute',
+          source: q.Ref('classes/vehicle_attribute')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_vehicle_attributes',
+          source: q.Ref('classes/vehicle_attribute'),
+          terms: [{ field: ['data', 'num'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
+  // city-attribute link table
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'city_attributes' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_city_attributes',
+          source: q.Ref('classes/city_attributes')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_city_attributes',
+          source: q.Ref('classes/city_attributes'),
+          terms: [{ field: ['data', 'num'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
+  // attribute table
+  return client
+    .query(q.Create(q.Ref('classes'), { name: 'attribs' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_attribs',
+          source: q.Ref('classes/attribs')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_attribs',
+          source: q.Ref('classes/attribs'),
+          terms: [{ field: ['data', 'id'] }],
+          unique: true
         })
       )
     })
