@@ -33,6 +33,7 @@ CityGoals.propTypes = {
 
 function CityGoals ({ setCity }) {
   const [goal, setGoal] = useState({})
+  const [city, setCities] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
   const [isDefault, setDefault] = useState(false)
@@ -106,11 +107,14 @@ function CityGoals ({ setCity }) {
 
       try {
         api.readAll().then(city => {
-          let profiles = []
-          if (city.length !== 0) {
-            profiles = [city[0].data, city[1].data]
-          }
+          const profiles = []
+          var i = 0
+          city.forEach(element => {
+            profiles[i] = element.data
+            i++
+          })
 
+          setCities(city)
           setProfiles(profiles)
         })
       } catch (err) {
@@ -126,7 +130,7 @@ function CityGoals ({ setCity }) {
   function handleSaveProfile (event) {
     setSavePending(true)
     const todoValue = goal.name
-
+    const id = find(city, { data: goal })
     if (!todoValue) {
       alert('Please add City Name')
       return false
@@ -140,16 +144,19 @@ function CityGoals ({ setCity }) {
       joyfulness: value3,
       personalSafety: value4
     }
-
-    // Make API request to create new todo
-    api
-      .create(todoInfo)
-      .then(response => {
-        console.log(response)
-      })
-      .catch(e => {
-        console.log('An API error occurred', e)
-      })
+    if (typeof find(profiles, { name: todoInfo.name }) === 'undefined') {
+      // Make API request to create new todo
+      api
+        .create(todoInfo)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(e => {
+          console.log('An API error occurred', e)
+        })
+    } else {
+      api.update(id, todoInfo)
+    }
 
     setSavePending(false)
   }
