@@ -104,6 +104,46 @@ function CityGoals ({ setCity }) {
     }
     setValue(value)
   }
+  const handleValueChange1 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    if (value > 10) {
+      value = 10
+    }
+    setValue1(value)
+  }
+  const handleValueChange2 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    if (value > 10) {
+      value = 10
+    }
+    setValue2(value)
+  }
+  const handleValueChange3 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    if (value > 10) {
+      value = 10
+    }
+    setValue3(value)
+  }
+  const handleValueChange4 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    if (value > 10) {
+      value = 10
+    }
+    setValue4(value)
+  }
   useEffect(() => {
     async function fetchGoals () {
       setLoadingProfiles(true)
@@ -134,8 +174,6 @@ function CityGoals ({ setCity }) {
     setSavePending(true)
     setLastUpdate(new Date().toISOString())
     const todoValue = goal.name
-    const cityref = find(city, { data: goal })
-    const id = getCityId(cityref)
     if (!todoValue) {
       alert('Please add City Name')
       return false
@@ -161,6 +199,8 @@ function CityGoals ({ setCity }) {
           console.log('An API error occurred', e)
         })
     } else {
+      const cityref = find(city, { data: goal })
+      const id = getCityId(cityref)
       api.update(id, todoInfo)
     }
 
@@ -294,7 +334,7 @@ function CityGoals ({ setCity }) {
               />
             </Grid.Column>
             <Grid.Column width={2}>
-              <Input value={value1} max="10" onChange={handleValueChange} />
+              <Input value={value1} max="10" onChange={handleValueChange1} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
@@ -310,7 +350,7 @@ function CityGoals ({ setCity }) {
               />
             </Grid.Column>
             <Grid.Column width={2}>
-              <Input value={value2} max="10" onChange={handleValueChange} />
+              <Input value={value2} max="10" onChange={handleValueChange2} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
@@ -326,7 +366,7 @@ function CityGoals ({ setCity }) {
               />
             </Grid.Column>
             <Grid.Column width={2}>
-              <Input value={value3} max="10" onChange={handleValueChange} />
+              <Input value={value3} max="10" onChange={handleValueChange3} />
             </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={3}>
@@ -342,7 +382,7 @@ function CityGoals ({ setCity }) {
               />
             </Grid.Column>
             <Grid.Column width={2}>
-              <Input value={value4} max="10" onChange={handleValueChange} />
+              <Input value={value4} max="10" onChange={handleValueChange4} />
             </Grid.Column>
           </Grid.Row>
         </Grid>

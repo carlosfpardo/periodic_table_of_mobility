@@ -171,6 +171,33 @@ function createFaunaDB (key) {
         throw e
       }
     })
+  // city-attribute link table
+  client
+    .query(q.Create(q.Ref('classes'), { name: 'cases' }))
+    .then(() => {
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'get_all_cases',
+          source: q.Ref('classes/cases')
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'pk_city_cases',
+          source: q.Ref('classes/cases'),
+          terms: [{ field: ['data', 'num'] }],
+          unique: true
+        })
+      )
+    })
+    .catch(e => {
+      if (
+        e.requestResult.statusCode === 400 &&
+        e.message === 'instance not unique'
+      ) {
+        throw e
+      }
+    })
   // attribute table
   return client
     .query(q.Create(q.Ref('classes'), { name: 'attribs' }))

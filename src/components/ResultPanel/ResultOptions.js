@@ -25,10 +25,11 @@ ResultOptions.propTypes = {
       })
     )
   }),
-  levels: PropTypes.objectOf(PropTypes.number)
+  levels: PropTypes.objectOf(PropTypes.number),
+  vehicleset: PropTypes.bool
 }
 
-function ResultOptions ({ levels, vehicle }) {
+function ResultOptions ({ levels, vehicle, vehicleset }) {
   let spaceArray = {}
   let drivers = 0
   let operating = 0
@@ -37,7 +38,8 @@ function ResultOptions ({ levels, vehicle }) {
   let subsidy = 0
   let risk = 0
   const { t } = useTranslation()
-  if (!levels) return null
+
+  if (!levels || !vehicleset) return null
   // Require ALL dependent variables to be set
   const allValues = Object.values(levels)
   if (allValues.includes(0)) {
@@ -50,7 +52,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.driverLicense')}
             </Segment>
           </Grid.Column>
@@ -65,7 +67,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.driverLicense')}
           </Segment>
         </Grid.Column>
@@ -84,7 +86,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment textAlign="center" basic>
+            <Segment textAlign="right" basic>
               {t('resultOptions.operatingLicense')}
             </Segment>
           </Grid.Column>
@@ -99,7 +101,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.operatingLicense')}
           </Segment>
         </Grid.Column>
@@ -118,7 +120,7 @@ function ResultOptions ({ levels, vehicle }) {
     if (counter > 1 && elev === 0) {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
@@ -131,7 +133,7 @@ function ResultOptions ({ levels, vehicle }) {
     } else if (counter === 2 && elev === 1) {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
@@ -142,7 +144,7 @@ function ResultOptions ({ levels, vehicle }) {
     } else {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
@@ -160,7 +162,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.price')}
             </Segment>
           </Grid.Column>
@@ -175,7 +177,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.price')}
             </Segment>
           </Grid.Column>
@@ -190,7 +192,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.price')}
           </Segment>
         </Grid.Column>
@@ -207,7 +209,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.subsidy')}
           </Segment>
         </Grid.Column>
@@ -231,7 +233,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.risk')}
             </Segment>
           </Grid.Column>
@@ -246,7 +248,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.risk')}
           </Segment>
         </Grid.Column>
