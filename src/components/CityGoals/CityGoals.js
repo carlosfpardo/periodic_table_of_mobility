@@ -29,10 +29,11 @@ CityGoals.propTypes = {
     joyfulness: PropTypes.number,
     personalSafety: PropTypes.number
   }),
-  setCity: PropTypes.func
+  setCity: PropTypes.func,
+  setCityid: PropTypes.func
 }
 
-function CityGoals ({ setCity }) {
+function CityGoals ({ setCity, setCityid }) {
   const [goal, setGoal] = useState({})
   const [city, setCities] = useState({})
   const [profiles, setProfiles] = useState([])
@@ -188,10 +189,14 @@ function CityGoals ({ setCity }) {
       joyfulness: value3,
       personalSafety: value4
     }
+    const todosInfo = {
+      ...todoInfo,
+      attributes: ['test', 'test']
+    }
     if (typeof find(profiles, { name: todoInfo.name }) === 'undefined') {
       // Make API request to create new todo
       api
-        .create(todoInfo)
+        .create(todosInfo)
         .then(response => {
           console.log(response)
         })
@@ -201,7 +206,8 @@ function CityGoals ({ setCity }) {
     } else {
       const cityref = find(city, { data: goal })
       const id = getCityId(cityref)
-      api.update(id, todoInfo)
+      setCityid(id)
+      api.update(id, todosInfo)
     }
 
     setSavePending(false)

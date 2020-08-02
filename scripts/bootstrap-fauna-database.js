@@ -156,6 +156,14 @@ function createFaunaDB (key) {
       )
       client.query(
         q.Create(q.Ref('indexes'), {
+          name: 'attributes_from_city',
+          source: q.Ref('classes/city_attributes'),
+          terms: [{ field: ['data', 'city_name'] }],
+          unique: true
+        })
+      )
+      client.query(
+        q.Create(q.Ref('indexes'), {
           name: 'pk_city_attributes',
           source: q.Ref('classes/city_attributes'),
           terms: [{ field: ['data', 'num'] }],

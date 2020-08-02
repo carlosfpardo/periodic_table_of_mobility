@@ -23,11 +23,6 @@ const readAll = () => {
     return response.json()
   })
 }
-const readAllAttributes = () => {
-  return fetch('/.netlify/functions/attribs-read-all').then(response => {
-    return response.json()
-  })
-}
 
 const readAllCases = () => {
   return fetch('/.netlify/functions/cases-read-all').then(response => {
@@ -76,7 +71,6 @@ export default {
   create: create,
   readAll: readAll,
   readAllCases: readAllCases,
-  readAllAttributes: readAllAttributes,
   update: update,
   updateUseCase: updateUseCase,
   delete: deleteTodo,

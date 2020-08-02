@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Header, Button, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import UnitSelection from './UnitSelection'
-import { fetchAttributeData /*, saveAttributeData */ } from '../../utils/city'
+import api from '../../utils/api'
 import { useTranslation } from 'react-i18next'
 
 function Attribute ({ attributes, values = {}, onChange = () => {} }) {
@@ -25,10 +25,11 @@ Attributes.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     units: PropTypes.string
   }),
-  setAttributes: PropTypes.func
+  setAttributes: PropTypes.func,
+  cityId: PropTypes.any
 }
 
-function Attributes ({ city, attributes, setAttributes }) {
+function Attributes ({ city, attributes, setAttributes, cityId }) {
   const [isLoadingProfiles, setLoadingProfiles] = useState(true)
   const [isSettingAttributes, setAttributesSet] = useState(false)
   useEffect(() => {
@@ -36,8 +37,15 @@ function Attributes ({ city, attributes, setAttributes }) {
       setLoadingProfiles(true)
 
       try {
-        const profiles = await fetchAttributeData(city)
-        setAttributes(profiles)
+        api.readAll().then(city => {
+          const profiles = []
+          var i = 0
+          city.forEach(element => {
+            profiles[i] = element.data
+            i++
+          })
+          setAttributes(profiles)
+        })
       } catch (err) {
         console.error(err)
       }
@@ -46,7 +54,7 @@ function Attributes ({ city, attributes, setAttributes }) {
     }
 
     fetchAttributes()
-  }, [city, setAttributes])
+  }, [cityId, setAttributes])
   function handleAttributeset () {
     setAttributesSet(true)
   }
