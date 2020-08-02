@@ -9,11 +9,11 @@ exports.handler = (event, context) => {
     secret: process.env.FAUNADB_SERVER_SECRET
   })
   return client
-    .query(q.Paginate(q.Match(q.Ref('indexes/get_all_citygoals'))))
+    .query(q.Paginate(q.Match(q.Ref('indexes/get_all_cases'))))
     .then(response => {
       const todoRefs = response.data
-      console.log('Todo refs', todoRefs)
-      console.log(`${todoRefs.length} todos found`)
+      console.log('Cases refs', todoRefs)
+      console.log(`${todoRefs.length} cases found`)
       // create new query out of todo refs. http://bit.ly/2LG3MLg
       const getAllTodoDataQuery = todoRefs.map(ref => {
         return q.Get(ref)

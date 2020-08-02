@@ -32,7 +32,6 @@
     "nextPUDO": "B: Flex Zone",
     "nextMove": "C: Travel close",
     "farMove": "D: Travel far",
-    "application": "Download application",
     "seeRequirements": "Required",
     "notNecessary": "Not necessary",
     "none": "None",
@@ -40,7 +39,9 @@
     "strict": "Strict",
     "risk": "Risk assessment",
     "riskDetails": "Assessment Required",
-    "save": "Download complete recomendation with details"
+    "save": "Download complete recomendation with details",
+    "flexTitle": "PUDO zone",
+    "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off"
   },
   "document": {
     "introPDF": "This document is a summary of the NUMO policy recommendation for a VEHICLENAME in a USECASE, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
@@ -132,6 +133,24 @@
     "th1": "Threshold 1",
     "th2": "Threshold 2",
     "th3": "Threshold 3"
+  },
+  "useCase": {
+    "city": "Chose the framework that you are going to use",
+    "title": "Pleace indicate how you use the vehicle",
+    "automation": "Highest SEA level of automation",
+    "fleet": "Fleet size",
+    "ride": "I will ride with others",
+    "charge": "I will charge others",
+    "app": "I have a digital app",
+    "local": "I am local",
+    "pudo": "Pickup and dropoff passangers",
+    "enabled": "Enabled to travel",
+    "elef": "flying",
+    "elev": "level",
+    "eleu": "under",
+    "placeholder1": "Name for the use case",
+    "defgoals": "Build a custom use case",
+    "pregoals": "Use a prebuild use case"
   },
   "header": {
     "title": "Periodic Table of Mobility",

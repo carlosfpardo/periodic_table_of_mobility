@@ -7,8 +7,7 @@ import { fetchData } from '../../utils/gsheets'
 import { useTranslation } from 'react-i18next'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
-import { DEFAULT_USE_CASE } from '../../constants'
-import { useCases } from '../../utils/useCase'
+import UseCase from './UseCase'
 
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
@@ -27,14 +26,15 @@ ResultPage.propTypes = {
 }
 
 function ResultPage ({ vehicle, setVehicle }) {
-  // const [profiles, setProfiles] = useState(VEHICLE_PROFILES)
+  const [city, setCity] = useState('')
   const [profiles, setProfiles] = useState([])
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
   const [lastUpdate] = useState(new Date().toISOString())
+  const [vehicleset, setSetvehcile] = useState(false)
+  const [useCase, setUseCase] = useState({})
   const levels = mapAttributeValuesToLevel(vehicle.attributes)
-  const useCase = useCases(DEFAULT_USE_CASE)
   const { t } = useTranslation()
   useEffect(() => {
     async function fetchVehicleProfiles () {
@@ -58,7 +58,7 @@ function ResultPage ({ vehicle, setVehicle }) {
     const vehicle = find(profiles, { id: data.value })
 
     setVehicle(vehicle)
-
+    setSetvehcile(false)
     // Reset error state.
     setSuccess('')
     setError('')
@@ -91,13 +91,24 @@ function ResultPage ({ vehicle, setVehicle }) {
           onChange={handleDropdownChange}
         />
       </div>
-
+      <UseCase
+        useCase={useCase}
+        setUseCase={setUseCase}
+        setCity={setCity}
+        vehicleset={vehicleset}
+        setSetvehcile={setSetvehcile}
+        levels={levels}
+      />
+      <ResultOptions
+        levels={levels}
+        useCase={useCase}
+        city={city}
+        vehicle={vehicle}
+        vehicleset={vehicleset}
+      />
       {error && <Message error>{error}</Message>}
       {success && <Message success>{success}</Message>}
-
-      <ResultOptions levels={levels} useCase={useCase} vehicle={vehicle} />
     </div>
   )
 }
-
 export default ResultPage

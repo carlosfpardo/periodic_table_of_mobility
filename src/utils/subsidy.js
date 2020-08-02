@@ -9,7 +9,7 @@
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
 
-export function calculateSubsidyRequired (levels) {
+export function calculateSubsidyRequired (levels, elevation, local) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counter = false
@@ -20,8 +20,7 @@ export function calculateSubsidyRequired (levels) {
           counter = true
         }
       }
-      if (element === 'company' && levels[element] === 'local') counter = true
     }
   }
-  return counter
+  return counter && elevation === 0 && local
 }

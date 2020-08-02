@@ -25,10 +25,25 @@ ResultOptions.propTypes = {
       })
     )
   }),
-  levels: PropTypes.objectOf(PropTypes.number)
+  levels: PropTypes.objectOf(PropTypes.number),
+  vehicleset: PropTypes.bool,
+  useCase: PropTypes.shape({
+    name: PropTypes.string,
+    automation: PropTypes.number,
+    fleetSize: PropTypes.number,
+    rideshare: PropTypes.bool,
+    charge: PropTypes.bool,
+    app: PropTypes.bool,
+    local: PropTypes.bool,
+    pudoPassager: PropTypes.bool,
+    elevationF: PropTypes.bool,
+    elevationL: PropTypes.bool,
+    elevationU: PropTypes.bool
+  }),
+  city: PropTypes.string
 }
 
-function ResultOptions ({ levels, vehicle }) {
+function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   let spaceArray = {}
   let drivers = 0
   let operating = 0
@@ -36,89 +51,93 @@ function ResultOptions ({ levels, vehicle }) {
   let price = 0
   let subsidy = 0
   let risk = 0
+  const {
+    name,
+    automation,
+    charge,
+    local,
+    elevationF,
+    elevationL,
+    elevationU
+  } = useCase
+  let elevation
+  if (elevationF) {
+    elevation = 1
+  } else if (elevationU) {
+    elevation = -1
+  } else if (elevationL) {
+    elevation = 0
+  } else {
+    elevation = 2
+  }
   const { t } = useTranslation()
-  if (!levels) return null
+
+  if (!levels || !vehicleset) return null
   // Require ALL dependent variables to be set
   const allValues = Object.values(levels)
   if (allValues.includes(0)) {
     return null
   }
   function DriversLicense () {
-    const counter = calculateDriverLevelRequired(levels)
+    const counter = calculateDriverLevelRequired(
+      levels,
+      charge,
+      automation,
+      elevation
+    )
     drivers = counter
-    if (counter > 1) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Segment basic textAlign="center">
-              {t('resultOptions.driverLicense')}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment color="red" inverted textAlign="center">
-              {t('resultOptions.seeRequirements')}
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    }
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.driverLicense')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Segment textAlign="center">
-            {t('resultOptions.notNecessary')}
-          </Segment>
+          {counter ? (
+            <Segment color="red" inverted textAlign="center">
+              {t('resultOptions.seeRequirements')}
+            </Segment>
+          ) : (
+            <Segment textAlign="center">
+              {t('resultOptions.notNecessary')}
+            </Segment>
+          )}
         </Grid.Column>
       </Grid.Row>
     )
   }
   function OperatingLicense () {
-    const counter = calculateOperatingLevelRequired(levels)
+    const counter = calculateOperatingLevelRequired(charge)
     operating = counter
-    if (counter > 0) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Segment textAlign="center" basic>
-              {t('resultOptions.operatingLicense')}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.application')}
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    }
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment textAlign="right" basic>
             {t('resultOptions.operatingLicense')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Segment textAlign="center">
-            {t('resultOptions.notNecessary')}
-          </Segment>
+          {operating ? (
+            <Segment inverted color="red" textAlign="center">
+              {t('resultOptions.seeRequirements')}
+            </Segment>
+          ) : (
+            <Segment textAlign="center">
+              {t('resultOptions.notNecessary')}
+            </Segment>
+          )}
         </Grid.Column>
       </Grid.Row>
     )
   }
   function DataRequirement () {
-    const counter = calculateDataLevelRequired(levels)
+    const counter = calculateDataLevelRequired(levels, charge, elevation)
     data = counter
-    const elev = 0
-    if (counter > 1 && elev === 0) {
+    if (data === 1) {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
@@ -128,21 +147,23 @@ function ResultOptions ({ levels, vehicle }) {
           </Grid.Column>
         </Grid.Row>
       )
-    } else if (counter === 2 && elev === 1) {
+    } else if (data === 2) {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment>{t('resultOptions.strict')}</Segment>
+            <Segment inverted color="red" textAlign="center">
+              {t('resultOptions.strict')}
+            </Segment>
           </Grid.Column>
         </Grid.Row>
       )
     } else {
       return (
         <Grid.Row columns={2}>
-          <Grid.Column textAlign="center">
+          <Grid.Column textAlign="right">
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
@@ -160,7 +181,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.price')}
             </Segment>
           </Grid.Column>
@@ -175,7 +196,7 @@ function ResultOptions ({ levels, vehicle }) {
       return (
         <Grid.Row columns={2}>
           <Grid.Column>
-            <Segment basic textAlign="center">
+            <Segment basic textAlign="right">
               {t('resultOptions.price')}
             </Segment>
           </Grid.Column>
@@ -190,7 +211,7 @@ function ResultOptions ({ levels, vehicle }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.price')}
           </Segment>
         </Grid.Column>
@@ -201,18 +222,17 @@ function ResultOptions ({ levels, vehicle }) {
     )
   }
   function Subsidy () {
-    const counter = calculateSubsidyRequired(levels)
+    const counter = calculateSubsidyRequired(levels, elevation, local)
     subsidy = counter
-    const elevation = 0
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.subsidy')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          {counter && elevation !== 1 ? (
+          {subsidy ? (
             <Segment textAlign="center" inverted color="green">
               {t('resultOptions.formRequest')}
             </Segment>
@@ -227,48 +247,37 @@ function ResultOptions ({ levels, vehicle }) {
   function Risk () {
     const counter = calculateRisk(levels)
     risk = counter
-    if (counter === 1) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Segment basic textAlign="center">
-              {t('resultOptions.risk')}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.seeRequirements')}
-            </Segment>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    }
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="center">
+          <Segment basic textAlign="right">
             {t('resultOptions.risk')}
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Segment textAlign="center">
-            {t('resultOptions.notNecessary')}
-          </Segment>
+          {risk ? (
+            <Segment inverted color="red" textAlign="center">
+              {t('resultOptions.seeRequirements')}
+            </Segment>
+          ) : (
+            <Segment textAlign="center">
+              {t('resultOptions.notNecessary')}
+            </Segment>
+          )}
         </Grid.Column>
       </Grid.Row>
     )
   }
 
   function SpaceAllocation () {
-    spaceArray = calculateSpaceRequired(levels)
-    const elevation = 0
+    spaceArray = calculateSpaceRequired(levels, elevation)
     const counterA = spaceArray[0]
     const counterC = spaceArray[1]
     const counterD = spaceArray[2]
     return (
       <Grid.Row columns={4}>
         <Grid.Column textAlign="center">
-          {counterA && elevation !== 1 ? (
+          {counterA ? (
             <Segment basic textAlign="center">
               {t('resultOptions.sidewalk')}
             </Segment>
@@ -281,24 +290,19 @@ function ResultOptions ({ levels, vehicle }) {
         <Grid.Column textAlign="center">
           <Modal
             trigger={
-              <Segment basic textAlign="center">
-                {t('resultOptions.nextPUDO')}
-              </Segment>
+              <Button textAlign="center">{t('resultOptions.nextPUDO')}</Button>
             }
           >
-            <Modal.Header>Has caveats</Modal.Header>
+            <Modal.Header>{t('resultOptions.flexTitle')}</Modal.Header>
             <Modal.Content>
               <Modal.Description>
-                <Header>
-                  Most vehicles only have PUDO (pick-up dropoff) privilages in
-                  this area
-                </Header>
+                <Header>{t('resultOptions.flextext')}</Header>
               </Modal.Description>
             </Modal.Content>
           </Modal>
         </Grid.Column>
         <Grid.Column textAlign="center">
-          {counterC && elevation !== 1 ? (
+          {counterC ? (
             <Segment basic textAlign="center">
               {t('resultOptions.nextMove')}
             </Segment>
@@ -309,7 +313,7 @@ function ResultOptions ({ levels, vehicle }) {
           )}
         </Grid.Column>
         <Grid.Column textAlign="center">
-          {elevation === 1 || counterD ? (
+          {counterD ? (
             <Segment basic textAlign="center">
               {t('resultOptions.farMove')}
             </Segment>
@@ -326,7 +330,7 @@ function ResultOptions ({ levels, vehicle }) {
     var doc = new JsPDF()
     doc.setFontSize(10)
     doc.text(vehicle.name, 35, 20)
-    if (drivers > 1) {
+    if (drivers) {
       doc.text(t('document.driversReq'), 35, 30)
     } else {
       doc.text(t('document.driversNotReq'), 35, 30)
@@ -336,7 +340,9 @@ function ResultOptions ({ levels, vehicle }) {
     } else {
       doc.text(t('document.operatingNotReq'), 35, 40)
     }
-    if (data > 1) {
+    if (data === 2) {
+      doc.text(t('document.dataStrict'), 35, 50)
+    } else if (data === 1) {
       doc.text(t('document.dataLoose'), 35, 50)
     } else {
       doc.text(t('document.dataNone'), 35, 50)
@@ -363,7 +369,10 @@ function ResultOptions ({ levels, vehicle }) {
 
   return (
     <div className="box">
-      <Header>{vehicle.name}</Header>
+      <Header>
+        These are the recomendations for a {vehicle.name} in {city.name} for{' '}
+        {name}{' '}
+      </Header>
       <Grid centered>
         <Grid.Row stretched columns={2}>
           <Grid.Column width={6}>

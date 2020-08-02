@@ -16,7 +16,7 @@ exports.handler = async (event, context) => {
   }
   /* construct the fauna query */
   return client
-    .query(q.Create(q.Ref('classes/todos'), todoItem))
+    .query(q.Create(q.Ref('classes/citygoals'), todoItem))
     .then(response => {
       console.log('success', response)
       /* Success! return the response with statusCode 200 */

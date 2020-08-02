@@ -9,14 +9,37 @@ const create = data => {
   })
 }
 
+const createUseCase = data => {
+  return fetch('/.netlify/functions/useCase-create', {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
+
 const readAll = () => {
   return fetch('/.netlify/functions/todos-read-all').then(response => {
     return response.json()
   })
 }
 
+const readAllCases = () => {
+  return fetch('/.netlify/functions/cases-read-all').then(response => {
+    return response.json()
+  })
+}
+
 const update = (todoId, data) => {
   return fetch(`/.netlify/functions/todos-update/${todoId}`, {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
+const updateUseCase = (todoId, data) => {
+  return fetch(`/.netlify/functions/useCase-update/${todoId}`, {
     body: JSON.stringify(data),
     method: 'POST'
   }).then(response => {
@@ -44,9 +67,12 @@ const batchDeleteTodo = todoIds => {
 }
 
 export default {
+  createUseCase: createUseCase,
   create: create,
   readAll: readAll,
+  readAllCases: readAllCases,
   update: update,
+  updateUseCase: updateUseCase,
   delete: deleteTodo,
   batchDelete: batchDeleteTodo
 }

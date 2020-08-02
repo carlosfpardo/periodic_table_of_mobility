@@ -49,6 +49,7 @@ function AppRouter () {
   const [vehicle, setVehicle] = useState({})
   const [attributes, setAttributes] = useState({})
   const [city, setCity] = useState({})
+  const [cityId, setCityid] = useState({})
   const { t, i18n } = useTranslation()
   const changeLanguage = lng => {
     i18n.changeLanguage(lng)
@@ -105,7 +106,7 @@ function AppRouter () {
             </Grid>
           </Route>
           <Route path="/city">
-            <CityGoals setCity={setCity} />
+            <CityGoals setCity={setCity} setCityid={setCityid} />
           </Route>
           <Route path="/attributes">
             <Grid stackable>
@@ -113,6 +114,7 @@ function AppRouter () {
                 <Grid.Column>
                   <Attributes
                     city={city}
+                    cityId={cityId}
                     attributes={attributes}
                     setAttributes={setAttributes}
                   />
