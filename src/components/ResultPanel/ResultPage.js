@@ -71,7 +71,6 @@ function ResultPage ({ vehicle, setVehicle }) {
       </Header>
 
       <p>{t('resultPage.part2')}</p>
-
       <div className="input-row">
         <Dropdown
           className="icon"

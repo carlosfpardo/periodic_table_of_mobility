@@ -29,7 +29,7 @@
     "formRequest": "Yes",
     "streetAllocation": "Right of way zone allowance",
     "sidewalk": "A: Ped realm ",
-    "nextPUDO": "B: Flex Zone*",
+    "nextPUDO": "B: Flex Zone",
     "nextMove": "C: Travel close",
     "farMove": "D: Travel far",
     "seeRequirements": "Required",
@@ -44,20 +44,21 @@
     "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off"
   },
   "document": {
-    "driversReq": "Driver license is required for this vehicle, more information can be found in this link ",
-    "driversNotReq": "Driver license is not required to operate this vehicle",
-    "operatingReq": "Operating license is required for this vehicle, more information can be found in this link ",
-    "operatingNotReq": "Driver license is not required to operate this vehicle",
-    "dataLoose": "A moderate amount of data is needed to be provided for this vehicle",
-    "dataStrict": "A great amount of data is needed to be provided for this vehicle",
-    "dataNone": "No data is needed to be gathered for this vehicle",
-    "pricesLow": "This vehicle should have low fees and fines attached to it in legislation",
-    "pricesHigh": "This vehicle should have high fees and fines attached to it in legislation",
-    "pricesNA": "This vehicle should have no fees and fines attached to it in legislation",
-    "subsidyGiven": "This vehicle should have its use incentiviced",
-    "subsidyNone": "This vehicle should not have subsidies",
-    "riskReq": "Risk assessment is required for this vehicle",
-    "riskNotReq": "Risk assessment is required for this vehicle"
+    "introPDF": "This document is a summary of the NUMO policy recommendation for a VEHICLENAME in a USECASE, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
+    "driversReq": "A driver license is required for this vehicle, more information to request a license can be found HERE",
+    "driversNotReq": "A driver license is not required to operate this vehicle. Regardless, please be careful when moving around our city and follow all traffic rules. See HERE the general traffic rules for your beautiful island.",
+    "operatingReq": "An operating license is required for this vehicle, more information can be found HERE",
+    "operatingNotReq": "An operating license is not required to operate this vehicle. However, please remember to stay safe. It's a jungle out there.",
+    "dataStrict": "This vehicle in the use case indicated has the highest level of data requirements, according to the Atlantis Data Office's guidelines available HERE. Given the characteristics of the vehicle and how it will be used, these more stringent requirements have been established for everyone's wellbeing, and in order to monitor with greater detail how the vehicle is being used. You have been warned",
+    "dataLoose": "This vehicle must report some data, according to the Atlantis Data Office's moderate level guidelines available HERE. And remember that we will always protect your privacy",
+    "dataNone": "No data will be required of this vehicle, You can roam freely and peacefully but please always be alert of your surroundings. Also, you could still voluntarily provide some data it if you find that it will improve Atlantis's mobility conditions. If you are interested in providing data, please go HERE (you can later revoke this).",
+    "pricesLow": "Fees associated to this vehicle will be low, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
+    "pricesHigh": "Fees associated to this vehicle will be high, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
+    "pricesNA": "There are no fees associated to this vehicle, according to the very popular and well-respected Pricing Office of Atlantis. You must be using a nice, slow, light vehicle. We love it.",
+    "subsidyGiven": "This vehicle can receive a subsidy, after a very simple process that can be requested online through the Department of Nice Things HERE. It's our way of saying thanks.",
+    "subsidyNone": "This vehicle is not eligible to receive subsidies. Are you sure you want to use it? Wouldn't you rather use another vehicle with better conditions? There's lots to choose from, remember we're a magical place so the sky's the limit",
+    "riskReq": "A risk assessment is required for this vehicle. The Risk Department contains greater details here",
+    "riskNotReq": "Risk assessment is required for this vehicle. We like it and hope you have a great time, though please remember to follow all traffic rules."
   },
   "inputPanel": {
     "part1": "Input vehicle attributes",
@@ -69,7 +70,7 @@
     "savePlaceholder": "Saving ...",
     "save": "Save profile",
     "example": "Example",
-    "savedCorrect": "Saved vehicle to google sheets.",
+    "savedCorrect": "Saved vehicle to our database.",
     "saveFail": "Unable to save vehicle profile."
   },
   "inputHelp": {
@@ -92,10 +93,10 @@
   "city": {
     "title": "Please describe your social and policy priorities",
     "subtitle": "Learning about social and policy goals and priorities of a city is helpful to provide well-adjusted recommendations on transport policies",
-    "pregoals": "Pre-load goals",
+    "pregoals": "Pre-load list of priorities",
     "defgoals": "Define your own goals and priorities (below)",
-    "placeholder1": "Name for goal group",
-    "placeholder2": "Describe the priorities of your city in terms of the main policies you have at the national, local level and specific policies for transportation.",
+    "placeholder1": "Name for new list of priorities",
+    "placeholder2": "Describe the priorities of your city according to the main policies you have at the national, local level and specific policies for transportation.",
     "part1": "Please rank the priorities for improvement according to current city policies (a higher number represents a higher priority):",
     "environment": "Environment",
     "publicHealth": "Public health",
@@ -124,7 +125,7 @@
     "name": "Input city name",
     "nameLabel": "Name of city",
     "title": "Please determine the threshold levels for",
-    "subtitle": "Thresholds below determine the price assignation for use of a vehicle in your city",
+    "subtitle": "Thresholds below determine the price indication for use of a vehicle in your city",
     "preload": "Preload thresholds",
     "defname": "Define new",
     "placeholder1": "Threshold name",
@@ -154,7 +155,7 @@
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
-    "part1": "This platform helps assess the impact of any vehicle (existing or hypothetical) depending on its attributes. There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
     "link": "Learn why this tool exists and how to offer feedback."
   },
   "footer": {
