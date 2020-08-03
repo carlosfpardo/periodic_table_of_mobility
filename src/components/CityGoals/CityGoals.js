@@ -16,6 +16,7 @@ import { Slider } from 'react-semantic-ui-range'
 import find from 'lodash/find'
 import PropTypes from 'prop-types'
 import api from '../../utils/api'
+import { fetchAttributeData } from '../../utils/attributes'
 import { Link } from 'react-router-dom'
 
 CityGoals.propTypes = {
@@ -38,6 +39,7 @@ function CityGoals ({ setCity, setCityid }) {
   const [city, setCities] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
+  const [isChanged, setChanged] = useState(false)
   const [isDefault, setDefault] = useState(false)
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
@@ -103,6 +105,7 @@ function CityGoals ({ setCity, setCityid }) {
     if (value > 10) {
       value = 10
     }
+    setChanged(true)
     setValue(value)
   }
   const handleValueChange1 = e => {
@@ -113,6 +116,7 @@ function CityGoals ({ setCity, setCityid }) {
     if (value > 10) {
       value = 10
     }
+    setChanged(true)
     setValue1(value)
   }
   const handleValueChange2 = e => {
@@ -123,6 +127,7 @@ function CityGoals ({ setCity, setCityid }) {
     if (value > 10) {
       value = 10
     }
+    setChanged(true)
     setValue2(value)
   }
   const handleValueChange3 = e => {
@@ -133,6 +138,7 @@ function CityGoals ({ setCity, setCityid }) {
     if (value > 10) {
       value = 10
     }
+    setChanged(true)
     setValue3(value)
   }
   const handleValueChange4 = e => {
@@ -143,6 +149,7 @@ function CityGoals ({ setCity, setCityid }) {
     if (value > 10) {
       value = 10
     }
+    setChanged(true)
     setValue4(value)
   }
   useEffect(() => {
@@ -171,7 +178,7 @@ function CityGoals ({ setCity, setCityid }) {
 
     fetchGoals()
   }, [lastUpdate])
-  function handleSaveProfile (event) {
+  async function handleSaveProfile (event) {
     setSavePending(true)
     setLastUpdate(new Date().toISOString())
     const todoValue = goal.name
@@ -189,11 +196,13 @@ function CityGoals ({ setCity, setCityid }) {
       joyfulness: value3,
       personalSafety: value4
     }
-    const todosInfo = {
-      ...todoInfo,
-      attributes: ['test', 'test']
-    }
+
     if (typeof find(profiles, { name: todoInfo.name }) === 'undefined') {
+      const attributes = await fetchAttributeData()
+      const todosInfo = {
+        ...todoInfo,
+        attributes: attributes
+      }
       // Make API request to create new todo
       api
         .create(todosInfo)
@@ -203,20 +212,22 @@ function CityGoals ({ setCity, setCityid }) {
         .catch(e => {
           console.log('An API error occurred', e)
         })
+      setCity(todosInfo)
     } else {
       const cityref = find(city, { data: goal })
       const id = getCityId(cityref)
+      setCity(todoInfo)
       setCityid(id)
-      api.update(id, todosInfo)
+      api.update(id, todoInfo)
     }
-
+    setChanged(false)
     setSavePending(false)
   }
 
   function handleDropdownChange (event, data) {
     const goals = find(profiles, { name: data.value })
     setGoal(goals)
-    setCity(goals.name)
+    setCity(goals)
     setDescription(goals.description)
     setValue(goals.environment)
     setValue1(goals.publicHealth)
@@ -233,7 +244,7 @@ function CityGoals ({ setCity, setCityid }) {
       ...goal,
       name: event.target.value
     }
-
+    setChanged(true)
     setGoal(newVehicle)
   }
   function handleDescriptionChange (event, data) {
@@ -242,7 +253,7 @@ function CityGoals ({ setCity, setCityid }) {
       ...goal,
       description: event.target.value
     }
-
+    setChanged(true)
     setGoal(newVehicle)
   }
   function handleSelection (event) {
@@ -413,7 +424,7 @@ function CityGoals ({ setCity, setCityid }) {
           </>
         )}
       </Button>
-      {isSavePending || (goal && !goal.name) ? (
+      {isSavePending || (goal && !goal.name) || isChanged ? (
         ''
       ) : (
         <Link to="/attributes">

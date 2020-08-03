@@ -1,22 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { Header, Form, Grid, Button, Icon, Message } from 'semantic-ui-react'
+import { Header, Form, Grid } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
-import { saveData } from '../../utils/loadThresholds'
-import { getNewGoalsId } from '../../utils/uniqueid'
 import TInput from './TInput'
 
 Thresholds.propTypes = {
   attributes: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    units: PropTypes.string
+    id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    definedUnit: PropTypes.string,
+    description: PropTypes.string,
+    exampleValue: PropTypes.any,
+    thresholds: PropTypes.array
   })
 }
 function Attributes ({ attributes, values = {}, onChange = () => {} }) {
   return attributes.map(attribute => (
     <TInput
-      key={attribute.attrib_id}
-      name={attribute.attrib_id}
+      key={attribute.id}
       attribute={attribute}
       onChange={value => {
         onChange({ ...values, [attribute.id]: value })
@@ -26,47 +28,11 @@ function Attributes ({ attributes, values = {}, onChange = () => {} }) {
 }
 
 function Thresholds ({ attributes }) {
-  const [goal, setGoal] = useState({})
-  const [isSavePending, setSavePending] = useState(false)
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
   const { t } = useTranslation()
-
-  function handleSaveProfile (event) {
-    const clone = {
-      ...goal,
-      id: getNewGoalsId(),
-      name: `${goal.name}`
-    }
-    setGoal(clone)
-    saveToApi('POST', clone)
-  }
-
-  // async function updateToApi () {
-  //   saveToApi('PUT', goal)
-  // }
-
-  async function saveToApi (method, goal) {
-    setSuccess('')
-    setError('')
-    setSavePending(true)
-
-    try {
-      const result = await saveData('POST', goal)
-      if (!result) return
-      setSuccess(t('inputPanel.savedCorrect'))
-    } catch (err) {
-      console.error(err)
-      setError(t('inputPanel.saveFail'))
-    }
-
-    setSavePending(false)
-  }
-
   return (
     <div className="App">
       <Header textAlign="center">
-        {t('thresholds.title')} PLACEHOLDER
+        {t('thresholds.title')}
         <Header.Subheader>{t('thresholds.subtitle')}</Header.Subheader>
       </Header>
 
@@ -75,28 +41,6 @@ function Thresholds ({ attributes }) {
           <Attributes attributes={attributes} />
         </Grid>
       </Form>
-      <Button
-        fluid
-        color="green"
-        icon
-        labelPosition="left"
-        onClick={handleSaveProfile}
-        disabled={isSavePending || (goal && !goal.name)}
-      >
-        {isSavePending ? (
-          <>
-            <Icon loading name="spinner" />
-            {t('inputPanel.savePlaceholder')}
-          </>
-        ) : (
-          <>
-            <Icon name="save" />
-            {t('inputPanel.save')}
-          </>
-        )}
-      </Button>
-      {error && <Message error>{error}</Message>}
-      {success && <Message success>{success}</Message>}
     </div>
   )
 }

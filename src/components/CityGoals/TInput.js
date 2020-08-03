@@ -7,20 +7,19 @@ import './TInput.css'
 
 TInput.propTypes = {
   attribute: PropTypes.shape({
-    attrib_id: PropTypes.string.isRequired,
-    city_name: PropTypes.string.isRequired,
-    thresholds: PropTypes.arrayOf(PropTypes.array)
-  }),
-  name: PropTypes.string,
-  value: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    units: PropTypes.string
+    id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    definedUnit: PropTypes.string,
+    description: PropTypes.string,
+    exampleValue: PropTypes.any,
+    thresholds: PropTypes.array
   }),
   onChange: PropTypes.func
 }
 
 function TInput (props) {
-  const { name, attribute, onChange = () => {} } = props
+  const { attribute, onChange = () => {} } = props
   const { thresholds } = attribute
   const { t } = useTranslation(['translation', 'attributes'])
   const htmlId = uniqueId('data-input_')
@@ -34,40 +33,38 @@ function TInput (props) {
   return (
     <Grid.Row>
       <div className="input-row">
-        {test.value === null ? (
+        {typeof test === 'undefined' ? (
           ''
         ) : (
           <>
-            <label htmlFor={htmlId}>
-              {t('translation:attributes.' + name)}{' '}
-            </label>
+            <label htmlFor={htmlId}>{t('attributes.' + attribute.id)} </label>
             <Grid>
               <Grid.Row columns={4}>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.minvalue')}
-                    value={thresholds[1].value}
+                    value={thresholds[0]}
                     onChange={handleInputChange}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th1')}
-                    value={thresholds[2].value}
+                    value={thresholds[1]}
                     onChange={handleInputChange}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th2')}
-                    value={thresholds[3].value}
+                    value={thresholds[2]}
                     onChange={handleInputChange}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th3')}
-                    value={thresholds[4].value}
+                    value={thresholds[3]}
                     onChange={handleInputChange}
                   />
                 </Grid.Column>

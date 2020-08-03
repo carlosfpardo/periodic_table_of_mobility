@@ -3,15 +3,17 @@ import PropTypes from 'prop-types'
 import { Header, Button, Segment } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import UnitSelection from './UnitSelection'
-import api from '../../utils/api'
 import { useTranslation } from 'react-i18next'
 
 function Attribute ({ attributes, values = {}, onChange = () => {} }) {
   return attributes.map(attribute => (
     <UnitSelection
-      key={attribute.attrib_id + attribute.city_id}
-      attribId={attribute.attrib_id}
-      cityId={attribute.city_id}
+      key={attribute.id}
+      defaultUnit={attribute.defaultUnit}
+      definedUnits={attribute.definedUnits}
+      name={attribute.id}
+      description={attribute.description}
+      value={values[attribute.id]}
       onChange={value => {
         onChange({ ...values, [attribute.id]: value })
       }}
@@ -20,43 +22,47 @@ function Attribute ({ attributes, values = {}, onChange = () => {} }) {
 }
 
 Attributes.propTypes = {
-  city: PropTypes.string,
   attributes: PropTypes.shape({
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    units: PropTypes.string
+    id: PropTypes.string,
+    name: PropTypes.string,
+    type: PropTypes.string,
+    definedUnit: PropTypes.string,
+    description: PropTypes.string,
+    exampleValue: PropTypes.any,
+    thresholds: PropTypes.array
   }),
   setAttributes: PropTypes.func,
-  cityId: PropTypes.any
+  city: PropTypes.shape({
+    attributes: PropTypes.shape({})
+  })
 }
 
-function Attributes ({ city, attributes, setAttributes, cityId }) {
+function Attributes ({ city, attributes, setAttributes }) {
   const [isLoadingProfiles, setLoadingProfiles] = useState(true)
   const [isSettingAttributes, setAttributesSet] = useState(false)
   useEffect(() => {
     async function fetchAttributes () {
       setLoadingProfiles(true)
 
-      try {
-        api.readAll().then(city => {
-          const profiles = []
-          var i = 0
-          city.forEach(element => {
-            profiles[i] = element.data
-            i++
-          })
-          setAttributes(profiles)
-        })
-      } catch (err) {
-        console.error(err)
+      if (typeof city.attributes !== 'undefined') {
+        try {
+          const attributesList = city.attributes
+          setAttributes(attributesList)
+        } catch (e) {
+          console.error(e)
+        }
       }
 
       setLoadingProfiles(false)
     }
 
     fetchAttributes()
-  }, [cityId, setAttributes])
+  }, [city, setAttributes])
   function handleAttributeset () {
     setAttributesSet(true)
+  }
+  function handleAttributesChange (attributes) {
+    setAttributes(attributes)
   }
   const { t } = useTranslation()
 
@@ -65,11 +71,18 @@ function Attributes ({ city, attributes, setAttributes, cityId }) {
       <Header as="h3" dividing>
         {t('attributes.part1')}
       </Header>
-      {city}
       <p>{t('attributes.part2')}</p>
 
       <div className="input-row" />
-      {isLoadingProfiles ? '' : <Attribute attributes={attributes} />}
+      {isLoadingProfiles ? (
+        ''
+      ) : (
+        <Attribute
+          attributes={attributes}
+          values={attributes}
+          onChange={handleAttributesChange}
+        />
+      )}
 
       <Segment basic>
         <Button icon labelPosition="right" onClick={handleAttributeset}>

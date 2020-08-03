@@ -124,7 +124,7 @@
   "thresholds": {
     "name": "Input city name",
     "nameLabel": "Name of city",
-    "title": "Please determine the threshold levels for",
+    "title": "Please determine the threshold levels",
     "subtitle": "Thresholds below determine the price indication for use of a vehicle in your city",
     "preload": "Preload thresholds",
     "defname": "Define new",
