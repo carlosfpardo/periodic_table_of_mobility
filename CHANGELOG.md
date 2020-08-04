@@ -15,3 +15,11 @@
 - Style changes for policy recomendations
 - First implementation of faunaDB and netlify functions for database
 - Implemented use case for each vehicle for policy recomendations
+
+## v0.1.3-alpha
+
+- PDF generation
+- Modals for requirement explanation
+- Home page
+- some translation fixes
+- some cuality changes for policy recomendation

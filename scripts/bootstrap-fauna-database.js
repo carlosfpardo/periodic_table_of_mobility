@@ -118,47 +118,21 @@ function createFaunaDB (key) {
         throw e
       }
     })
+  // image table
   client
-    .query(q.Create(q.Ref('classes'), { name: 'vehicle_attribute' }))
+    .query(q.Create(q.Ref('classes'), { name: 'images' }))
     .then(() => {
       client.query(
         q.Create(q.Ref('indexes'), {
-          name: 'get_all_vehicle_attribute',
-          source: q.Ref('classes/vehicle_attribute')
+          name: 'get_all_images',
+          source: q.Ref('classes/images')
         })
       )
       client.query(
         q.Create(q.Ref('indexes'), {
-          name: 'pk_vehicle_attributes',
-          source: q.Ref('classes/vehicle_attribute'),
-          terms: [{ field: ['data', 'num'] }],
-          unique: true
-        })
-      )
-    })
-    .catch(e => {
-      if (
-        e.requestResult.statusCode === 400 &&
-        e.message === 'instance not unique'
-      ) {
-        throw e
-      }
-    })
-  // city-attribute link table
-  client
-    .query(q.Create(q.Ref('classes'), { name: 'city_attributes' }))
-    .then(() => {
-      client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'get_all_city_attributes',
-          source: q.Ref('classes/city_attributes')
-        })
-      )
-      client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'attributes_from_city',
-          source: q.Ref('classes/city_attributes'),
-          terms: [{ field: ['data', 'city_name'] }],
+          name: 'single image',
+          source: q.Ref('classes/images'),
+          terms: [{ field: ['data', 'name'] }],
           unique: true
         })
       )
@@ -179,7 +153,7 @@ function createFaunaDB (key) {
         throw e
       }
     })
-  // city-attribute link table
+  // use cases table
   client
     .query(q.Create(q.Ref('classes'), { name: 'cases' }))
     .then(() => {

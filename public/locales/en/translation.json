@@ -40,7 +40,7 @@
     "risk": "Risk assessment",
     "riskDetails": "Assessment Required",
     "save": "Download complete recomendation with details",
-    "flexTitle": "PUDO zone",
+    "flexTitle": "B: Flex zone/PUDO zone",
     "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off"
   },
   "document": {
@@ -55,10 +55,10 @@
     "pricesLow": "Fees associated to this vehicle will be low, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
     "pricesHigh": "Fees associated to this vehicle will be high, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
     "pricesNA": "There are no fees associated to this vehicle, according to the very popular and well-respected Pricing Office of Atlantis. You must be using a nice, slow, light vehicle. We love it.",
-    "subsidyGiven": "This vehicle can receive a subsidy, after a very simple process that can be requested online through the Department of Nice Things HERE. It's our way of saying thanks.",
+    "subsidyGiven": "This vehicle can receive a subsidy, after a very simple process that can be requested online through the Department of Nice Things <5>HERE</5>. It's our way of saying thanks.",
     "subsidyNone": "This vehicle is not eligible to receive subsidies. Are you sure you want to use it? Wouldn't you rather use another vehicle with better conditions? There's lots to choose from, remember we're a magical place so the sky's the limit",
     "riskReq": "A risk assessment is required for this vehicle. The Risk Department contains greater details here",
-    "riskNotReq": "Risk assessment is required for this vehicle. We like it and hope you have a great time, though please remember to follow all traffic rules."
+    "riskNotReq": "Risk assessment is not required for this vehicle. We like it and hope you have a great time, though please remember to follow all traffic rules."
   },
   "inputPanel": {
     "part1": "Input vehicle attributes",
@@ -167,6 +167,7 @@
     "results": "Policy recommendation",
     "city": "City priorities",
     "attributes": "City Attributes",
-    "thresholds": "Thresholds"
+    "thresholds": "Thresholds",
+    "home": "Home"
   }
 }

@@ -32,19 +32,21 @@ UseCase.propTypes = {
   setCity: PropTypes.func,
   levels: PropTypes.objectOf(PropTypes.number),
   vehicleset: PropTypes.bool,
-  setSetvehcile: PropTypes.func
+  setSetvehcile: PropTypes.func,
+  city: PropTypes.any
 }
 
 function UseCase ({
   useCase,
   setUseCase,
+  city,
   setCity,
   levels,
   vehicleset,
   setSetvehcile
 }) {
   const [caseA, setCase] = useState([])
-  const [cityset, setCityset] = useState(false)
+  const [caseset, setCaseset] = useState(false)
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [profiles, setProfiles] = useState([])
   const [isDefault, setDefault] = useState(false)
@@ -82,20 +84,20 @@ function UseCase ({
 
     fetchUseCases()
   }, [lastUpdate])
-  if (!levels || vehicleset) return null
+  if (!levels) return null
   const allValues = Object.values(levels)
   if (allValues.includes(0)) {
     return null
   }
   function handleDropdownChange (event, data) {
     const goals = find(profiles, { name: data.value })
-    setCityset(true)
+    setSetvehcile(true)
     setCity(goals)
   }
   function handleCaseDropdownChange (event, data) {
     const goals = find(caseA, { name: data.value })
     setUseCase(goals)
-    setSetvehcile(true)
+    setCaseset(true)
   }
   function handleNameChange (event, data) {
     const newVehicle = {
@@ -250,19 +252,40 @@ function UseCase ({
   }
   return (
     <div className="App">
-      <Segment basic>{t('useCase.city')}</Segment>
-      <Dropdown
-        placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
-        search
-        selection
-        options={profiles.map(item => ({
-          key: item.name,
-          text: item.name,
-          value: item.name
-        }))}
-        onChange={handleDropdownChange}
-      />
-      {cityset ? (
+      {vehicleset ? (
+        <Grid>
+          <Grid.Row columns={2}>
+            <Grid.Column>
+              <p>Use Case </p>
+              <Dropdown
+                search
+                selection
+                text={useCase.name}
+                options={caseA.map(item => ({
+                  key: item.name,
+                  text: item.name,
+                  value: item.name
+                }))}
+                onChange={handleCaseDropdownChange}
+              />
+            </Grid.Column>
+            <Grid.Column>
+              <p>Framework</p>
+              <Dropdown
+                search
+                selection
+                text={city.name}
+                options={profiles.map(item => ({
+                  key: item.name,
+                  text: item.name,
+                  value: item.name
+                }))}
+                onChange={handleDropdownChange}
+              />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      ) : (
         <>
           <Header textAlign="center">{t('useCase.title')}</Header>
           <Form>
@@ -280,7 +303,7 @@ function UseCase ({
                   <Dropdown disabled />
                 ) : (
                   <Dropdown
-                    placeholder={isLoadingProfiles ? 'Select Loadout' : ''}
+                    placeholder={!isLoadingProfiles ? 'Select Loadout' : ''}
                     fluid
                     search
                     selection
@@ -418,9 +441,25 @@ function UseCase ({
               )}
             </Grid>
           </Form>
+          {caseset ? (
+            <>
+              <Segment basic>{t('useCase.city')}</Segment>
+              <Dropdown
+                placeholder={!isLoadingProfiles ? 'Select Loadout' : ''}
+                search
+                selection
+                options={profiles.map(item => ({
+                  key: item.name,
+                  text: item.name,
+                  value: item.name
+                }))}
+                onChange={handleDropdownChange}
+              />
+            </>
+          ) : (
+            ''
+          )}
         </>
-      ) : (
-        ''
       )}
     </div>
   )

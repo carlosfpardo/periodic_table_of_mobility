@@ -18,6 +18,14 @@ const createUseCase = data => {
   })
 }
 
+const createImage = data => {
+  return fetch('/.netlify/functions/image-create', {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
 const readAll = () => {
   return fetch('/.netlify/functions/todos-read-all').then(response => {
     return response.json()
@@ -68,6 +76,7 @@ const batchDeleteTodo = todoIds => {
 
 export default {
   createUseCase: createUseCase,
+  createImage: createImage,
   create: create,
   readAll: readAll,
   readAllCases: readAllCases,

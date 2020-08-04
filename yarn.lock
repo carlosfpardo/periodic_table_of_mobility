@@ -1742,6 +1742,11 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.4.tgz#15925414e0ad2cd765bfef58842f7e26a7accb24"
   integrity sha512-1HcDas8SEj4z1Wc696tH56G8OlRaH/sqZOynNNB+HF0WOeXPaxTtbYzJY2oEfiUxjSKjhCKr+MvR7dCHcEelug==
 
+"@types/raf@^3.4.0":
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/@types/raf/-/raf-3.4.0.tgz#2b72cbd55405e071f1c4d29992638e022b20acc2"
+  integrity sha512-taW5/WYqo36N7V39oYyHP9Ipfd5pNFvGTIQsNGj86xV88YQ7GnI30/yMfKDF7Zgin0m3e+ikX88FvImnK4RjGw==
+
 "@types/react-dom@^16.9.5":
   version "16.9.8"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
@@ -3009,6 +3014,18 @@ canvg@1.5.3:
     stackblur-canvas "^1.4.1"
     xmldom "^0.1.22"
 
+canvg@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/canvg/-/canvg-3.0.6.tgz#4f82a34acc433daa06c494fc255420cbbb05f903"
+  integrity sha512-eFUy8R/4DgocR93LF8lr+YUxW4PYblUe/Q1gz2osk/cI5n8AsYdassvln0D9QPhLXQ6Lx7l8hwtT8FLvOn2Ihg==
+  dependencies:
+    "@babel/runtime" "^7.6.3"
+    "@types/raf" "^3.4.0"
+    core-js "3"
+    raf "^3.4.1"
+    rgbcolor "^1.0.1"
+    stackblur-canvas "^2.0.0"
+
 capture-exit@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/capture-exit/-/capture-exit-2.0.0.tgz#fb953bfaebeb781f62898239dabb426d08a509a4"
@@ -3486,15 +3503,15 @@ core-js-compat@^3.6.2:
     browserslist "^4.8.5"
     semver "7.0.0"
 
+core-js@3, core-js@^3.5.0:
+  version "3.6.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
+
 core-js@^2.4.0:
   version "2.6.11"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.11.tgz#38831469f9922bded8ee21c9dc46985e0399308c"
   integrity sha512-5wjnpaT/3dV+XB4borEsnAYQchn00XSgTAWKDkEqv+K8KevjbzmofK6hfJ9TZIlpj2N0xQpazy7PiRQiWHqzWg==
-
-core-js@^3.5.0:
-  version "3.6.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
-  integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -10911,6 +10928,11 @@ stackblur-canvas@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/stackblur-canvas/-/stackblur-canvas-1.4.1.tgz#849aa6f94b272ff26f6471fa4130ed1f7e47955b"
   integrity sha1-hJqm+UsnL/JvZHH6QTDtH35HlVs=
+
+stackblur-canvas@^2.0.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/stackblur-canvas/-/stackblur-canvas-2.3.0.tgz#6e945fb516c8fd6de66dc9d3316e1a1e9fa5a22b"
+  integrity sha512-3ZHJv+43D8YttgumssIxkfs3hBXW7XaMS5Ux65fOBhKDYMjbG5hF8Ey8a90RiiJ58aQnAhWbGilPzZ9rkIlWgQ==
 
 state-toggle@^1.0.0:
   version "1.0.3"

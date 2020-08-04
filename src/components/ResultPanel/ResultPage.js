@@ -58,7 +58,6 @@ function ResultPage ({ vehicle, setVehicle }) {
     const vehicle = find(profiles, { id: data.value })
 
     setVehicle(vehicle)
-    setSetvehcile(false)
     // Reset error state.
     setSuccess('')
     setError('')
@@ -94,6 +93,7 @@ function ResultPage ({ vehicle, setVehicle }) {
       <UseCase
         useCase={useCase}
         setUseCase={setUseCase}
+        city={city}
         setCity={setCity}
         vehicleset={vehicleset}
         setSetvehcile={setSetvehcile}

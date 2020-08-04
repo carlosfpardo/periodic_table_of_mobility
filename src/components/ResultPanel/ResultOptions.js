@@ -11,8 +11,10 @@ import { calculateRisk } from '../../utils/riskAssessment'
 import VehicleImage from './VehicleImage'
 import RadarChart from './RadarChart'
 import SummaryPolicy from './SummaryPolicy'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import * as JsPDF from 'jspdf'
+import { Link } from 'react-router-dom'
+import api from '../../utils/api'
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
@@ -233,11 +235,38 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
         </Grid.Column>
         <Grid.Column>
           {subsidy ? (
-            <Segment textAlign="center" inverted color="green">
-              {t('resultOptions.formRequest')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center" inverted color="green">
+                  {t('resultOptions.formRequest')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.subsidy')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Trans i18nKey="subsidyGiven">
+                    This vehicle can receive a subsidy, after a very simple
+                    process that can be requested online through the Department
+                    of Nice Things <Link to="/subsidyURL">HERE</Link>. It's our
+                    way of saying thanks.
+                  </Trans>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           ) : (
-            <Segment textAlign="center">{t('resultOptions.none')}</Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center">{t('resultOptions.none')}</Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.subsidy')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.subsidyNone')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           )}
         </Grid.Column>
       </Grid.Row>
@@ -256,13 +285,35 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
         </Grid.Column>
         <Grid.Column>
           {risk ? (
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.seeRequirements')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment inverted color="red" textAlign="center">
+                  {t('resultOptions.seeRequirements')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.risk')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.riskReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           ) : (
-            <Segment textAlign="center">
-              {t('resultOptions.notNecessary')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center">
+                  {t('resultOptions.notNecessary')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.risk')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.riskNotReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           )}
         </Grid.Column>
       </Grid.Row>
@@ -327,51 +378,165 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     )
   }
   function GeneratePDF () {
-    var doc = new JsPDF()
-    doc.setFontSize(10)
-    doc.text(vehicle.name, 35, 20)
+    var pageWidth = 8.5
+    var lineHeight = 1.2
+    var margin = 0.5
+    var maxLineWidth = pageWidth - margin * 2
+    var fontSize = 10
+    var ptsPerInch = 72
+    var oneLineHeight = (fontSize * lineHeight) / ptsPerInch
+    var doc = new JsPDF({
+      unit: 'in',
+      lineHeight: lineHeight
+    }).setProperties({ title: 'Linesplit' })
+    let text = ''
+    let line = 2
     if (drivers) {
-      doc.text(t('document.driversReq'), 35, 30)
+      text = t('document.driversReq')
+      var textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      doc.link(margin + 5.2, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
+        url: 'https://stackoverflow.com/'
+      })
+      line = line + 3
     } else {
-      doc.text(t('document.driversNotReq'), 35, 30)
+      text = t('document.driversNotReq')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 3
     }
     if (operating > 0) {
-      doc.text(t('document.operatingReq'), 35, 40)
+      text = t('document.operatingReq')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     } else {
-      doc.text(t('document.operatingNotReq'), 35, 40)
+      text = t('document.operatingNotReq')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     }
     if (data === 2) {
-      doc.text(t('document.dataStrict'), 35, 50)
+      text = t('document.dataStrict')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 4
     } else if (data === 1) {
-      doc.text(t('document.dataLoose'), 35, 50)
+      text = t('document.dataLoose')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 4
     } else {
-      doc.text(t('document.dataNone'), 35, 50)
+      text = t('document.dataNone')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 4
     }
     if (price === 2) {
-      doc.text(t('document.pricesHigh'), 35, 60)
+      text = t('document.pricesHigh')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 3
     } else if (price === 1) {
-      doc.text(t('document.pricesLow'), 35, 60)
+      text = t('document.pricesLow')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 3
     } else {
-      doc.text(t('document.pricesNA'), 35, 60)
+      text = t('document.pricesNA')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 3
     }
     if (subsidy) {
-      doc.text(t('document.subsidyGiven'), 35, 70)
+      text = t('document.subsidyGiven')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     } else {
-      doc.text(t('document.subsidyNone'), 35, 70)
+      text = t('document.subsidyNone')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     }
     if (risk > 0) {
-      doc.text(t('document.riskReq'), 35, 80)
+      text = t('document.riskReq')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     } else {
-      doc.text(t('document.riskNotReq'), 35, 80)
+      text = t('document.riskNotReq')
+      textLines = doc
+        .setFont('helvetica', 'neue')
+        .setFontSize(fontSize)
+        .splitTextToSize(text, maxLineWidth)
+      doc.text(textLines, margin, margin + line * oneLineHeight)
+      line = line + 2
     }
+    doc.text(vehicle.name, margin, margin + oneLineHeight)
+    const reqSvgs = require.context('../../../public/images/', true, /\.svg$/) // change the url when you can get a file server
+    const svgs = reqSvgs.keys().map(path => ({ path, file: reqSvgs(path) }))
+    svgs.forEach(element => {
+      const test = {
+        name: element.path,
+        file: element.file
+      }
+      api
+        .createImage(test)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(e => {
+          console.log('An API error occurred', e)
+        })
+    })
     doc.save('generated.pdf')
   }
 
   return (
     <div className="box">
       <Header>
-        These are the recomendations for a {vehicle.name} in {city.name} for{' '}
-        {name}{' '}
+        These are the recommendations for {vehicle.name} in {city.name}{' '}
+        framework for {name} use
       </Header>
       <Grid centered>
         <Grid.Row stretched columns={2}>

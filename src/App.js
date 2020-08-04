@@ -8,6 +8,7 @@ import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import Attributes from './components/CityGoals/Attributes'
+import Home from './components/Home'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CityGoals from './components/CityGoals/CityGoals'
@@ -58,15 +59,11 @@ function AppRouter () {
     <Router>
       <div>
         <Menu huge secondary>
-          <Menu.Item href="/">
-            {/* <NUMOLogo
-              style={{
-                height: '2.5em'
-              }}
-            /> */}
+          <Menu.Item>
+            <Link to="/">{t('routing.home')}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/">{t('routing.profiles')}</Link>
+            <Link to="/vehicles">{t('routing.profiles')}</Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="/policyRecomendations">{t('routing.results')}</Link>
@@ -132,8 +129,18 @@ function AppRouter () {
             </Grid>
           </Route>
           <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/vehicles">
             <Page />
           </Route>
+          <Route
+            path="/subsidyURL"
+            component={() => {
+              window.location.replace('http://www.google.com/subsidy')
+              return null
+            }}
+          />
         </Switch>
       </div>
     </Router>
