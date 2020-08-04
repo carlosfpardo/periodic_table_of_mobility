@@ -14,7 +14,7 @@ import SummaryPolicy from './SummaryPolicy'
 import { useTranslation, Trans } from 'react-i18next'
 import * as JsPDF from 'jspdf'
 import { Link } from 'react-router-dom'
-import api from '../../utils/api'
+/* import api from '../../utils/api' */
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
@@ -513,7 +513,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
       line = line + 2
     }
     doc.text(vehicle.name, margin, margin + oneLineHeight)
-    const reqSvgs = require.context('../../../public/images/', true, /\.svg$/) // change the url when you can get a file server
+    /* const reqSvgs = require.context('../../../public/images/', true, /\.svg$/) // change the url when you can get a file server
     const svgs = reqSvgs.keys().map(path => ({ path, file: reqSvgs(path) }))
     svgs.forEach(element => {
       const test = {
@@ -528,7 +528,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
         .catch(e => {
           console.log('An API error occurred', e)
         })
-    })
+    }) */
     doc.save('generated.pdf')
   }
 
