@@ -14,6 +14,7 @@ import SummaryPolicy from './SummaryPolicy'
 import { useTranslation, Trans } from 'react-i18next'
 import * as JsPDF from 'jspdf'
 import { Link } from 'react-router-dom'
+import html2canvas from 'html2canvas'
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
@@ -96,13 +97,35 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
         </Grid.Column>
         <Grid.Column>
           {counter ? (
-            <Segment color="red" inverted textAlign="center">
-              {t('resultOptions.seeRequirements')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment color="red" inverted textAlign="center">
+                  {t('resultOptions.seeRequirements')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.driverLicense')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.driversReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           ) : (
-            <Segment textAlign="center">
-              {t('resultOptions.notNecessary')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center">
+                  {t('resultOptions.notNecessary')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.driverLicense')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.driversNotReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           )}
         </Grid.Column>
       </Grid.Row>
@@ -120,13 +143,35 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
         </Grid.Column>
         <Grid.Column>
           {operating ? (
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.seeRequirements')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment inverted color="red" textAlign="center">
+                  {t('resultOptions.seeRequirements')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.operatingLicense')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.operatingReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           ) : (
-            <Segment textAlign="center">
-              {t('resultOptions.notNecessary')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center">
+                  {t('resultOptions.notNecessary')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.operatingLicense')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.operatingNotReq')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           )}
         </Grid.Column>
       </Grid.Row>
@@ -142,9 +187,20 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment inverted color="orange" textAlign="center">
-              {t('resultOptions.loose')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment inverted color="orange" textAlign="center">
+                  {t('resultOptions.loose')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.dataLoose')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           </Grid.Column>
         </Grid.Row>
       )
@@ -155,9 +211,20 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.strict')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment inverted color="red" textAlign="center">
+                  {t('resultOptions.strict')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.dataStrict')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           </Grid.Column>
         </Grid.Row>
       )
@@ -168,7 +235,18 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment textAlign="center">{t('resultOptions.none')}</Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center">{t('resultOptions.none')}</Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.dataNone')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           </Grid.Column>
         </Grid.Row>
       )
@@ -187,9 +265,20 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             </Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment inverted color="red" textAlign="center">
-              {t('resultOptions.priceHigh')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment inverted color="red" textAlign="center">
+                  {t('resultOptions.priceHigh')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.price')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.pricesHigh')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           </Grid.Column>
         </Grid.Row>
       )
@@ -202,9 +291,20 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             </Segment>
           </Grid.Column>
           <Grid.Column>
-            <Segment textAlign="center" inverted color="orange">
-              {t('resultOptions.priceLow')}
-            </Segment>
+            <Modal
+              trigger={
+                <Segment textAlign="center" inverted color="orange">
+                  {t('resultOptions.priceLow')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.price')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.pricesLow')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
           </Grid.Column>
         </Grid.Row>
       )
@@ -217,7 +317,18 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
           </Segment>
         </Grid.Column>
         <Grid.Column>
-          <Segment textAlign="center">{t('resultOptions.priceNA')}</Segment>
+          <Modal
+            trigger={
+              <Segment textAlign="center">{t('resultOptions.priceNA')}</Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.price')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>{t('document.pricesNA')}</Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
       </Grid.Row>
     )
@@ -376,6 +487,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
       </Grid.Row>
     )
   }
+
   function GeneratePDF () {
     var pageWidth = 8.5
     var lineHeight = 1.2
@@ -388,126 +500,109 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
       unit: 'in',
       lineHeight: lineHeight
     }).setProperties({ title: 'Linesplit' })
+    var svgElements = document.body.querySelectorAll('svg')
+    svgElements.forEach(function (item) {
+      item.setAttribute('width', item.getBoundingClientRect().width)
+      item.style.width = null
+    })
+    html2canvas(document.getElementById(vehicle.name)).then(function (canvas) {
+      document.body.appendChild(canvas)
+    })
+
     let text = ''
-    let line = 2
+    const intro = (
+      <Trans i18nKey="introPDF">
+        This document is a summary of the {city.name} policy recommendation for
+        a {vehicle.name} in a {name} use case, based on the Periodic Table of
+        Mobility. It can be used in Atlantis to process requirements in order to
+        use this vehicle in this glorious (albeit fictitious) island.
+      </Trans>
+    )
+    intro.props.children.forEach(element => {
+      text += element
+    })
+    let line = 10
+    var textLines = doc
+      .setFontSize(fontSize)
+      .splitTextToSize(text, maxLineWidth)
+    doc.text(textLines, margin, margin + oneLineHeight * line)
+    line = line + 4
     if (drivers) {
       text = t('document.driversReq')
-      var textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
-      doc.link(margin + 5.2, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
+      doc.link(margin + 5.5, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
         url: 'https://stackoverflow.com/'
       })
       line = line + 3
     } else {
       text = t('document.driversNotReq')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     }
     if (operating > 0) {
       text = t('document.operatingReq')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2
     } else {
       text = t('document.operatingNotReq')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2
     }
     if (data === 2) {
       text = t('document.dataStrict')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
-      line = line + 4
+      line = line + 5
     } else if (data === 1) {
       text = t('document.dataLoose')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 4
     } else {
       text = t('document.dataNone')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 4
     }
     if (price === 2) {
       text = t('document.pricesHigh')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     } else if (price === 1) {
       text = t('document.pricesLow')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     } else {
       text = t('document.pricesNA')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     }
     if (subsidy) {
       text = t('document.subsidyGiven')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
-      line = line + 2
+      line = line + 3
     } else {
       text = t('document.subsidyNone')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
-      line = line + 2
+      line = line + 3
     }
     if (risk > 0) {
       text = t('document.riskReq')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2
     } else {
       text = t('document.riskNotReq')
-      textLines = doc
-        .setFont('helvetica', 'neue')
-        .setFontSize(fontSize)
-        .splitTextToSize(text, maxLineWidth)
+      textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2
     }
@@ -516,16 +611,18 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   }
 
   return (
-    <div className="box">
+    <div id="printArea" className="box">
       <Header>
-        These are the recommendations for {vehicle.name} in {city.name}{' '}
-        framework for {name} use
+        <Trans i18nKey="header1">
+          These are the recommendations for {vehicle.name} in {city.name}{' '}
+          framework for {name} use
+        </Trans>
       </Header>
       <Grid centered>
         <Grid.Row stretched columns={2}>
           <Grid.Column width={6}>
             <div className="box1">
-              <Grid centered>
+              <Grid id="someHtml" centered>
                 <Grid.Row>
                   <Header>{t('resultOptions.summary')}</Header>
                 </Grid.Row>

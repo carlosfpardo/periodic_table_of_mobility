@@ -81,6 +81,7 @@ function ResultPage ({ vehicle, setVehicle }) {
           search
           selection
           value=""
+          text={vehicle.name}
           loading={isLoadingProfiles}
           options={profiles.map(item => ({
             key: item.id,

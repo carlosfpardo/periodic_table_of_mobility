@@ -41,10 +41,11 @@
     "riskDetails": "Assessment Required",
     "save": "Download complete recomendation with details",
     "flexTitle": "B: Flex zone/PUDO zone",
-    "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off"
+    "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off",
+    "header1": "These are the recommendations for {{name}} in {{city}} framework for {{case}} use"
   },
   "document": {
-    "introPDF": "This document is a summary of the NUMO policy recommendation for a VEHICLENAME in a USECASE, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
+    "introPDF": "This document is a summary of the {{NUMO}} policy recommendation for a {{VEHICLENAME}} in a {{USECASE}} use case, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
     "driversReq": "A driver license is required for this vehicle, more information to request a license can be found HERE",
     "driversNotReq": "A driver license is not required to operate this vehicle. Regardless, please be careful when moving around our city and follow all traffic rules. See HERE the general traffic rules for your beautiful island.",
     "operatingReq": "An operating license is required for this vehicle, more information can be found HERE",

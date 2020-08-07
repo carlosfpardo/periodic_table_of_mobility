@@ -43,6 +43,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faunadb": "^2.14.2",
+    "html2canvas": "^1.0.0-rc.5",
     "i18next": "19.4.3",
     "i18next-browser-languagedetector": "4.2.0",
     "i18next-http-backend": "1.0.15",
