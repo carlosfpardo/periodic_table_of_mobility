@@ -119,7 +119,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   const eunits = emissions.defaultUnit
   const weight2 = weight.thresholds[2] + ''
   const speed2 = speed.thresholds[2] + ''
-  const helaths = health.thresholds[0] + ''
+  const healths = health.thresholds[0] + ''
   const hunits = health.defaultUnit
   function DriversLicense () {
     const counter = calculateDriverLevelRequired(
@@ -147,7 +147,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Trans i18nKey="resultOptions.driversExp">
                     If the intended use of the vehicle is commercial, OR if its
                     level of automation is above 2, OR if it is elevated above
-                    ground (flying), OR if its weight is more than {{ weights }}{' '}
+                    ground (flying), OR if its weight is more than {{ weights }}
                     {{ wunits }} AND if its top factory speed is higher than{' '}
                     {{ speed2 }} {{ sunits }}, then it requires a driver
                     license.
@@ -292,7 +292,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Trans i18nKey="resultOptions.dataExpH">
                     If the vehicle does not transit on the ground level, OR if
                     its weight is more than {{ weight2 }} {{ wunits }}, OR if
-                    its top factory speed is higher than {{ speed2 }}{' '}
+                    its top factory speed is higher than {{ speed2 }}
                     {{ sunits }}, then the data-sharing requirements are strict.
                   </Trans>
                   <br />
@@ -300,7 +300,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Trans i18nKey="resultOptions.dataExpL">
                     If the vehicle transits on the ground level, AND if its
                     weight is less than or equal to {{ weight2 }} {{ wunits }},
-                    AND if its top factory speed is lower than or equal to{' '}
+                    AND if its top factory speed is lower than or equal to
                     {{ speed2 }} {{ sunits }}, OR if its intended use is
                     commercial, then the data-sharing requirements are less
                     strict.
@@ -309,8 +309,8 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <br />
                   <Trans i18nKey="resultOptions.dataExpN">
                     If the vehicle transits on the ground level, AND if its
-                    weight is less than or equal to {{ weights }} {{ wunits }}{' '}
-                    AND if its top factory speed is lower than or equal to{' '}
+                    weight is less than or equal to {{ weights }} {{ wunits }}
+                    AND if its top factory speed is lower than or equal to
                     {{ speeds }} {{ sunits }}, AND if its intended use is
                     personal, then it must not share any data.
                   </Trans>
@@ -417,35 +417,35 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Description>
                 <Header>
                   <Trans i18nKey="resultOptions.priceExpH">
-                    If the weight of the vehicle is more than {{ weight2 }}{' '}
-                    {{ wunits }}, OR if its top factory speed is higher than{' '}
+                    If the weight of the vehicle is more than {{ weight2 }}
+                    {{ wunits }}, OR if its top factory speed is higher than
                     {{ speed2 }} {{ sunits }}, OR if its space efficiency per
                     person is more than {{ footprint2 }} {{ funits }}, OR if its
-                    exhaust-emissions efficiency per person is more than{' '}
+                    exhaust-emissions efficiency per person is more than
                     {{ emission2 }} {{ eunits }}, then it must pay high fees and
                     fines.
                   </Trans>
                   <br />
                   <br />
                   <Trans i18nKey="resultOptions.priceExpL">
-                    If the weight of the vehicle is less than or equal to{' '}
+                    If the weight of the vehicle is less than or equal to
                     {{ weight2 }} {{ wunits }}, AND if its top factory speed is
                     lower than or equal to {{ speed2 }} {{ sunits }}, AND if its
-                    space efficiency per person is less than or equal to{' '}
+                    space efficiency per person is less than or equal to
                     {{ footprint2 }} {{ funits }}, AND if its exhaust-emissions
-                    efficiency per person is less than or equal to{' '}
+                    efficiency per person is less than or equal to
                     {{ emission2 }} {{ eunits }}, OR if its intended use is
                     commercial, then it must pay low fees and fines.
                   </Trans>
                   <br />
                   <br />
                   <Trans i18nKey="resultOptions.priceExpN">
-                    If the weight of the vehicle is less than or equal to{' '}
+                    If the weight of the vehicle is less than or equal to
                     {{ weights }} {{ wunits }}, AND if its top factory speed is
                     lower than or equal to {{ speeds }} {{ sunits }}, AND if its
-                    space efficiency per person is less than or equal to{' '}
+                    space efficiency per person is less than or equal to
                     {{ footprints }} {{ funits }}, OR if its exhaust-emissions
-                    efficiency per person is equal to {{ emission }}{' '}
+                    efficiency per person is equal to {{ emission }}
                     {{ eunits }}, AND if its intended use is personal, then it
                     must not pay any fees and fines.
                   </Trans>
@@ -539,9 +539,9 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 <Header>
                   <Trans i18nKey="resultOptions.subsidyExp">
                     If the vehicle transits on the ground level, AND if its
-                    exhaust-emissions efficiency per person is equal to{' '}
+                    exhaust-emissions efficiency per person is equal to
                     {{ emission }} {{ eunits }}, OR if its ILL-Health value is
-                    greater than or equal to {{ helaths }} {{ hunits }}, OR if
+                    greater than or equal to {{ healths }} {{ hunits }}, OR if
                     the service provider is local, then it is eligible for
                     subsidies.
                   </Trans>
@@ -895,7 +895,57 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 {t('resultOptions.streetAllocation')}
               </Segment>
             </Grid.Column>
-            <Image src="/images/PerfilCurb.jpg" alt="image" />
+
+            <Modal
+              trigger={
+                <Image src="/images/PerfilCurb.jpg" alt="street-image" />
+              }
+            >
+              <Modal.Header>{t('resultOptions.streetAllocation')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>
+                    <Trans i18nKey="resultOptions.streetA">
+                      If the elevation of the vehicle is not above the ground
+                      (flying), AND if its weight is less than or equal to{' '}
+                      {{ weights }} {{ wunits }}, AND if its top factory speed
+                      is lower than or equal to {{ speeds }} {{ sunits }}, AND
+                      if its space efficiency per person is less than or equal
+                      to {{ footprints }} {{ funits }}, AND if its
+                      exhaust-emissions efficiency per person is equal to{' '}
+                      {{ emission }} {{ eunits }}, AND if its ILL-Health value
+                      is greater than or equal to {{ healths }} {{ hunits }},
+                      AND if its level of automation is 0, then it belongs to
+                      position A.
+                    </Trans>
+                    <br />
+                    <br />
+                    <Trans i18nKey="resultOptions.streetC">
+                      If the elevation of the vehicle is not above the ground
+                      (flying), AND if its top factory speed is lower than or
+                      equal to {{ speed2 }} {{ sunits }}, AND if its space
+                      efficiency per person is less than or equal to{' '}
+                      {{ footprint2 }} {{ funits }}, AND if its
+                      exhaust-emissions efficiency per person is less than or
+                      equal to {{ emission2 }} {{ eunits }}, AND if its level of
+                      automation is below or equal to 2, then it belongs to
+                      position C.
+                    </Trans>
+                    <br />
+                    <br />
+                    <Trans i18nKey="resultOptions.streetD">
+                      If the top factory speed of the vehicle is higher than to{' '}
+                      {{ speed2 }} {{ sunits }}, OR if its space efficiency per
+                      person is more than {{ footprint2 }} {{ funits }}, OR if
+                      its exhaust-emissions efficiency per person is more than{' '}
+                      {{ emission2 }} {{ eunits }}, OR if its level of
+                      automation is above 2, OR if its elevation is above the
+                      ground (flying), then it belongs to position D.
+                    </Trans>
+                  </Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
             <Grid relaxed>
               <SpaceAllocation />
             </Grid>
