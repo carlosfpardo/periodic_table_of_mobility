@@ -89,9 +89,11 @@ function UseCase ({
   if (allValues.includes(0)) {
     return null
   }
-  if (typeof city.name === 'undefined' && typeof profiles !== 'undefined') {
-    const test = find(profiles, { name: 'NUMO' })
-    setCity(test)
+  if ((city == null || city === '') && profiles.length > 0) {
+    if (city.name == null) {
+      const test = find(profiles, { name: 'NUMO' })
+      setCity(test)
+    }
   }
   function handleDropdownChange (event, data) {
     const goals = find(profiles, { name: data.value })
@@ -102,7 +104,7 @@ function UseCase ({
     setUseCase(goals)
     setCaseset(true)
   }
-  function handleSetUseCase (event, data) {
+  function handleSetUseCase () {
     setSetvehcile(true)
   }
   function handleNameChange (event, data) {

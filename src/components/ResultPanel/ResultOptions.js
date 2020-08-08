@@ -1,6 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Segment, Header, Button, Modal, Image } from 'semantic-ui-react'
+import {
+  Grid,
+  Segment,
+  Header,
+  Button,
+  Modal,
+  Image,
+  Icon
+} from 'semantic-ui-react'
 import { calculateDriverLevelRequired } from '../../utils/driversLicense'
 import { calculateOperatingLevelRequired } from '../../utils/operatingLicense'
 import { calculateDataLevelRequired } from '../../utils/dataRequirement'
@@ -15,6 +23,7 @@ import { useTranslation, Trans } from 'react-i18next'
 import * as JsPDF from 'jspdf'
 import { Link } from 'react-router-dom'
 import html2canvas from 'html2canvas'
+import find from 'lodash/find'
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
@@ -42,10 +51,18 @@ ResultOptions.propTypes = {
     elevationL: PropTypes.bool,
     elevationU: PropTypes.bool
   }),
-  city: PropTypes.string
+  city: PropTypes.oneOfType([
+    PropTypes.shape({
+      attributes: PropTypes.array,
+      description: PropTypes.string,
+      name: PropTypes.string
+    }),
+    PropTypes.string
+  ])
 }
 
 function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
+  const { t } = useTranslation()
   let spaceArray = {}
   let drivers = 0
   let operating = 0
@@ -62,6 +79,17 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     elevationL,
     elevationU
   } = useCase
+  if (city == null) return null
+  const { attributes } = city
+  let { weight, speed, footprint, emissions, health } = {}
+  if (typeof attributes === 'undefined') {
+  } else {
+    weight = find(attributes, { id: 'weight' })
+    speed = find(attributes, { id: 'speed' })
+    footprint = find(attributes, { id: 'footprint' })
+    emissions = find(attributes, { id: 'emissions' })
+    health = find(attributes, { id: 'health' })
+  }
   let elevation = 0
   if (elevationF) {
     elevation = 1
@@ -72,7 +100,6 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   } else {
     elevation = 2
   }
-  const { t } = useTranslation()
 
   if (!levels || !vehicleset) return null
   // Require ALL dependent variables to be set
@@ -80,6 +107,20 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   if (allValues.includes(0)) {
     return null
   }
+  const weights = weight.thresholds[1] + ''
+  const wunits = weight.defaultUnit
+  const speeds = speed.thresholds[1] + ''
+  const sunits = speed.defaultUnit
+  const footprints = footprint.thresholds[1] + ''
+  const footprint2 = footprint.thresholds[2] + ''
+  const funits = footprint.defaultUnit
+  const emission = emissions.thresholds[1] + ''
+  const emission2 = emissions.thresholds[2] + ''
+  const eunits = emissions.defaultUnit
+  const weight2 = weight.thresholds[2] + ''
+  const speed2 = speed.thresholds[2] + ''
+  const helaths = health.thresholds[0] + ''
+  const hunits = health.defaultUnit
   function DriversLicense () {
     const counter = calculateDriverLevelRequired(
       levels,
@@ -91,9 +132,30 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="right">
-            {t('resultOptions.driverLicense')}
-          </Segment>
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.driverLicense')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.driverLicense')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>
+                  <Trans i18nKey="resultOptions.driversExp">
+                    If the intended use of the vehicle is commercial, OR if its
+                    level of automation is above 2, OR if it is elevated above
+                    ground (flying), OR if its weight is more than {{ weights }}{' '}
+                    {{ wunits }} AND if its top factory speed is higher than{' '}
+                    {{ speed2 }} {{ sunits }}, then it requires a driver
+                    license.
+                  </Trans>
+                </Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
         <Grid.Column>
           {counter ? (
@@ -151,9 +213,21 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment textAlign="right" basic>
-            {t('resultOptions.operatingLicense')}
-          </Segment>
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.operatingLicense')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.operatingLicense')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>{t('resultOptions.operatingExp')}</Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
         <Grid.Column>
           {operating ? (
@@ -200,13 +274,53 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   function DataRequirement () {
     const counter = calculateDataLevelRequired(levels, charge, elevation)
     data = counter
-    if (data === 1) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column textAlign="right">
-            <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
-          </Grid.Column>
-          <Grid.Column>
+    return (
+      <Grid.Row columns={2}>
+        <Grid.Column textAlign="right">
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.dataRequirements')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>
+                  <Trans i18nKey="resultOptions.dataExpH">
+                    If the vehicle does not transit on the ground level, OR if
+                    its weight is more than {{ weight2 }} {{ wunits }}, OR if
+                    its top factory speed is higher than {{ speed2 }}{' '}
+                    {{ sunits }}, then the data-sharing requirements are strict.
+                  </Trans>
+                  <br />
+                  <br />
+                  <Trans i18nKey="resultOptions.dataExpL">
+                    If the vehicle transits on the ground level, AND if its
+                    weight is less than or equal to {{ weight2 }} {{ wunits }},
+                    AND if its top factory speed is lower than or equal to{' '}
+                    {{ speed2 }} {{ sunits }}, OR if its intended use is
+                    commercial, then the data-sharing requirements are less
+                    strict.
+                  </Trans>
+                  <br />
+                  <br />
+                  <Trans i18nKey="resultOptions.dataExpN">
+                    If the vehicle transits on the ground level, AND if its
+                    weight is less than or equal to {{ weights }} {{ wunits }}{' '}
+                    AND if its top factory speed is lower than or equal to{' '}
+                    {{ speeds }} {{ sunits }}, AND if its intended use is
+                    personal, then it must not share any data.
+                  </Trans>
+                </Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+        </Grid.Column>
+        <Grid.Column>
+          {data === 1 ? (
             <Modal
               trigger={
                 <Segment inverted color="orange" textAlign="center">
@@ -228,16 +342,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 </Modal.Description>
               </Modal.Content>
             </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    } else if (data === 2) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column textAlign="right">
-            <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
-          </Grid.Column>
-          <Grid.Column>
+          ) : data === 2 ? (
             <Modal
               trigger={
                 <Segment inverted color="red" textAlign="center">
@@ -264,16 +369,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 </Modal.Description>
               </Modal.Content>
             </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    } else {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column textAlign="right">
-            <Segment basic>{t('resultOptions.dataRequirements')}</Segment>
-          </Grid.Column>
-          <Grid.Column>
+          ) : (
             <Modal
               trigger={
                 <Segment textAlign="center">{t('resultOptions.none')}</Segment>
@@ -296,24 +392,70 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 </Modal.Description>
               </Modal.Content>
             </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    }
+          )}
+        </Grid.Column>
+      </Grid.Row>
+    )
   }
 
   function PriceRequired () {
     const counter = calculatePriceRequired(levels)
     price = counter
-    if (counter === 2) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Segment basic textAlign="right">
-              {t('resultOptions.price')}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
+    return (
+      <Grid.Row columns={2}>
+        <Grid.Column>
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.price')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.price')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>
+                  <Trans i18nKey="resultOptions.priceExpH">
+                    If the weight of the vehicle is more than {{ weight2 }}{' '}
+                    {{ wunits }}, OR if its top factory speed is higher than{' '}
+                    {{ speed2 }} {{ sunits }}, OR if its space efficiency per
+                    person is more than {{ footprint2 }} {{ funits }}, OR if its
+                    exhaust-emissions efficiency per person is more than{' '}
+                    {{ emission2 }} {{ eunits }}, then it must pay high fees and
+                    fines.
+                  </Trans>
+                  <br />
+                  <br />
+                  <Trans i18nKey="resultOptions.priceExpL">
+                    If the weight of the vehicle is less than or equal to{' '}
+                    {{ weight2 }} {{ wunits }}, AND if its top factory speed is
+                    lower than or equal to {{ speed2 }} {{ sunits }}, AND if its
+                    space efficiency per person is less than or equal to{' '}
+                    {{ footprint2 }} {{ funits }}, AND if its exhaust-emissions
+                    efficiency per person is less than or equal to{' '}
+                    {{ emission2 }} {{ eunits }}, OR if its intended use is
+                    commercial, then it must pay low fees and fines.
+                  </Trans>
+                  <br />
+                  <br />
+                  <Trans i18nKey="resultOptions.priceExpN">
+                    If the weight of the vehicle is less than or equal to{' '}
+                    {{ weights }} {{ wunits }}, AND if its top factory speed is
+                    lower than or equal to {{ speeds }} {{ sunits }}, AND if its
+                    space efficiency per person is less than or equal to{' '}
+                    {{ footprints }} {{ funits }}, OR if its exhaust-emissions
+                    efficiency per person is equal to {{ emission }}{' '}
+                    {{ eunits }}, AND if its intended use is personal, then it
+                    must not pay any fees and fines.
+                  </Trans>
+                </Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
+        </Grid.Column>
+        <Grid.Column>
+          {counter === 2 ? (
             <Modal
               trigger={
                 <Segment inverted color="red" textAlign="center">
@@ -335,18 +477,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 </Modal.Description>
               </Modal.Content>
             </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    } else if (counter === 1) {
-      return (
-        <Grid.Row columns={2}>
-          <Grid.Column>
-            <Segment basic textAlign="right">
-              {t('resultOptions.price')}
-            </Segment>
-          </Grid.Column>
-          <Grid.Column>
+          ) : counter === 1 ? (
             <Modal
               trigger={
                 <Segment textAlign="center" inverted color="orange">
@@ -368,30 +499,22 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 </Modal.Description>
               </Modal.Content>
             </Modal>
-          </Grid.Column>
-        </Grid.Row>
-      )
-    }
-    return (
-      <Grid.Row columns={2}>
-        <Grid.Column>
-          <Segment basic textAlign="right">
-            {t('resultOptions.price')}
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <Modal
-            trigger={
-              <Segment textAlign="center">{t('resultOptions.priceNA')}</Segment>
-            }
-          >
-            <Modal.Header>{t('resultOptions.price')}</Modal.Header>
-            <Modal.Content>
-              <Modal.Description>
-                <Header>{t('document.pricesNA')}</Header>
-              </Modal.Description>
-            </Modal.Content>
-          </Modal>
+          ) : (
+            <Modal
+              trigger={
+                <Segment textAlign="center">
+                  {t('resultOptions.priceNA')}
+                </Segment>
+              }
+            >
+              <Modal.Header>{t('resultOptions.price')}</Modal.Header>
+              <Modal.Content>
+                <Modal.Description>
+                  <Header>{t('document.pricesNA')}</Header>
+                </Modal.Description>
+              </Modal.Content>
+            </Modal>
+          )}
         </Grid.Column>
       </Grid.Row>
     )
@@ -402,9 +525,30 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="right">
-            {t('resultOptions.subsidy')}
-          </Segment>
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.subsidy')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.subsidy')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>
+                  <Trans i18nKey="resultOptions.subsidyExp">
+                    If the vehicle transits on the ground level, AND if its
+                    exhaust-emissions efficiency per person is equal to{' '}
+                    {{ emission }} {{ eunits }}, OR if its ILL-Health value is
+                    greater than or equal to {{ helaths }} {{ hunits }}, OR if
+                    the service provider is local, then it is eligible for
+                    subsidies.
+                  </Trans>
+                </Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
         <Grid.Column>
           {subsidy ? (
@@ -455,9 +599,31 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     return (
       <Grid.Row columns={2}>
         <Grid.Column>
-          <Segment basic textAlign="right">
-            {t('resultOptions.risk')}
-          </Segment>
+          <Modal
+            trigger={
+              <Segment basic textAlign="right">
+                {t('resultOptions.risk')}
+                <Icon circular color="teal" name="help" />
+              </Segment>
+            }
+          >
+            <Modal.Header>{t('resultOptions.risk')}</Modal.Header>
+            <Modal.Content>
+              <Modal.Description>
+                <Header>
+                  <Trans i18nKey="resultOptions.riskExp">
+                    If the intended use of the vehicle is commercial, OR if its
+                    weight is more than {{ weight2 }} {{ wunits }}, OR if its
+                    top factory speed is higher than {{ speed2 }} {{ sunits }},
+                    OR if its exhaust-emissions efficiency per person is more
+                    than {{ emission2 }} {{ eunits }}, OR if its elevation is
+                    above the ground (flying), then it requires a risk
+                    assessment.
+                  </Trans>
+                </Header>
+              </Modal.Description>
+            </Modal.Content>
+          </Modal>
         </Grid.Column>
         <Grid.Column>
           {risk ? (
@@ -521,11 +687,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
           )}
         </Grid.Column>
         <Grid.Column textAlign="center">
-          <Modal
-            trigger={
-              <Button textAlign="center">{t('resultOptions.nextPUDO')}</Button>
-            }
-          >
+          <Modal trigger={<Button>{t('resultOptions.nextPUDO')}</Button>}>
             <Modal.Header>{t('resultOptions.flexTitle')}</Modal.Header>
             <Modal.Content>
               <Modal.Description>
@@ -733,15 +895,15 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 {t('resultOptions.streetAllocation')}
               </Segment>
             </Grid.Column>
+            <Image src="/images/PerfilCurb.jpg" alt="image" />
             <Grid relaxed>
               <SpaceAllocation />
             </Grid>
-            <Image src="/images/PerfilCurb.jpg" alt="image" />
           </Grid.Row>
         </div>
       </Grid>
       <Segment basic>
-        <Button onClick={GeneratePDF}>Generate PDF</Button>
+        <Button onClick={GeneratePDF}>{t('generatePDF')}</Button>
       </Segment>
     </div>
   )

@@ -53,7 +53,6 @@ function ResultPage ({ vehicle, setVehicle }) {
 
     fetchVehicleProfiles()
   }, [lastUpdate])
-
   function handleDropdownChange (event, data) {
     const vehicle = find(profiles, { id: data.value })
 
