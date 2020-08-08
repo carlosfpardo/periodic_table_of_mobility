@@ -7,7 +7,7 @@
  *          passed to react-d3-radar.
  * @returns {Object} - returns the code to render the drivers licence requirements
  */
-export function calculateRisk (levels, charge, elevation) {
+export function calculateRisk (levels, elevation, charge) {
   const array = Object.values(levels).filter(Number.isFinite)
   const keys = Object.keys(levels)
   let counter = false
@@ -24,5 +24,5 @@ export function calculateRisk (levels, charge, elevation) {
       }
     }
   }
-  return counter && elevation === 1 && charge
+  return counter || elevation === 1 || charge
 }

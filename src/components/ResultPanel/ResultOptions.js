@@ -62,7 +62,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     elevationL,
     elevationU
   } = useCase
-  let elevation
+  let elevation = 0
   if (elevationF) {
     elevation = 1
   } else if (elevationU) {
@@ -325,7 +325,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Content>
                 <Modal.Description>
                   <Header>
-                    <Trans i18nKey="document.priceHigh">
+                    <Trans i18nKey="document.pricesHigh">
                       Fees associated to this vehicle will be high, according to
                       the very popular and well-respected Pricing Office of
                       Atlantis. Please see guidelines
@@ -450,7 +450,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   }
 
   function Risk () {
-    const counter = calculateRisk(levels)
+    const counter = calculateRisk(levels, elevation, charge)
     risk = counter
     return (
       <Grid.Row columns={2}>
