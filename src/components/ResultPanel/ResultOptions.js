@@ -148,7 +148,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     If the intended use of the vehicle is commercial, OR if its
                     level of automation is above 2, OR if it is elevated above
                     ground (flying), OR if its weight is more than {{ weights }}
-                    {{ wunits }} AND if its top factory speed is higher than{' '}
+                    {{ wunits }} AND if its top factory speed is higher than
                     {{ speed2 }} {{ sunits }}, then it requires a driver
                     license.
                   </Trans>
@@ -907,12 +907,12 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Header>
                     <Trans i18nKey="resultOptions.streetA">
                       If the elevation of the vehicle is not above the ground
-                      (flying), AND if its weight is less than or equal to{' '}
+                      (flying), AND if its weight is less than or equal to
                       {{ weights }} {{ wunits }}, AND if its top factory speed
                       is lower than or equal to {{ speeds }} {{ sunits }}, AND
                       if its space efficiency per person is less than or equal
                       to {{ footprints }} {{ funits }}, AND if its
-                      exhaust-emissions efficiency per person is equal to{' '}
+                      exhaust-emissions efficiency per person is equal to
                       {{ emission }} {{ eunits }}, AND if its ILL-Health value
                       is greater than or equal to {{ healths }} {{ hunits }},
                       AND if its level of automation is 0, then it belongs to
@@ -924,7 +924,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                       If the elevation of the vehicle is not above the ground
                       (flying), AND if its top factory speed is lower than or
                       equal to {{ speed2 }} {{ sunits }}, AND if its space
-                      efficiency per person is less than or equal to{' '}
+                      efficiency per person is less than or equal to
                       {{ footprint2 }} {{ funits }}, AND if its
                       exhaust-emissions efficiency per person is less than or
                       equal to {{ emission2 }} {{ eunits }}, AND if its level of
@@ -934,10 +934,10 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <br />
                     <br />
                     <Trans i18nKey="resultOptions.streetD">
-                      If the top factory speed of the vehicle is higher than to{' '}
+                      If the top factory speed of the vehicle is higher than to
                       {{ speed2 }} {{ sunits }}, OR if its space efficiency per
                       person is more than {{ footprint2 }} {{ funits }}, OR if
-                      its exhaust-emissions efficiency per person is more than{' '}
+                      its exhaust-emissions efficiency per person is more than
                       {{ emission2 }} {{ eunits }}, OR if its level of
                       automation is above 2, OR if its elevation is above the
                       ground (flying), then it belongs to position D.
