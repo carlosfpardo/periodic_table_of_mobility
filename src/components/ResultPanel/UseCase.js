@@ -89,15 +89,21 @@ function UseCase ({
   if (allValues.includes(0)) {
     return null
   }
+  if (typeof city.name === 'undefined' && typeof profiles !== 'undefined') {
+    const test = find(profiles, { name: 'NUMO' })
+    setCity(test)
+  }
   function handleDropdownChange (event, data) {
     const goals = find(profiles, { name: data.value })
-    setSetvehcile(true)
     setCity(goals)
   }
   function handleCaseDropdownChange (event, data) {
     const goals = find(caseA, { name: data.value })
     setUseCase(goals)
     setCaseset(true)
+  }
+  function handleSetUseCase (event, data) {
+    setSetvehcile(true)
   }
   function handleNameChange (event, data) {
     const newVehicle = {
@@ -256,7 +262,7 @@ function UseCase ({
         <Grid>
           <Grid.Row columns={2}>
             <Grid.Column>
-              <p>Use Case </p>
+              <p>{t('useCase.useCase')} </p>
               <Dropdown
                 search
                 selection
@@ -270,7 +276,7 @@ function UseCase ({
               />
             </Grid.Column>
             <Grid.Column>
-              <p>Framework</p>
+              <p>{t('useCase.framework')}</p>
               <Dropdown
                 search
                 selection
@@ -448,12 +454,17 @@ function UseCase ({
                 placeholder={!isLoadingProfiles ? 'Select Loadout' : ''}
                 search
                 selection
+                value={city.name}
                 options={profiles.map(item => ({
                   key: item.name,
                   text: item.name,
                   value: item.name
                 }))}
                 onChange={handleDropdownChange}
+              />
+              <Button
+                onClick={handleSetUseCase}
+                text={t('useCase.setUseCase')}
               />
             </>
           ) : (

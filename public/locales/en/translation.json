@@ -46,17 +46,17 @@
   },
   "document": {
     "introPDF": "This document is a summary of the {{NUMO}} policy recommendation for a {{VEHICLENAME}} in a {{USECASE}} use case, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
-    "driversReq": "A driver license is required for this vehicle, more information to request a license can be found HERE",
-    "driversNotReq": "A driver license is not required to operate this vehicle. Regardless, please be careful when moving around our city and follow all traffic rules. See HERE the general traffic rules for your beautiful island.",
-    "operatingReq": "An operating license is required for this vehicle, more information can be found HERE",
+    "driversReq": "A driver license is required for this vehicle, more information to request a license can be found <1>HERE</1>",
+    "driversNotReq": "A driver license is not required to operate this vehicle. Regardless, please be careful when moving around our city and follow all traffic rules. See <1>HERE</1> the general traffic rules for your beautiful island.",
+    "operatingReq": "An operating license is required for this vehicle, more information can be found <1>HERE</1>",
     "operatingNotReq": "An operating license is not required to operate this vehicle. However, please remember to stay safe. It's a jungle out there.",
-    "dataStrict": "This vehicle in the use case indicated has the highest level of data requirements, according to the Atlantis Data Office's guidelines available HERE. Given the characteristics of the vehicle and how it will be used, these more stringent requirements have been established for everyone's wellbeing, and in order to monitor with greater detail how the vehicle is being used. You have been warned",
-    "dataLoose": "This vehicle must report some data, according to the Atlantis Data Office's moderate level guidelines available HERE. And remember that we will always protect your privacy",
-    "dataNone": "No data will be required of this vehicle, You can roam freely and peacefully but please always be alert of your surroundings. Also, you could still voluntarily provide some data it if you find that it will improve Atlantis's mobility conditions. If you are interested in providing data, please go HERE (you can later revoke this).",
-    "pricesLow": "Fees associated to this vehicle will be low, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
-    "pricesHigh": "Fees associated to this vehicle will be high, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines HERE",
+    "dataStrict": "This vehicle in the use case indicated has the highest level of data requirements, according to the Atlantis Data Office's guidelines available <1>HERE</1>. Given the characteristics of the vehicle and how it will be used, these more stringent requirements have been established for everyone's wellbeing, and in order to monitor with greater detail how the vehicle is being used. You have been warned",
+    "dataLoose": "This vehicle must report some data, according to the Atlantis Data Office's moderate level guidelines available <1>HERE</1>. And remember that we will always protect your privacy",
+    "dataNone": "No data will be required of this vehicle, You can roam freely and peacefully but please always be alert of your surroundings. Also, you could still voluntarily provide some data it if you find that it will improve Atlantis's mobility conditions. If you are interested in providing data, please go <1>HERE</1> (you can later revoke this).",
+    "pricesLow": "Fees associated to this vehicle will be low, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines <1>HERE</1>",
+    "pricesHigh": "Fees associated to this vehicle will be high, according to the very popular and well-respected Pricing Office of Atlantis. Please see guidelines <1>HERE</1>",
     "pricesNA": "There are no fees associated to this vehicle, according to the very popular and well-respected Pricing Office of Atlantis. You must be using a nice, slow, light vehicle. We love it.",
-    "subsidyGiven": "This vehicle can receive a subsidy, after a very simple process that can be requested online through the Department of Nice Things <5>HERE</5>. It's our way of saying thanks.",
+    "subsidyGiven": "This vehicle can receive a subsidy, after a very simple process that can be requested online through the Department of Nice Things <1>HERE</1>. It's our way of saying thanks.",
     "subsidyNone": "This vehicle is not eligible to receive subsidies. Are you sure you want to use it? Wouldn't you rather use another vehicle with better conditions? There's lots to choose from, remember we're a magical place so the sky's the limit",
     "riskReq": "A risk assessment is required for this vehicle. The Risk Department contains greater details here",
     "riskNotReq": "Risk assessment is not required for this vehicle. We like it and hope you have a great time, though please remember to follow all traffic rules."
@@ -136,6 +136,8 @@
     "th3": "Threshold 3"
   },
   "useCase": {
+    "useCase": "Use Case",
+    "framework": "Framework",
     "city": "Chose the framework that you are going to use",
     "title": "Pleace indicate how you use the vehicle",
     "automation": "Highest SEA level of automation",
@@ -151,7 +153,8 @@
     "eleu": "under",
     "placeholder1": "Name for the use case",
     "defgoals": "Build a custom use case",
-    "pregoals": "Use a prebuild use case"
+    "pregoals": "Use a prebuild use case",
+    "setUseCase": "Set use case"
   },
   "header": {
     "title": "Periodic Table of Mobility",

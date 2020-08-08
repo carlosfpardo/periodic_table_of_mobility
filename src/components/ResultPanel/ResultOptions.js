@@ -107,7 +107,13 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.driverLicense')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.driversReq')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.driversReq">
+                      A driver license is required for this vehicle, more
+                      information to request a license can be found{' '}
+                      <Link to="/driversURL">HERE</Link>
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -122,7 +128,15 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.driverLicense')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.driversNotReq')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.driversNotReq">
+                      A driver license is not required to operate this vehicle.
+                      Regardless, please be careful when moving around our city
+                      and follow all traffic rules. See{' '}
+                      <Link to="/driversNotURL">HERE</Link> the general traffic
+                      rules for your beautiful island.
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -153,7 +167,13 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.operatingLicense')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.operatingReq')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.operatingReq">
+                      An operating license is required for this vehicle, more
+                      information can be found{' '}
+                      <Link to="/operatingURL">HERE</Link>
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -197,7 +217,14 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.dataLoose')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.dataStrict">
+                      This vehicle must report some data, according to the
+                      Atlantis Data Office's moderate level guidelines available{' '}
+                      <Link to="/dataStrictURL">HERE</Link>. And remember that
+                      we will always protect your privacy
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -221,7 +248,19 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.dataStrict')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.dataStrict">
+                      This vehicle in the use case indicated has the highest
+                      level of data requirements, according to the Atlantis Data
+                      Office's guidelines available{' '}
+                      <Link to="/dataStrictURL">HERE</Link>. Given the
+                      characteristics of the vehicle and how it will be used,
+                      these more stringent requirements have been established
+                      for everyone's wellbeing, and in order to monitor with
+                      greater detail how the vehicle is being used. You have
+                      been warned
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -243,7 +282,17 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.dataRequirements')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.dataNone')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.dataNone">
+                      No data will be required of this vehicle, You can roam
+                      freely and peacefully but please always be alert of your
+                      surroundings. Also, you could still voluntarily provide
+                      some data it if you find that it will improve Atlantis's
+                      mobility conditions. If you are interested in providing
+                      data, please go <Link to="/dataNoneURL">HERE</Link> (you
+                      can later revoke this).
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -275,7 +324,14 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.price')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.pricesHigh')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.priceHigh">
+                      Fees associated to this vehicle will be high, according to
+                      the very popular and well-respected Pricing Office of
+                      Atlantis. Please see guidelines{' '}
+                      <Link to="/priceHighURL">HERE</Link>
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -301,7 +357,14 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.price')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.pricesLow')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.priceLow">
+                      Fees associated to this vehicle will be low, according to
+                      the very popular and well-respected Pricing Office of
+                      Atlantis. Please see guidelines{' '}
+                      <Link to="/priceLowURL">HERE</Link>
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -355,12 +418,15 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.subsidy')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Trans i18nKey="subsidyGiven">
-                    This vehicle can receive a subsidy, after a very simple
-                    process that can be requested online through the Department
-                    of Nice Things <Link to="/subsidyURL">HERE</Link>. It's our
-                    way of saying thanks.
-                  </Trans>
+                  <Header>
+                    <Trans i18nKey="document.subsidyGiven">
+                      This vehicle can receive a subsidy, after a very simple
+                      process that can be requested online through the
+                      Department of Nice Things{' '}
+                      <Link to="/subsidyURL">HERE</Link>. It's our way of saying
+                      thanks.
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -531,7 +597,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
       text = t('document.driversReq')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
-      doc.link(margin + 5.5, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
+      doc.link(margin + 5.55, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
         url: 'https://stackoverflow.com/'
       })
       line = line + 3
