@@ -474,7 +474,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Header>
                     <Trans i18nKey="document.riskReq">
                       A risk assessment is required for this vehicle. The Risk
-                      Department contains greater details{' '}
+                      Department contains greater details
                       <Link to="/riskURL">HERE</Link>
                     </Trans>
                   </Header>
