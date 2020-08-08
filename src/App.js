@@ -137,65 +137,63 @@ function AppRouter () {
           <Route
             path="/subsidyURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=subsidy')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/driversURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=driver%20License')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/driversNotURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=driver%20License')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/operatingURL"
             component={() => {
-              window.location.replace(
-                'https://lmgtfy.com/?q=operating%20License'
-              )
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/dataStrictURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              window.location.replace('https://policydata.numo.global/')
               return null
             }}
           />
           <Route
             path="/dataLooseURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/dataNoneURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              window.location.replace('https://policydata.numo.global/')
               return null
             }}
           />
           <Route
             path="/priceHighURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
           <Route
             path="/priceLowURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
