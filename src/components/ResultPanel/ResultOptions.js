@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Grid, Segment, Header, Button, Modal } from 'semantic-ui-react'
+import { Grid, Segment, Header, Button, Modal, Image } from 'semantic-ui-react'
 import { calculateDriverLevelRequired } from '../../utils/driversLicense'
 import { calculateOperatingLevelRequired } from '../../utils/operatingLicense'
 import { calculateDataLevelRequired } from '../../utils/dataRequirement'
@@ -730,6 +730,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
             <Grid relaxed>
               <SpaceAllocation />
             </Grid>
+            <Image src="/images/PerfilCurb.jpg" alt="image" />
           </Grid.Row>
         </div>
       </Grid>

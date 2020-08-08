@@ -462,10 +462,9 @@ function UseCase ({
                 }))}
                 onChange={handleDropdownChange}
               />
-              <Button
-                onClick={handleSetUseCase}
-                text={t('useCase.setUseCase')}
-              />
+              <Button onClick={handleSetUseCase}>
+                {t('useCase.setUseCase')}
+              </Button>
             </>
           ) : (
             ''
