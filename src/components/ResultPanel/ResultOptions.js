@@ -220,7 +220,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Header>
                     <Trans i18nKey="document.dataStrict">
                       This vehicle must report some data, according to the
-                      Atlantis Data Office's moderate level guidelines available{' '}
+                      Atlantis Data Office's moderate level guidelines available
                       <Link to="/dataStrictURL">HERE</Link>. And remember that
                       we will always protect your privacy
                     </Trans>
