@@ -110,7 +110,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Header>
                     <Trans i18nKey="document.driversReq">
                       A driver license is required for this vehicle, more
-                      information to request a license can be found{' '}
+                      information to request a license can be found
                       <Link to="/driversURL">HERE</Link>
                     </Trans>
                   </Header>
@@ -132,7 +132,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <Trans i18nKey="document.driversNotReq">
                       A driver license is not required to operate this vehicle.
                       Regardless, please be careful when moving around our city
-                      and follow all traffic rules. See{' '}
+                      and follow all traffic rules. See
                       <Link to="/driversNotURL">HERE</Link> the general traffic
                       rules for your beautiful island.
                     </Trans>
@@ -252,7 +252,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <Trans i18nKey="document.dataStrict">
                       This vehicle in the use case indicated has the highest
                       level of data requirements, according to the Atlantis Data
-                      Office's guidelines available{' '}
+                      Office's guidelines available
                       <Link to="/dataStrictURL">HERE</Link>. Given the
                       characteristics of the vehicle and how it will be used,
                       these more stringent requirements have been established
@@ -328,7 +328,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <Trans i18nKey="document.priceHigh">
                       Fees associated to this vehicle will be high, according to
                       the very popular and well-respected Pricing Office of
-                      Atlantis. Please see guidelines{' '}
+                      Atlantis. Please see guidelines
                       <Link to="/priceHighURL">HERE</Link>
                     </Trans>
                   </Header>
@@ -361,7 +361,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <Trans i18nKey="document.priceLow">
                       Fees associated to this vehicle will be low, according to
                       the very popular and well-respected Pricing Office of
-                      Atlantis. Please see guidelines{' '}
+                      Atlantis. Please see guidelines
                       <Link to="/priceLowURL">HERE</Link>
                     </Trans>
                   </Header>
@@ -422,7 +422,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     <Trans i18nKey="document.subsidyGiven">
                       This vehicle can receive a subsidy, after a very simple
                       process that can be requested online through the
-                      Department of Nice Things{' '}
+                      Department of Nice Things
                       <Link to="/subsidyURL">HERE</Link>. It's our way of saying
                       thanks.
                     </Trans>
@@ -471,7 +471,13 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Header>{t('resultOptions.risk')}</Modal.Header>
               <Modal.Content>
                 <Modal.Description>
-                  <Header>{t('document.riskReq')}</Header>
+                  <Header>
+                    <Trans i18nKey="document.riskReq">
+                      A risk assessment is required for this vehicle. The Risk
+                      Department contains greater details{' '}
+                      <Link to="/riskURL">HERE</Link>
+                    </Trans>
+                  </Header>
                 </Modal.Description>
               </Modal.Content>
             </Modal>
@@ -680,7 +686,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     <div id="printArea" className="box">
       <Header>
         <Trans i18nKey="header1">
-          These are the recommendations for {vehicle.name} in {city.name}{' '}
+          These are the recommendations for {vehicle.name} in {city.name}
           framework for {name} use
         </Trans>
       </Header>

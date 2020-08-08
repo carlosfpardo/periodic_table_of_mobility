@@ -193,7 +193,14 @@ function AppRouter () {
           <Route
             path="/subsidyURL"
             component={() => {
-              window.location.replace('https://lmgtfy.com/?q=subsidy')
+              window.location.replace('https://www.numo.global/')
+              return null
+            }}
+          />
+          <Route
+            path="/riskURL"
+            component={() => {
+              window.location.replace('https://www.numo.global/')
               return null
             }}
           />
