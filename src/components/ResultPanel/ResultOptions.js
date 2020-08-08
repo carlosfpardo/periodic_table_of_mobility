@@ -170,7 +170,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <Header>
                     <Trans i18nKey="document.operatingReq">
                       An operating license is required for this vehicle, more
-                      information can be found{' '}
+                      information can be found
                       <Link to="/operatingURL">HERE</Link>
                     </Trans>
                   </Header>
