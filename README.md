@@ -1,6 +1,6 @@
 # Vehicle profile editor
 
-A proof-of-concept developed jointly by the New Urban Mobility Alliance (NUMO) and Streetmix. This profile editor is simplified version of a guidance framework for policies for new vehicles and services.
+A proof-of-concept developed jointly by the New Urban Mobility Alliance (NUMO) and Streetmix. This profile editor is simplified version of a guidance framework for policies for new vehicles and services. During The second half of 2020 a larger team has been working on this expansion.
 
 ## Attributes
 
@@ -34,7 +34,7 @@ We also separate attributes into two types: **independent** and **dependent** va
 
 ### Calculations
 
-Calculations are equations evaluated by `mathjs` to determine a final value, given an input value. This is used to do any processing to the value before mapping it to a threshold. For instance, the _weight_ attribute only asks for the weight of the vehicle, but the threshold calculation actually applies the average weight of a human driver, resulting in the equation of `x + 80`.
+Calculations are equations evaluated by `mathjs` to determine a final value, given an input value. This is used to do any processing to the value before mapping it to a threshold. Note: in an earlier version, the _weight_ attribute only asked for the weight of the vehicle but the threshold calculation applied the average weight of a human driver, resulting in the equation of `x + 80`. This version of the tool no longer adds this given that the weight thresholds were changed throughout.
 
 The `x` is always used to mean the input value. If `calc` is not provided, the input value is unchanged (as if the equation was simply `x`).
 
@@ -52,7 +52,7 @@ There may be different possible solutions to this problem, but for now, calculat
 
 ### Thresholds
 
-Thresholds are an array of minimum and maximum values that define ranges, mapping calculated attribute values to levels. The NUMO framework has a maximum of four levels, but theoretically an attribute's defined thresholds can be any number.
+Thresholds are an array of minimum and maximum values that define ranges, mapping calculated attribute values to levels. The NUMO framework has a maximum of four levels, but theoretically an attribute's defined thresholds can be any number. While the first version of this tool had values defined by expert judgment and some literature, We have done more thorough research during May-August 2020 to document thresholds to concrete research findings or reality.
 
 ### Predefined unit types
 
@@ -110,6 +110,14 @@ This section describes the data used to give each vehicle a profile.
 ```
 
 Profiles can store other arbitrary data, since they're just JavaScript objects. For instance, for our case we have an `image` property value so that we can also store a URL to an image for the editor UI.
+
+## Policy recommendations
+
+We are currently working on this section of the tool. It is a more comprehensive version of the recommendation that not only provides the general policy recommendation but more specific recommendations related to driver license, operating license, data, prices and fines and subsidies. Its main logic is based on "triggers" based on vehicle thresholds that activate ("trigger") more stringent or lax policy recommendations. This section also accounts for private or commercial use of a vehicle, which influences the policy recommendations.
+
+## City goals and policies
+
+This section is inactive as of now, though has a "NUMO framework" without any influence on the final recommendations. In subsequent versions of the tool, this would influence the thresholds and/or policy recommendations of the tool by making one or another threshold more/less relevant in a vehicle's policy recommendation.
 
 ## Embedding into another site
 
