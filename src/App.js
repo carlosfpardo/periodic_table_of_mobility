@@ -135,13 +135,6 @@ function AppRouter () {
             <Page />
           </Route>
           <Route
-            path="/subsidyURL"
-            component={() => {
-              window.location.replace('https://lmgtfy.com/?q=subsidy')
-              return null
-            }}
-          />
-          <Route
             path="/driversURL"
             component={() => {
               window.location.replace('https://lmgtfy.com/?q=driver%20License')
@@ -196,6 +189,13 @@ function AppRouter () {
             path="/priceLowURL"
             component={() => {
               window.location.replace('https://lmgtfy.com/?q=data%20privacy')
+              return null
+            }}
+          />
+          <Route
+            path="/subsidyURL"
+            component={() => {
+              window.location.replace('https://lmgtfy.com/?q=subsidy')
               return null
             }}
           />

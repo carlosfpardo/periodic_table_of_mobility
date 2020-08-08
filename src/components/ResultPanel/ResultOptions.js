@@ -218,11 +218,11 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
               <Modal.Content>
                 <Modal.Description>
                   <Header>
-                    <Trans i18nKey="document.dataStrict">
+                    <Trans i18nKey="document.dataLoose">
                       This vehicle must report some data, according to the
                       Atlantis Data Office's moderate level guidelines available
-                      <Link to="/dataStrictURL">HERE</Link>. And remember that
-                      we will always protect your privacy
+                      <Link to="/dataLooseURL">HERE</Link>. And remember that we
+                      will always protect your privacy
                     </Trans>
                   </Header>
                 </Modal.Description>
