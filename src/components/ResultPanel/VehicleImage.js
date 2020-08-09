@@ -17,7 +17,6 @@ function VehicleImage ({ vehicle }) {
 
   return (
     <Image
-      id={vehicle.name}
       src={`/images/${vehicle.image}`}
       alt={`${t('description.image')}: ${vehicle.name}`}
       bordered

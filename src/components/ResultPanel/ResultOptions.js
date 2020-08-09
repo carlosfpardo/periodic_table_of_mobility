@@ -669,7 +669,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
   }
 
   function SpaceAllocation () {
-    spaceArray = calculateSpaceRequired(levels, elevation)
+    spaceArray = calculateSpaceRequired(levels, elevation, automation)
     const counterA = spaceArray[0]
     const counterC = spaceArray[1]
     const counterD = spaceArray[2]
@@ -763,6 +763,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     line = line + 4
     if (drivers) {
       text = t('document.driversReq')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       doc.link(margin + 5.55, margin + line * oneLineHeight - 0.2, 0.5, 0.25, {
@@ -771,12 +772,14 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
       line = line + 3
     } else {
       text = t('document.driversNotReq')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     }
     if (operating > 0) {
       text = t('document.operatingReq')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2
@@ -788,27 +791,32 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     }
     if (data === 2) {
       text = t('document.dataStrict')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 5
     } else if (data === 1) {
       text = t('document.dataLoose')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 4
     } else {
       text = t('document.dataNone')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 4
     }
     if (price === 2) {
       text = t('document.pricesHigh')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
     } else if (price === 1) {
       text = t('document.pricesLow')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
@@ -820,6 +828,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     }
     if (subsidy) {
       text = t('document.subsidyGiven')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 3
@@ -831,6 +840,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     }
     if (risk > 0) {
       text = t('document.riskReq')
+      text = text.replace('<1>HERE</1>', 'HERE')
       textLines = doc.setFontSize(fontSize).splitTextToSize(text, maxLineWidth)
       doc.text(textLines, margin, margin + line * oneLineHeight)
       line = line + 2

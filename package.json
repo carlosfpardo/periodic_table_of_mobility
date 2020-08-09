@@ -47,6 +47,7 @@
     "i18next": "19.4.3",
     "i18next-browser-languagedetector": "4.2.0",
     "i18next-http-backend": "1.0.15",
+    "jquery": "^3.5.1",
     "jspdf": "^1.5.3",
     "lodash": "^4.17.15",
     "mathjs": "^6.5.0",
@@ -63,6 +64,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.2",
     "svg-crowbar": "github:louh/svg-crowbar#package",
+    "svg2pdf.js": "^1.5.0",
     "typescript": "^3.7.5"
   },
   "devDependencies": {
