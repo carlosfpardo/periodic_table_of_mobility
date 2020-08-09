@@ -1,7 +1,7 @@
 /**
  * This is the method used to determine if the vehicle needs for a price to be set for use, at the moment
  * it only has a need/does not need binary result but it will be expanded in the future
- * IF exhaust-emissions efficiency = 1 OR ILL-Health = 1 OR company = local NOT elevation = 1 THEN “YES”
+ * IF elevation = 0 AND (exhaust-emissions efficiency = 1 OR ILL-Health = 1 OR service provider = local) THEN “Yes”
  * @param {Object} levels - An object where each key-value pair is attribute id
  *          and the level between 1-4. This is the same object that is
  *          passed to react-d3-radar.
@@ -22,5 +22,5 @@ export function calculateSubsidyRequired (levels, elevation, local) {
       }
     }
   }
-  return counter && elevation === 0 && local
+  return (counter || local) && elevation === 0
 }

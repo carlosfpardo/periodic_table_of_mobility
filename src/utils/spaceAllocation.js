@@ -59,7 +59,8 @@ export function calculateSpaceRequired (levels, elevation, automation) {
   }
   if (automation !== 0) {
     counterA++
-  } else if (automation > 2) {
+  }
+  if (automation > 2) {
     counterC++
     counterD = true
   }

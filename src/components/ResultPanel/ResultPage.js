@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-
 import { Header, Dropdown, Message } from 'semantic-ui-react'
 import find from 'lodash/find'
 import { fetchData } from '../../utils/gsheets'

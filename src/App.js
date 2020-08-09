@@ -34,14 +34,6 @@ function Page () {
             <ResultPanel vehicle={vehicle} />
           </Grid.Column>
         </Grid.Row>
-
-        {/* Branding / credits. Leave this at the bottom! */}
-        <Grid.Row columns={1}>
-          <Grid.Column>
-            <Divider />
-            <Footer />
-          </Grid.Column>
-        </Grid.Row>
       </Grid>
     </div>
   )
@@ -205,6 +197,15 @@ function AppRouter () {
             }}
           />
         </Switch>
+        {/* Branding / credits. Leave this at the bottom! */}
+        <Grid>
+          <Grid.Row columns={1}>
+            <Grid.Column>
+              <Divider />
+              <Footer />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       </div>
     </Router>
   )
