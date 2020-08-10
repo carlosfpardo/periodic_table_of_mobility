@@ -1,4 +1,5 @@
 import React, { Suspense, useState } from 'react'
+import PropTypes from 'prop-types'
 import { useTranslation } from 'react-i18next'
 import { Grid, Divider, Menu, Dropdown /* Input */ } from 'semantic-ui-react'
 // import { ReactComponent as NUMOLogo } from './images/logo_numo.svg'
@@ -13,10 +14,12 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CityGoals from './components/CityGoals/CityGoals'
 import Thresholds from './components/CityGoals/Thresholds'
-
+Page.propTypes = {
+  vehicle: PropTypes.any,
+  setVehicle: PropTypes.any
+}
 // page uses the hook
-function Page () {
-  const [vehicle, setVehicle] = useState({})
+function Page ({ vehicle, setVehicle }) {
   return (
     <div className="App">
       <Grid stackable>
@@ -25,7 +28,6 @@ function Page () {
             <Header />
           </Grid.Column>
         </Grid.Row>
-
         <Grid.Row columns={2}>
           <Grid.Column width={9}>
             <InputPanel vehicle={vehicle} setVehicle={setVehicle} />
@@ -124,7 +126,7 @@ function AppRouter () {
             <Home setVehicle={setVehicle} />
           </Route>
           <Route path="/vehicles">
-            <Page />
+            <Page vehicle={vehicle} setVehicle={setVehicle} />
           </Route>
           <Route
             path="/driversURL"

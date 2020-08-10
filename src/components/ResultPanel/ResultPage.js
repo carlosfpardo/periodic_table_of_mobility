@@ -63,7 +63,7 @@ function ResultPage ({ vehicle, setVehicle }) {
 
   return (
     <div className="Policy">
-      <p dividing>{t('resultPage.part0')}</p>
+      <p>{t('resultPage.part0')}</p>
       <Header as="h3" dividing>
         {t('resultPage.part1')}
       </Header>

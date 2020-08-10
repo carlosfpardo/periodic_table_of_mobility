@@ -14,24 +14,43 @@ import { Header, Icon, Grid } from 'semantic-ui-react'
 import './Carousel.css'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 CardCarousel.propTypes = {
   setVehicle: PropTypes.func
 }
 function CardCarousel ({ setVehicle }) {
   const [profiles, setProfiles] = useState([])
+  const [i, setI] = useState(1)
   useEffect(() => {
     async function fetchVehicleProfiles () {
       try {
         const profiles = await fetchData()
         setProfiles(profiles)
+        setVehicle(profiles[0])
       } catch (err) {
         console.error(err)
       }
     }
 
     fetchVehicleProfiles()
-  }, [])
-  var i = 0
+  }, [setVehicle])
+
+  function handleFirst () {
+    setI(0)
+    setVehicle(profiles[0])
+  }
+  function handleBack () {
+    setI(i - 1)
+    setVehicle(profiles[i])
+  }
+  function handleNext () {
+    setI(i + 1)
+    setVehicle(profiles[i])
+  }
+  function handleLast () {
+    setI(profiles.length - 1)
+    setVehicle(profiles[i])
+  }
   return (
     <CarouselProvider
       naturalSlideWidth={1}
@@ -42,28 +61,30 @@ function CardCarousel ({ setVehicle }) {
       <Grid verticalAlign="middle">
         <Grid.Row columns={3}>
           <Grid.Column>
-            <ButtonFirst className="button">
+            <ButtonFirst onClick={handleFirst} className="button">
               <Icon name="angle double left" />
             </ButtonFirst>
-            <ButtonBack className="button">
+            <ButtonBack onClick={handleBack} className="button">
               <Icon name="angle left" />
             </ButtonBack>
           </Grid.Column>
           <Grid.Column>
             <Slider>
               {profiles.map(vehicle => (
-                <Slide key={vehicle.id} index={i++}>
+                <Slide key={vehicle.id}>
                   <VehicleImage vehicle={vehicle} />
-                  <Header>{vehicle.name}</Header>
+                  <Link to="/vehicles">
+                    <Header>{vehicle.name}</Header>
+                  </Link>
                 </Slide>
               ))}
             </Slider>
           </Grid.Column>
           <Grid.Column>
-            <ButtonNext className="button">
+            <ButtonNext onClick={handleNext} className="button">
               <Icon name="angle right" />
             </ButtonNext>
-            <ButtonLast className="button">
+            <ButtonLast onClick={handleLast} className="button">
               <Icon name="angle double right" />
             </ButtonLast>
           </Grid.Column>
