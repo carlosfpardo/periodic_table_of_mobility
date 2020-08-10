@@ -1,7 +1,7 @@
 {
   "title": "Periodic Table of Mobility: A policy guidance tool by NUMO",
   "language": "Language",
-  "generatePDF": "Generate PDF",
+  "generatePDF": "See this in PDF",
   "description": {
     "part1": "Translation in progress",
     "part2": "Switch language between English and Spanish using buttons above.",
@@ -10,8 +10,8 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
-   "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework",
-    "part1": "Select vehicle",
+   "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the use case and finalizing with the framework. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part1": "Select a vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
     "part3": "Retrieving use cases...",
     "part4": "Select pre-loaded use cases"
@@ -32,8 +32,8 @@
     "streetAllocation": "Right of way zone allowance",
     "sidewalk": "A: Ped realm ",
     "nextPUDO": "B: Flex Zone",
-    "nextMove": "C: Travel close",
-    "farMove": "D: Travel far",
+    "nextMove": "C: Travel-lane (close)",
+    "farMove": "D: Travel-lane (far)",
     "seeRequirements": "Required",
     "notNecessary": "Not necessary",
     "none": "None",
@@ -173,10 +173,11 @@
     "getRecom": "Get recommendation"
   },
   "home": {
-    "title": "Discover vehicle impact on the urban environment",
-    "question": "Are you in search of serious vehicle policy?",
-    "button1": "Go to full model",
-    "button2": "Go to the complicated Stuff"
+    "title": "See how you can use a vehicle in city streets according to our Periodic Table",
+"subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
+    "question": "Looking for greater details?",
+    "button1": "Show me detailed policy recommendations",
+    "button2": "Let me define city policies"
   },
   "header": {
     "title": "Periodic Table of Mobility",
@@ -190,7 +191,7 @@
   },
   "routing": {
     "profiles": "Simple model",
-    "results": "Full model",
+    "results": "Full recommendations",
     "city": "City priorities",
     "attributes": "City Attributes",
     "thresholds": "Thresholds",
