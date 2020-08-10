@@ -10,6 +10,7 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
+   "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework",
     "part1": "Select vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
     "part3": "Retrieving use cases...",
@@ -168,7 +169,7 @@
     "placeholder1": "Name for the use case",
     "defgoals": "Build a custom use case",
     "pregoals": "Use a prebuild use case",
-    "setUseCase": "Set use case"
+    "getRecom": "Get recommendation"
   },
   "home": {
     "title": "Discover vehicle impact on the urban environment",
@@ -187,8 +188,8 @@
     "and": "and"
   },
   "routing": {
-    "profiles": "Vehicle profiles",
-    "results": "Policy recommendation",
+    "profiles": "Simple model",
+    "results": "Full model",
     "city": "City priorities",
     "attributes": "City Attributes",
     "thresholds": "Thresholds",
