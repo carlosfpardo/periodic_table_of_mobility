@@ -10,9 +10,14 @@ import {
 import React, { useEffect, useState } from 'react'
 import { fetchData } from '../../utils/gsheets'
 import VehicleImage from '../ResultPanel/VehicleImage'
-import { Header } from 'semantic-ui-react'
-
-function CardCarousel () {
+import { Header, Icon, Grid } from 'semantic-ui-react'
+import './Carousel.css'
+import 'pure-react-carousel/dist/react-carousel.es.css'
+import PropTypes from 'prop-types'
+CardCarousel.propTypes = {
+  setVehicle: PropTypes.func
+}
+function CardCarousel ({ setVehicle }) {
   const [profiles, setProfiles] = useState([])
   useEffect(() => {
     async function fetchVehicleProfiles () {
@@ -30,22 +35,40 @@ function CardCarousel () {
   return (
     <CarouselProvider
       naturalSlideWidth={1}
-      naturalSlideHeight={1}
+      naturalSlideHeight={1.5}
       totalSlides={profiles.length}
-      style={{ width: '300px' }}
+      style={{ width: '500px' }}
     >
-      <Slider>
-        {profiles.map(vehicle => (
-          <Slide key={vehicle.id} index={i++}>
-            <VehicleImage vehicle={vehicle} />
-            <Header>{vehicle.name}</Header>
-          </Slide>
-        ))}
-      </Slider>
-      <ButtonFirst>First</ButtonFirst>
-      <ButtonBack>Back</ButtonBack>
-      <ButtonNext>Next</ButtonNext>
-      <ButtonLast>Last</ButtonLast>
+      <Grid verticalAlign="middle">
+        <Grid.Row columns={3}>
+          <Grid.Column>
+            <ButtonFirst className="button">
+              <Icon name="angle double left" />
+            </ButtonFirst>
+            <ButtonBack className="button">
+              <Icon name="angle left" />
+            </ButtonBack>
+          </Grid.Column>
+          <Grid.Column>
+            <Slider>
+              {profiles.map(vehicle => (
+                <Slide key={vehicle.id} index={i++}>
+                  <VehicleImage vehicle={vehicle} />
+                  <Header>{vehicle.name}</Header>
+                </Slide>
+              ))}
+            </Slider>
+          </Grid.Column>
+          <Grid.Column>
+            <ButtonNext className="button">
+              <Icon name="angle right" />
+            </ButtonNext>
+            <ButtonLast className="button">
+              <Icon name="angle double right" />
+            </ButtonLast>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     </CarouselProvider>
   )
 }

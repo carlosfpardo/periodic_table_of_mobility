@@ -3,10 +3,6 @@ import { Container, Header, Segment, Grid, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import PropTypes from 'prop-types'
 
-// Heads up!
-// Don't forget to setyp required CSS!
-import 'pure-react-carousel/dist/react-carousel.es.css'
-
 import CardCarousel from './CardCarousel'
 import { Link } from 'react-router-dom'
 
@@ -38,7 +34,7 @@ function Home ({ setVehicle }) {
                 <Button fluid>{t('home.button1')}</Button>
               </Link>
             </Grid.Column>
-            <Grid.Column centered>
+            <Grid.Column centered="true">
               <Link to="/policyRecomendations">
                 <Button fluid>{t('home.button2')}</Button>
               </Link>

@@ -50,7 +50,7 @@ function AppRouter () {
   return (
     <Router>
       <div>
-        <Menu huge secondary>
+        <Menu secondary>
           <Menu.Item>
             <Link to="/">{t('routing.home')}</Link>
           </Menu.Item>

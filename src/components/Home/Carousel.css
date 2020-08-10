@@ -1,0 +1,11 @@
+.button {
+  background-color: #4c82af;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+:disabled {
+  background-color: #b3bbb3;
+}
