@@ -153,8 +153,8 @@
   "useCase": {
     "useCase": "Use Case",
     "framework": "Framework",
-    "city": "Chose the framework that you are going to use",
-    "title": "Pleace indicate how you use the vehicle",
+    "city": "Choose the framework that you are going to use",
+    "title": "Please indicate how you use the vehicle",
     "automation": "Highest SEA level of automation",
     "fleet": "Fleet size",
     "ride": "I will ride with others",
@@ -164,6 +164,7 @@
     "pudo": "Pickup and dropoff passengers",
     "enabled": "Enabled to travel",
     "elef": "flying",
+    
     "elev": "level",
     "eleu": "under",
     "placeholder1": "Name for the use case",
