@@ -465,7 +465,7 @@ function UseCase ({
                 onChange={handleDropdownChange}
               />
               <Button onClick={handleSetUseCase}>
-                {t('useCase.setUseCase')}
+                {t('useCase.getRecom')}
               </Button>
             </>
           ) : (

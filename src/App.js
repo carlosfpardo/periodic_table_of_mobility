@@ -55,10 +55,10 @@ function AppRouter () {
             <Link to="/">{t('routing.home')}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/vehicles">{t('routing.profiles')}</Link>
+            <Link to="/vehicles">{t('routing.simpleModel')}</Link>
           </Menu.Item>
           <Menu.Item>
-            <Link to="/policyRecomendations">{t('routing.results')}</Link>
+            <Link to="/policyRecomendations">{t('routing.fullRecs')}</Link>
           </Menu.Item>
           <Menu.Item>
             <Link to="/city">{t('routing.city')}</Link>

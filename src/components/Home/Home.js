@@ -30,12 +30,12 @@ function Home ({ setVehicle }) {
           </Grid.Row>
           <Grid.Row columns={2}>
             <Grid.Column>
-              <Link to="/vehicles">
+              <Link to="/policyRecomendations">
                 <Button fluid>{t('home.button1')}</Button>
               </Link>
             </Grid.Column>
             <Grid.Column centered="true">
-              <Link to="/policyRecomendations">
+              <Link to="/city">
                 <Button fluid>{t('home.button2')}</Button>
               </Link>
             </Grid.Column>

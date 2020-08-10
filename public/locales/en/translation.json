@@ -10,7 +10,7 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
-   "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the use case and finalizing with the framework. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the use case and finalizing with the framework. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
     "part1": "Select a vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
     "part3": "Retrieving use cases...",
@@ -164,7 +164,6 @@
     "pudo": "Pickup and dropoff passengers",
     "enabled": "Enabled to travel",
     "elef": "flying",
-    
     "elev": "level",
     "eleu": "under",
     "placeholder1": "Name for the use case",
@@ -174,7 +173,7 @@
   },
   "home": {
     "title": "See how you can use a vehicle in city streets according to our Periodic Table",
-"subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
+    "subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
     "question": "Looking for greater details?",
     "button1": "Show me detailed policy recommendations",
     "button2": "Let me define city policies"
@@ -190,8 +189,8 @@
     "and": "and"
   },
   "routing": {
-    "profiles": "Simple model",
-    "results": "Full recommendations",
+    "simpleModel": "Simple model",
+    "fullRecs": "Full recommendations",
     "city": "City priorities",
     "attributes": "City Attributes",
     "thresholds": "Thresholds",
