@@ -8,7 +8,7 @@ import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
 import Attributes from './components/CityGoals/Attributes'
-import Home from './components/Home'
+import Home from './components/Home/Home'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CityGoals from './components/CityGoals/CityGoals'
@@ -121,7 +121,7 @@ function AppRouter () {
             </Grid>
           </Route>
           <Route exact path="/">
-            <Home />
+            <Home setVehicle={setVehicle} />
           </Route>
           <Route path="/vehicles">
             <Page />

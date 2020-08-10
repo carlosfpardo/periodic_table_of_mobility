@@ -170,6 +170,12 @@
     "pregoals": "Use a prebuild use case",
     "setUseCase": "Set use case"
   },
+  "home": {
+    "title": "Discover vehicle impact on the urban environment",
+    "question": "Are you in search of serious vehicle policy?",
+    "button1": "Go to full model",
+    "button2": "Go to the complicated Stuff"
+  },
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
