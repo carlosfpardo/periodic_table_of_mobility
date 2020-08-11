@@ -178,6 +178,7 @@
         "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). You can choose a vehicle from the existing list below, or go to one of the other sections depending on your interests via the buttons at the bottom or the menus above.",
       "link": "Learn why this tool exists and how to offer feedback."
     "question": "Looking for greater details?",
+"button0": "Let me define vehicle attributes",
     "button1": "Show me detailed policy recommendations",
     "button2": "Let me define city policies"
   },
