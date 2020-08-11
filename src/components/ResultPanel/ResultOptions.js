@@ -858,7 +858,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     <div id="printArea" className="box">
       <Header>
         <Trans i18nKey="header1">
-          These are the recommendations for {vehicle.name} in {city.name}
+          These are the recommendations for {vehicle.name} in {city.name}{' '}
           framework for {name} use
         </Trans>
       </Header>
@@ -894,6 +894,55 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 <PriceRequired />
                 <Subsidy />
                 <Risk />
+                <Grid.Row>
+                  <Segment basic>{t('resultOptions.attTitle')}</Segment>
+                </Grid.Row>
+                <Grid.Row columns={2} textAlign="center">
+                  <Grid.Column>
+                    <Segment textAlign="right" basic>
+                      {t('resultOptions.capacity')}:{' '}
+                      {vehicle.attributes.capacity.value}{' '}
+                      {vehicle.attributes.capacity.units}{' '}
+                    </Segment>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Segment basic>
+                      {t('resultOptions.weight')}:{' '}
+                      {vehicle.attributes.weight.value}{' '}
+                      {vehicle.attributes.weight.units}
+                    </Segment>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row columns={2} textAlign="center">
+                  <Grid.Column>
+                    <Segment textAlign="right" basic>
+                      {t('resultOptions.footprint')}:{' '}
+                      {vehicle.attributes.footprint.value}{' '}
+                      {vehicle.attributes.footprint.units}
+                    </Segment>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Segment basic>
+                      {t('resultOptions.emissions')}:{' '}
+                      {vehicle.attributes.emissions.value} CO₂ g/km
+                    </Segment>
+                  </Grid.Column>
+                </Grid.Row>
+                <Grid.Row columns={2} textAlign="center">
+                  <Grid.Column>
+                    <Segment textAlign="right" basic>
+                      {t('resultOptions.health')}:{' '}
+                      {vehicle.attributes.health.value} MET
+                    </Segment>
+                  </Grid.Column>
+                  <Grid.Column>
+                    <Segment basic>
+                      {t('resultOptions.speed')}:{' '}
+                      {vehicle.attributes.speed.value}{' '}
+                      {vehicle.attributes.speed.units}
+                    </Segment>
+                  </Grid.Column>
+                </Grid.Row>
               </Grid>
             </div>
           </Grid.Column>
