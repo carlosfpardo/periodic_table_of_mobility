@@ -36,6 +36,7 @@ CityGoals.propTypes = {
 
 function CityGoals ({ setCity, setCityid }) {
   const [goal, setGoal] = useState({})
+  const [old, setOld] = useState({})
   const [city, setCities] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
@@ -179,6 +180,8 @@ function CityGoals ({ setCity, setCityid }) {
     fetchGoals()
   }, [lastUpdate])
   async function handleSaveProfile (event) {
+    setSuccess('')
+    setError('')
     setSavePending(true)
     setLastUpdate(new Date().toISOString())
     const todoValue = goal.name
@@ -194,7 +197,8 @@ function CityGoals ({ setCity, setCityid }) {
       publicHealth: value1,
       equity: value2,
       joyfulness: value3,
-      personalSafety: value4
+      personalSafety: value4,
+      attributes: city.attributes
     }
 
     if (typeof find(profiles, { name: todoInfo.name }) === 'undefined') {
@@ -214,18 +218,24 @@ function CityGoals ({ setCity, setCityid }) {
         })
       setCity(todosInfo)
     } else {
-      const cityref = find(city, { data: goal })
+      const cityref = find(city, { data: old })
       const id = getCityId(cityref)
-      setCity(todoInfo)
+      const newInfo = {
+        ...todoInfo,
+        attributes: old.attributes
+      }
+      setCity(newInfo)
       setCityid(id)
-      api.update(id, todoInfo)
+      api.update(id, newInfo)
     }
+    setSuccess(t('city.savedCorrect'))
     setChanged(false)
     setSavePending(false)
   }
 
   function handleDropdownChange (event, data) {
     const goals = find(profiles, { name: data.value })
+    setOld(goals)
     setGoal(goals)
     setCity(goals)
     setDescription(goals.description)

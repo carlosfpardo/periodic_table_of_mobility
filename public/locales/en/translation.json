@@ -119,7 +119,8 @@
     "equity": "Equity",
     "joyfulness": "Joyfulness",
     "personalSafety": "Personal safety",
-    "goal1": "Sustainable development goals"
+    "goal1": "Sustainable development goals",
+    "savedCorrect": "City saved correctly"
   },
   "attributes": {
     "part1": "Please indicate what attributes you will use to define vehicles",

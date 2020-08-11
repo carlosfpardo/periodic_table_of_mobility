@@ -5,15 +5,7 @@ import { useTranslation } from 'react-i18next'
 import TInput from './TInput'
 
 Thresholds.propTypes = {
-  attributes: PropTypes.shape({
-    id: PropTypes.string,
-    name: PropTypes.string,
-    type: PropTypes.string,
-    definedUnit: PropTypes.string,
-    description: PropTypes.string,
-    exampleValue: PropTypes.any,
-    thresholds: PropTypes.array
-  })
+  attributes: PropTypes.array
 }
 function Attributes ({ attributes, values = {}, onChange = () => {} }) {
   return attributes.map(attribute => (

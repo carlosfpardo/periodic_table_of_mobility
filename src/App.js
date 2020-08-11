@@ -42,7 +42,7 @@ function Page ({ vehicle, setVehicle }) {
 }
 function AppRouter () {
   const [vehicle, setVehicle] = useState({})
-  const [attributes, setAttributes] = useState({})
+  const [attributes, setAttributes] = useState([])
   const [city, setCity] = useState({})
   const [cityId, setCityid] = useState({})
   const { t, i18n } = useTranslation()

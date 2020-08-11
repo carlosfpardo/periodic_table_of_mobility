@@ -33,13 +33,14 @@ Attributes.propTypes = {
   }),
   setAttributes: PropTypes.func,
   city: PropTypes.shape({
-    attributes: PropTypes.shape({})
+    attributes: PropTypes.array
   })
 }
 
 function Attributes ({ city, attributes, setAttributes }) {
   const [isLoadingProfiles, setLoadingProfiles] = useState(true)
   const [isSettingAttributes, setAttributesSet] = useState(false)
+  const { t } = useTranslation()
   useEffect(() => {
     async function fetchAttributes () {
       setLoadingProfiles(true)
@@ -58,13 +59,15 @@ function Attributes ({ city, attributes, setAttributes }) {
 
     fetchAttributes()
   }, [city, setAttributes])
+  if (attributes == null) {
+    return <p>500 internal server error</p>
+  }
   function handleAttributeset () {
     setAttributesSet(true)
   }
   function handleAttributesChange (attributes) {
     setAttributes(attributes)
   }
-  const { t } = useTranslation()
 
   return (
     <div className="App1">
