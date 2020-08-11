@@ -175,14 +175,17 @@
   "home": {
     "title": "See how you can use a vehicle in city streets according to our Periodic Table",
     "subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
+        "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). You can choose a vehicle from the existing list below, or go to one of the other sections depending on your interests via the buttons at the bottom or the menus above.",
+      "link": "Learn why this tool exists and how to offer feedback."
     "question": "Looking for greater details?",
+"button0": "Let me define vehicle attributes",
     "button1": "Show me detailed policy recommendations",
     "button2": "Let me define city policies"
   },
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
-    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). There are pre-loaded values that you can choose to learn the policy implications of existing vehicles. You can add customized characteristics, or create new vehicle types as well.",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also add customized attributes, or create new vehicle types as well. If you would like to see more detailed recommendations for this vehicle, please go to the full model",
     "link": "Learn why this tool exists and how to offer feedback."
   },
   "footer": {
