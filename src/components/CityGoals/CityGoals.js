@@ -28,16 +28,17 @@ CityGoals.propTypes = {
     publicHealth: PropTypes.number,
     equity: PropTypes.number,
     joyfulness: PropTypes.number,
-    personalSafety: PropTypes.number
+    personalSafety: PropTypes.number,
+    attributes: PropTypes.array
   }),
   setCity: PropTypes.func,
   setCityid: PropTypes.func
 }
 
-function CityGoals ({ setCity, setCityid }) {
+function CityGoals ({ city, setCity, setCityid }) {
   const [goal, setGoal] = useState({})
   const [old, setOld] = useState({})
-  const [city, setCities] = useState({})
+  const [cities, setCities] = useState({})
   const [profiles, setProfiles] = useState([])
   const [isSavePending, setSavePending] = useState(false)
   const [isChanged, setChanged] = useState(false)
@@ -158,15 +159,14 @@ function CityGoals ({ setCity, setCityid }) {
       setLoadingProfiles(true)
 
       try {
-        api.readAll().then(city => {
+        api.readAll().then(cities => {
           const profiles = []
           var i = 0
-          city.forEach(element => {
+          cities.forEach(element => {
             profiles[i] = element.data
             i++
           })
-
-          setCities(city)
+          setCities(cities)
           setProfiles(profiles)
         })
       } catch (err) {
@@ -218,7 +218,7 @@ function CityGoals ({ setCity, setCityid }) {
         })
       setCity(todosInfo)
     } else {
-      const cityref = find(city, { data: old })
+      const cityref = find(cities, { data: old })
       const id = getCityId(cityref)
       const newInfo = {
         ...todoInfo,
@@ -271,6 +271,11 @@ function CityGoals ({ setCity, setCityid }) {
   }
   function handleSelection1 (event) {
     setDefault(false)
+  }
+  function handleSetAttributes (event) {
+    const cityref = find(cities, { data: city })
+    const id = getCityId(cityref)
+    setCityid(id)
   }
   return (
     <div className="App">
@@ -438,7 +443,7 @@ function CityGoals ({ setCity, setCityid }) {
         ''
       ) : (
         <Link to="/attributes">
-          <Button>Set attributes</Button>
+          <Button onClick={handleSetAttributes}>Set attributes</Button>
         </Link>
       )}
       {error && <Message error>{error}</Message>}

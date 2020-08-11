@@ -149,7 +149,8 @@
     "minvalue": "Minimum value",
     "th1": "Threshold 1",
     "th2": "Threshold 2",
-    "th3": "Threshold 3"
+    "th3": "Threshold 3",
+    "button": "Set Thresholds"
   },
   "useCase": {
     "useCase": "Use Case",

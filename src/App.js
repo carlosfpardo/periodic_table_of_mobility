@@ -97,7 +97,7 @@ function AppRouter () {
             </Grid>
           </Route>
           <Route path="/city">
-            <CityGoals setCity={setCity} setCityid={setCityid} />
+            <CityGoals city={city} setCity={setCity} setCityid={setCityid} />
           </Route>
           <Route path="/attributes">
             <Grid stackable>
@@ -117,7 +117,12 @@ function AppRouter () {
             <Grid stackable>
               <Grid.Row columns={1}>
                 <Grid.Column>
-                  <Thresholds attributes={attributes} />
+                  <Thresholds
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    cityId={cityId}
+                    city={city}
+                  />
                 </Grid.Column>
               </Grid.Row>
             </Grid>

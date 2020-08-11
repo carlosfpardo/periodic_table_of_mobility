@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Input, Grid } from 'semantic-ui-react'
 import uniqueId from 'lodash/uniqueId'
@@ -15,25 +15,63 @@ TInput.propTypes = {
     exampleValue: PropTypes.any,
     thresholds: PropTypes.array
   }),
-  onChange: PropTypes.func
+  setThreshold: PropTypes.func
 }
 
 function TInput (props) {
-  const { attribute, onChange = () => {} } = props
-  const { thresholds } = attribute
+  const { attribute, setThreshold } = props
+  const thresholds = attribute.thresholds
   const { t } = useTranslation(['translation', 'attributes'])
   const htmlId = uniqueId('data-input_')
+  const [value, setValue] = useState(thresholds[0])
+  const [value1, setValue1] = useState(thresholds[1])
+  const [value2, setValue2] = useState(thresholds[2])
+  const [value3, setValue3] = useState(thresholds[3])
 
-  function handleInputChange (event) {
-    onChange({
-      value: event.target.value
-    })
+  const handleInputChange = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    thresholds[0] = value
+    attribute.thresholds = thresholds
+    setValue(value)
+    setThreshold(thresholds)
   }
-  const test = thresholds[1]
+  const handleInputChange1 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    thresholds[1] = value
+    attribute.thresholds = thresholds
+    setValue1(value)
+    setThreshold(thresholds)
+  }
+  const handleInputChange2 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    thresholds[2] = value
+    attribute.thresholds = thresholds
+    setValue2(value)
+    setThreshold(thresholds)
+  }
+  const handleInputChange3 = e => {
+    let value = Number.parseInt(e.target.value)
+    if (!value) {
+      value = 0
+    }
+    thresholds[3] = value
+    attribute.thresholds = thresholds
+    setValue3(value)
+    setThreshold(thresholds)
+  }
   return (
     <Grid.Row>
       <div className="input-row">
-        {typeof test === 'undefined' ? (
+        {typeof thresholds === 'undefined' || thresholds[0] == null ? (
           ''
         ) : (
           <>
@@ -43,29 +81,29 @@ function TInput (props) {
                 <Grid.Column>
                   <Input
                     label={t('thresholds.minvalue')}
-                    value={thresholds[0]}
+                    value={value}
                     onChange={handleInputChange}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th1')}
-                    value={thresholds[1]}
-                    onChange={handleInputChange}
+                    value={value1}
+                    onChange={handleInputChange1}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th2')}
-                    value={thresholds[2]}
-                    onChange={handleInputChange}
+                    value={value2}
+                    onChange={handleInputChange2}
                   />
                 </Grid.Column>
                 <Grid.Column>
                   <Input
                     label={t('thresholds.th3')}
-                    value={thresholds[3]}
-                    onChange={handleInputChange}
+                    value={value3}
+                    onChange={handleInputChange3}
                   />
                 </Grid.Column>
               </Grid.Row>

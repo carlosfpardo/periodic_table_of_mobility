@@ -1,26 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { Header, Form, Grid } from 'semantic-ui-react'
+import { Header, Form, Grid, Button } from 'semantic-ui-react'
 import { useTranslation } from 'react-i18next'
 import TInput from './TInput'
+import api from '../../utils/api'
 
 Thresholds.propTypes = {
-  attributes: PropTypes.array
+  city: PropTypes.any,
+  cityId: PropTypes.string,
+  attributes: PropTypes.array,
+  setAttributes: PropTypes.func
 }
-function Attributes ({ attributes, values = {}, onChange = () => {} }) {
+function Attributes ({ attributes = {}, setThreshold = {} }) {
   return attributes.map(attribute => (
     <TInput
       key={attribute.id}
       attribute={attribute}
-      onChange={value => {
-        onChange({ ...values, [attribute.id]: value })
-      }}
+      setThreshold={setThreshold}
     />
   ))
 }
 
-function Thresholds ({ attributes }) {
+function Thresholds ({ city, cityId, attributes, setAttributes }) {
+  const [threshold, setThreshold] = useState(attributes.threshold)
   const { t } = useTranslation()
+  function handleSetThresholds (event) {
+    if (threshold) {
+    }
+    city = {
+      ...city,
+      attributes: attributes
+    }
+    api.update(cityId, city)
+    setAttributes(attributes)
+  }
   return (
     <div className="App">
       <Header textAlign="center">
@@ -30,8 +43,9 @@ function Thresholds ({ attributes }) {
 
       <Form>
         <Grid>
-          <Attributes attributes={attributes} />
+          <Attributes attributes={attributes} setThreshold={setThreshold} />
         </Grid>
+        <Button onClick={handleSetThresholds}>{t('thresholds.button')}</Button>
       </Form>
     </div>
   )
