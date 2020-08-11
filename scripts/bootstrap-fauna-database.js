@@ -128,22 +128,6 @@ function createFaunaDB (key) {
           source: q.Ref('classes/images')
         })
       )
-      client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'single image',
-          source: q.Ref('classes/images'),
-          terms: [{ field: ['data', 'name'] }],
-          unique: true
-        })
-      )
-      client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'pk_city_attributes',
-          source: q.Ref('classes/city_attributes'),
-          terms: [{ field: ['data', 'num'] }],
-          unique: true
-        })
-      )
     })
     .catch(e => {
       if (

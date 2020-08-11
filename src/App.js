@@ -14,6 +14,7 @@ import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
 import CityGoals from './components/CityGoals/CityGoals'
 import Thresholds from './components/CityGoals/Thresholds'
+import ImageUpload from './components/ImageUpload/ImageUpload'
 Page.propTypes = {
   vehicle: PropTypes.any,
   setVehicle: PropTypes.any
@@ -203,6 +204,7 @@ function AppRouter () {
         <Grid>
           <Grid.Row columns={1}>
             <Grid.Column>
+              <ImageUpload />
               <Divider />
               <Footer />
             </Grid.Column>
