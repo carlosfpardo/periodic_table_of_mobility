@@ -8,12 +8,12 @@ import Footer from './components/Footer'
 import InputPanel from './components/InputPanel/InputPanel'
 import ResultPanel from './components/ResultPanel/ResultPanel'
 import ResultPage from './components/ResultPanel/ResultPage'
-import Attributes from './components/CityGoals/Attributes'
+/* import Attributes from './components/CityGoals/Attributes' */
 import Home from './components/Home/Home'
 import './App.css'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import CityGoals from './components/CityGoals/CityGoals'
-import Thresholds from './components/CityGoals/Thresholds'
+/* import CityGoals from './components/CityGoals/CityGoals' */
+/* import Thresholds from './components/CityGoals/Thresholds' */
 Page.propTypes = {
   vehicle: PropTypes.any,
   setVehicle: PropTypes.any
@@ -42,9 +42,9 @@ function Page ({ vehicle, setVehicle }) {
 }
 function AppRouter () {
   const [vehicle, setVehicle] = useState({})
-  const [attributes, setAttributes] = useState([])
+  /* const [attributes, setAttributes] = useState([])
   const [city, setCity] = useState({})
-  const [cityId, setCityid] = useState({})
+  const [cityId, setCityid] = useState({}) */
   const { t, i18n } = useTranslation()
   const changeLanguage = lng => {
     i18n.changeLanguage(lng)
@@ -62,9 +62,9 @@ function AppRouter () {
           <Menu.Item>
             <Link to="/policyRecomendations">{t('routing.fullRecs')}</Link>
           </Menu.Item>
-          <Menu.Item>
+          {/* <Menu.Item>
             <Link to="/city">{t('routing.city')}</Link>
-          </Menu.Item>
+          </Menu.Item> */}
           <Dropdown item text={t('language')}>
             <Dropdown.Menu>
               <Dropdown.Item onClick={() => changeLanguage('en')}>
@@ -96,7 +96,7 @@ function AppRouter () {
               </Grid.Row>
             </Grid>
           </Route>
-          <Route path="/city">
+          {/* <Route path="/city">
             <CityGoals city={city} setCity={setCity} setCityid={setCityid} />
           </Route>
           <Route path="/attributes">
@@ -126,7 +126,7 @@ function AppRouter () {
                 </Grid.Column>
               </Grid.Row>
             </Grid>
-          </Route>
+          </Route> */}
           <Route exact path="/">
             <Home setVehicle={setVehicle} />
           </Route>

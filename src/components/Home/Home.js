@@ -47,11 +47,11 @@ function Home ({ setVehicle }) {
                   <Button fluid>{t('home.button1')}</Button>
                 </Link>
               </Grid.Column>
-              <Grid.Column centered="true">
+              {/* <Grid.Column centered="true">
                 <Link to="/city">
                   <Button fluid>{t('home.button2')}</Button>
                 </Link>
-              </Grid.Column>
+              </Grid.Column> */}
             </Grid.Row>
           </Grid>
         </Segment>

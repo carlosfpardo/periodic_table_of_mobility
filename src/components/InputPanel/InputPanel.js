@@ -14,7 +14,6 @@ import { getNewVehicleId } from '../../utils/uniqueid'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import { useTranslation } from 'react-i18next'
 import api from '../../utils/api'
-// import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
 function Attributes ({ values = {}, onChange = () => {} }) {
   return ATTRIBUTES.map(attribute => (
@@ -49,8 +48,8 @@ InputPanel.propTypes = {
 function InputPanel ({ vehicle, setVehicle }) {
   // const [profiles, setProfiles] = useState(VEHICLE_PROFILES)
   const [profiles, setProfiles] = useState([])
-  const [idv, setId] = useState(null)
-  const [vehicles, setVehicles] = useState([])
+  /* const [idv, setId] = useState(null) */
+  /* const [vehicles, setVehicles] = useState([]) */
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
@@ -69,8 +68,8 @@ function InputPanel ({ vehicle, setVehicle }) {
             profiles[i] = element.data
             i++
           })
-          setVehicles(vehicles)
-          setId(vehicles[0])
+          /* setVehicles(vehicles) */
+          /* setId(vehicles[0]) */
           setProfiles(profiles)
         })
       } catch (err) {
@@ -104,14 +103,15 @@ function InputPanel ({ vehicle, setVehicle }) {
     const transport = {
       lastEddited: vehicle['app:edited'],
       attributes: vehicle.attributes,
-      id: vehicle.id,
+      id: getNewVehicleId(),
       name: vehicle.name,
       image: vehicle.image
     }
     setSavePending(true)
-    const cityref = find(vehicles, { data: idv })
+    /* const cityref = find(vehicles, { data: idv })
     const id = getVehicleId(cityref)
-    api.updateVehicle(id, transport).then(response => {
+    api.updateVehicle(id, transport).then(response => { */
+    api.createVehicle(transport).then(response => {
       console.log(response)
       setLastUpdate(new Date().toISOString())
       setSavePending(false)
@@ -124,11 +124,11 @@ function InputPanel ({ vehicle, setVehicle }) {
     setSavePending(true)
 
     const transport = {
-      lastEddited: vehicle['app:edited'],
-      attributes: vehicle.attributes,
       id: vehicle.id,
       name: vehicle.name,
-      image: vehicle.image
+      image: vehicle.image,
+      lastEddited: vehicle['app:edited'],
+      attributes: vehicle.attributes
     }
     api
       .createVehicle(transport)
@@ -153,14 +153,14 @@ function InputPanel ({ vehicle, setVehicle }) {
 
   function handleDropdownChange (event, data) {
     const vehicle = find(profiles, { id: data.value })
-    setIdv(vehicle)
+    /* setIdv(vehicle) */
     setVehicle(vehicle)
 
     // Reset error state.
     setSuccess('')
     setError('')
   }
-  function setIdv (vehicle) {
+  /* function setIdv (vehicle) {
     const oldVehicle = {
       lastEddited: vehicle.lastEddited,
       attributes: vehicle.attributes,
@@ -169,7 +169,7 @@ function InputPanel ({ vehicle, setVehicle }) {
       image: vehicle.image
     }
     setId(oldVehicle)
-  }
+  } */
   function handleNameChange (event, data) {
     const newVehicle = {
       ...vehicle,
@@ -267,10 +267,10 @@ function InputPanel ({ vehicle, setVehicle }) {
     </div>
   )
 }
-function getVehicleId (todo) {
+/* function getVehicleId (todo) {
   if (!todo.ref) {
     return null
   }
   return todo.ref['@ref'].id
-}
+} */
 export default InputPanel
