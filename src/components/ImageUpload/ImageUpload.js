@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import api from '../../utils/api'
 import { Button } from 'semantic-ui-react'
 
 function ImageUpload () {
@@ -13,7 +12,6 @@ function ImageUpload () {
   function handleFileUpload () {
     const fd = new FormData()
     fd.append('image', file, file.name)
-    api.createImage(file)
   }
   function checkPhoto (target) {
     if (target.files[0].type.indexOf('image') === -1) {

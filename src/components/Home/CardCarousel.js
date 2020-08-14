@@ -8,13 +8,14 @@ import {
   ButtonLast
 } from 'pure-react-carousel'
 import React, { useEffect, useState } from 'react'
-import { fetchData } from '../../utils/gsheets'
 import VehicleImage from '../ResultPanel/VehicleImage'
 import { Header, Icon, Grid } from 'semantic-ui-react'
 import './Carousel.css'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
+import api from '../../utils/api'
+
 CardCarousel.propTypes = {
   setVehicle: PropTypes.func
 }
@@ -24,9 +25,16 @@ function CardCarousel ({ setVehicle }) {
   useEffect(() => {
     async function fetchVehicleProfiles () {
       try {
-        const profiles = await fetchData()
-        setProfiles(profiles)
-        setVehicle(profiles[0])
+        api.readAllVehicles().then(vehicles => {
+          const profiles = []
+          var i = 0
+          vehicles.forEach(element => {
+            profiles[i] = element.data
+            i++
+          })
+          setProfiles(profiles)
+          setVehicle(profiles[0])
+        })
       } catch (err) {
         console.error(err)
       }
