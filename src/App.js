@@ -33,7 +33,7 @@ function Page ({ vehicle, setVehicle }) {
             <InputPanel vehicle={vehicle} setVehicle={setVehicle} />
           </Grid.Column>
           <Grid.Column width={7}>
-            <ResultPanel vehicle={vehicle} />
+            <ResultPanel vehicle={vehicle} setVehicle={setVehicle} />
           </Grid.Column>
         </Grid.Row>
       </Grid>

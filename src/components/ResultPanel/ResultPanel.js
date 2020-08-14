@@ -16,16 +16,17 @@ ResultPanel.propTypes = {
         units: PropTypes.string
       })
     )
-  })
+  }),
+  setVehicle: PropTypes.func
 }
 
-function ResultPanel ({ vehicle }) {
+function ResultPanel ({ vehicle, setVehicle }) {
   const levels = mapAttributeValuesToLevel(vehicle.attributes)
 
   return (
     <div className="box">
       <VehicleImage vehicle={vehicle} />
-      <ImageUpload />
+      <ImageUpload vehicle={vehicle} setVehicle={setVehicle} />
       <SummaryPolicy levels={levels} />
       <RadarChart levels={levels} />
     </div>
