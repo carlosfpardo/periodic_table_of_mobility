@@ -11,9 +11,9 @@ import {
 import find from 'lodash/find'
 import DataInput from './DataInput'
 import { getNewVehicleId } from '../../utils/uniqueid'
-import { fetchData, saveData } from '../../utils/gsheets'
 import ATTRIBUTES from '../../data/attributes_numo.json'
 import { useTranslation } from 'react-i18next'
+import api from '../../utils/api'
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
 function Attributes ({ values = {}, onChange = () => {} }) {
@@ -31,6 +31,9 @@ function Attributes ({ values = {}, onChange = () => {} }) {
 
 InputPanel.propTypes = {
   vehicle: PropTypes.shape({
+    'app:edited': PropTypes.string,
+    id: PropTypes.string,
+    lastEddited: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
     attributes: PropTypes.objectOf(
@@ -46,6 +49,8 @@ InputPanel.propTypes = {
 function InputPanel ({ vehicle, setVehicle }) {
   // const [profiles, setProfiles] = useState(VEHICLE_PROFILES)
   const [profiles, setProfiles] = useState([])
+  const [idv, setId] = useState(null)
+  const [vehicles, setVehicles] = useState([])
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
@@ -57,8 +62,17 @@ function InputPanel ({ vehicle, setVehicle }) {
       setLoadingProfiles(true)
 
       try {
-        const profiles = await fetchData()
-        setProfiles(profiles)
+        api.readAllVehicles().then(vehicles => {
+          const profiles = []
+          var i = 0
+          vehicles.forEach(element => {
+            profiles[i] = element.data
+            i++
+          })
+          setVehicles(vehicles)
+          setId(vehicles[0])
+          setProfiles(profiles)
+        })
       } catch (err) {
         console.error(err)
         setError(err.message)
@@ -76,30 +90,58 @@ function InputPanel ({ vehicle, setVehicle }) {
       id: getNewVehicleId(),
       name: `${vehicle.name}`
     }
-    setVehicle(clone)
-    saveToApi('POST', clone)
+    if (typeof find(profiles, { name: clone.name }) === 'undefined') {
+      setVehicle(clone)
+      saveToApi('POST', clone)
+    } else {
+      updateToApi(vehicle)
+    }
   }
 
-  // async function updateToApi () {
-  //   saveToApi('PUT', vehicle)
-  // }
+  async function updateToApi (vehicle) {
+    setSuccess('')
+    setError('')
+    const transport = {
+      lastEddited: vehicle['app:edited'],
+      attributes: vehicle.attributes,
+      id: vehicle.id,
+      name: vehicle.name,
+      image: vehicle.image
+    }
+    setSavePending(true)
+    const cityref = find(vehicles, { data: idv })
+    const id = getVehicleId(cityref)
+    api.updateVehicle(id, transport).then(response => {
+      console.log(response)
+      setLastUpdate(new Date().toISOString())
+      setSavePending(false)
+    })
+  }
 
   async function saveToApi (method, vehicle) {
     setSuccess('')
     setError('')
     setSavePending(true)
 
-    try {
-      const result = await saveData('POST', vehicle)
-      if (!result) return
-      setLastUpdate(new Date().toISOString())
-      setSuccess(t('inputPanel.savedCorrect'))
-    } catch (err) {
-      console.error(err)
-      setError(t('inputPanel.saveFail'))
+    const transport = {
+      lastEddited: vehicle['app:edited'],
+      attributes: vehicle.attributes,
+      id: vehicle.id,
+      name: vehicle.name,
+      image: vehicle.image
     }
-
-    setSavePending(false)
+    api
+      .createVehicle(transport)
+      .then(response => {
+        console.log(response)
+        setSavePending(false)
+        setLastUpdate(new Date().toISOString())
+        setSuccess(t('inputPanel.savedCorrect'))
+      })
+      .catch(e => {
+        console.log('An API error occurred', e)
+        setError(t('inputPanel.saveFail'))
+      })
   }
 
   function handleAttributesChange (attributes) {
@@ -111,14 +153,23 @@ function InputPanel ({ vehicle, setVehicle }) {
 
   function handleDropdownChange (event, data) {
     const vehicle = find(profiles, { id: data.value })
-
+    setIdv(vehicle)
     setVehicle(vehicle)
 
     // Reset error state.
     setSuccess('')
     setError('')
   }
-
+  function setIdv (vehicle) {
+    const oldVehicle = {
+      lastEddited: vehicle.lastEddited,
+      attributes: vehicle.attributes,
+      id: vehicle.id,
+      name: vehicle.name,
+      image: vehicle.image
+    }
+    setId(oldVehicle)
+  }
   function handleNameChange (event, data) {
     const newVehicle = {
       ...vehicle,
@@ -216,5 +267,10 @@ function InputPanel ({ vehicle, setVehicle }) {
     </div>
   )
 }
-
+function getVehicleId (todo) {
+  if (!todo.ref) {
+    return null
+  }
+  return todo.ref['@ref'].id
+}
 export default InputPanel

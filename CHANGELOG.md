@@ -23,3 +23,4 @@
 - Home page
 - some translation fixes
 - some cuality changes for policy recomendation
+- city/framework creation with default attributes, modifiable thresholds

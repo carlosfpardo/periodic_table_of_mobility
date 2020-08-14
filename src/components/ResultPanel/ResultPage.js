@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Dropdown, Message } from 'semantic-ui-react'
 import find from 'lodash/find'
-import { fetchData } from '../../utils/gsheets'
 import { useTranslation } from 'react-i18next'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import UseCase from './UseCase'
+import api from '../../utils/api'
 
 // import VEHICLE_PROFILES from '../../data/vehicle_profiles.json'
 
@@ -40,8 +40,15 @@ function ResultPage ({ vehicle, setVehicle }) {
       setLoadingProfiles(true)
 
       try {
-        const profiles = await fetchData()
-        setProfiles(profiles)
+        api.readAllVehicles().then(vehicles => {
+          const profiles = []
+          var i = 0
+          vehicles.forEach(element => {
+            profiles[i] = element.data
+            i++
+          })
+          setProfiles(profiles)
+        })
       } catch (err) {
         console.error(err)
         setError(err.message)

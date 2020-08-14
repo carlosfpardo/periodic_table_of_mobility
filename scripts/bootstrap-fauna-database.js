@@ -118,25 +118,6 @@ function createFaunaDB (key) {
         throw e
       }
     })
-  // image table
-  client
-    .query(q.Create(q.Ref('classes'), { name: 'images' }))
-    .then(() => {
-      client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'get_all_images',
-          source: q.Ref('classes/images')
-        })
-      )
-    })
-    .catch(e => {
-      if (
-        e.requestResult.statusCode === 400 &&
-        e.message === 'instance not unique'
-      ) {
-        throw e
-      }
-    })
   // use cases table
   client
     .query(q.Create(q.Ref('classes'), { name: 'cases' }))

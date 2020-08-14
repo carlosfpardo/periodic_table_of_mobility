@@ -17,7 +17,14 @@ const createUseCase = data => {
     return response.json()
   })
 }
-
+const createVehicle = data => {
+  return fetch('/.netlify/functions/vehicle-create', {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
 const createImage = data => {
   return fetch('/.netlify/functions/image-create', {
     body: JSON.stringify(data),
@@ -32,6 +39,11 @@ const readAll = () => {
   })
 }
 
+const readAllVehicles = () => {
+  return fetch('/.netlify/functions/vehicle-read-all').then(response => {
+    return response.json()
+  })
+}
 const readAllCases = () => {
   return fetch('/.netlify/functions/cases-read-all').then(response => {
     return response.json()
@@ -46,6 +58,16 @@ const update = (todoId, data) => {
     return response.json()
   })
 }
+
+const updateVehicle = (todoId, data) => {
+  return fetch(`/.netlify/functions/vehicle-update/${todoId}`, {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
+
 const updateUseCase = (todoId, data) => {
   return fetch(`/.netlify/functions/useCase-update/${todoId}`, {
     body: JSON.stringify(data),
@@ -77,10 +99,13 @@ const batchDeleteTodo = todoIds => {
 export default {
   createUseCase: createUseCase,
   createImage: createImage,
+  createVehicle: createVehicle,
   create: create,
   readAll: readAll,
+  readAllVehicles: readAllVehicles,
   readAllCases: readAllCases,
   update: update,
+  updateVehicle: updateVehicle,
   updateUseCase: updateUseCase,
   delete: deleteTodo,
   batchDelete: batchDeleteTodo
