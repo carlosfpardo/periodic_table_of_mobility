@@ -26,3 +26,4 @@ yarn-error.log*
 # Local Netlify folder
 .netlify
 functions/periodicimage-firebase-adminsdk-zosmm-cf9b17db40.json
+.env

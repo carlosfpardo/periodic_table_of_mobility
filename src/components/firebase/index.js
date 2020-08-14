@@ -3,7 +3,7 @@ import 'firebase/storage'
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
-  apiKey: 'AIzaSyBYZfu03J8ia9TEJu-LUvodW2DGx-4OIu8',
+  apiKey: process.env.APIKEY,
   authDomain: 'periodicimage.firebaseapp.com',
   databaseURL: 'https://periodicimage.firebaseio.com',
   projectId: 'periodicimage',
