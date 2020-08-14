@@ -4,7 +4,7 @@ import VehicleImage from './VehicleImage'
 import SummaryPolicy from './SummaryPolicy'
 import RadarChart from './RadarChart_old'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
-import ImageUpload from '../ImageUpload/ImageUpload'
+/* import ImageUpload from '../ImageUpload/ImageUpload' */
 
 ResultPanel.propTypes = {
   vehicle: PropTypes.shape({
@@ -26,7 +26,7 @@ function ResultPanel ({ vehicle, setVehicle }) {
   return (
     <div className="box">
       <VehicleImage vehicle={vehicle} />
-      <ImageUpload vehicle={vehicle} setVehicle={setVehicle} />
+      {/* <ImageUpload vehicle={vehicle} setVehicle={setVehicle} /> */}
       <SummaryPolicy levels={levels} />
       <RadarChart levels={levels} />
     </div>
