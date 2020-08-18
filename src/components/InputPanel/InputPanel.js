@@ -55,7 +55,7 @@ function InputPanel ({ vehicle, setVehicle }) {
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [isSavePending, setSavePending] = useState(false)
   const [isLoadingProfiles, setLoadingProfiles] = useState(false)
-  const { t } = useTranslation()
+  const { t } = useTranslation(['translation', 'vehicles'])
   useEffect(() => {
     async function fetchVehicleProfiles () {
       setLoadingProfiles(true)
@@ -206,7 +206,7 @@ function InputPanel ({ vehicle, setVehicle }) {
           loading={isLoadingProfiles}
           options={profiles.map(item => ({
             key: item.id,
-            text: item.name,
+            text: t('vehicles:vehicleNames.' + item.id),
             value: item.id
           }))}
           onChange={handleDropdownChange}

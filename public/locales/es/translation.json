@@ -1,6 +1,7 @@
 {
   "title": "Tabla Periódica de Movilidad: una herramienta de NUMO para guiar políticas",
   "language": "Idioma",
+  "generatePDF": "See this in PDF",
   "description": {
     "part1": "Traducción en progreso",
     "part2": "Cambie su idioma entre inglés y español usando los botones de arriba",
@@ -9,7 +10,8 @@
     "downloadSVG": "Descargar imagen vectorial (SVG)"
   },
   "resultPage": {
-    "part1": "Seleccione un vehículo",
+    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the use case and finalizing with the framework. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part1": "Select a vehicle",
     "part2": "Por favor elija del menú desplegable abajo",
     "part3": "Recuperando ejemplos...",
     "part4": "Seleccione ejemplos pre-definidos"
@@ -30,8 +32,8 @@
     "streetAllocation": "Autorización en el derecho de vía",
     "sidewalk": "A: ámbito peatonal",
     "nextPUDO": "B: Zona flexible",
-    "nextMove": "C: Viaje - cerca",
-    "farMove": "D: Viaje - lejos",
+    "nextMove": "C: Travel-lane (close)",
+    "farMove": "D: Travel-lane (far)",
     "seeRequirements": "Requerido",
     "notNecessary": "No es necesario",
     "none": "Ninguno",
@@ -42,7 +44,27 @@
     "save": "Descargue recomendación completa con detalles",
     "flexTitle": "B: Zona flexible/zona abordaje",
     "flextext": "Los vehículos de esta zona solo se permiten cuando circulan a menos de 30 km/h y con una función explícita de abordaje / recoger pasajeros.",
-    "header1": "Estas son las recomendaciones para {{name}} en {{city}} modelo para el uso {{case}}"
+    "header1": "Estas son las recomendaciones para {{name}} en {{city}} modelo para el uso {{case}}",
+    "driversExp": "If the intended use of the vehicle is commercial, OR if its level of automation is above 2, OR if it is elevated above ground (flying), OR if its weight is more than {{ weights }} {{ wunits }} AND if its top factory speed is higher than {{ speed2 }} {{ sunits }}, then it requires a driver license.",
+    "operatingExp": "If the intended use of the vehicle is commercial, then it requires an operating license.",
+    "dataExpH": "If the vehicle does not transit on the ground level, OR if its weight is more than {{ weight2 }} {{ wunits }}, OR if its top factory speed is higher than {{ speed2 }} {{ sunits }}, then the data-sharing requirements are strict.",
+    "dataExpL": "If the vehicle transits on the ground level, AND if its weight is less than or equal to {{ weight2 }} {{ wunits }}, AND if its top factory speed is lower than or equal to {{ speed2 }} {{ sunits }}, OR if its intended use is commercial, then the data-sharing requirements are less strict.",
+    "dataExpN": "If the vehicle transits on the ground level, AND if its weight is less than or equal to {{ weights }} {{ wunits }} AND if its top factory speed is lower than or equal to {{ speeds }} {{ sunits }}, AND if its intended use is personal, then it must not share any data.",
+    "priceExpH": "If the weight of the vehicle is more than {{ weight2 }} {{ wunits }}, OR if its top factory speed is higher than {{ speed2 }} {{ sunits }}, OR if its space efficiency per person is more than {{ footprint2 }} {{ funits }}, OR if its exhaust-emissions efficiency per person is more than {{ emission2 }} {{ eunits }}, then it must pay high fees and fines.",
+    "priceExpL": "If the weight of the vehicle is less than or equal to {{ weight2 }} {{ wunits }}, AND if its top factory speed is lower than or equal to {{ speed2 }} {{ sunits }}, AND if its space efficiency per person is less than or equal to {{ footprint2 }} {{ funits }}, AND if its exhaust-emissions efficiency per person is less than or equal to {{ emission2 }} {{ eunits }}, OR if its intended use is commercial, then it must pay low fees and fines.",
+    "priceExpN": "If the weight of the vehicle is less than or equal to {{ weights }} {{ wunits }}, AND if its top factory speed is lower than or equal to {{ speeds }} {{ sunits }}, AND if its space efficiency per person is less than or equal to {{ footprints }} {{ funits }}, OR if its exhaust-emissions efficiency per person is equal to {{ emission }} {{ eunits }}, AND if its intended use is personal, then it must not pay any fees and fines.",
+    "subsidyExp": "If the vehicle transits on the ground level, AND if its exhaust-emissions efficiency per person is equal to {{ emission }} {{ eunits }}, OR if its ILL-Health value is greater than or equal to {{helaths }} {{hunits }}, OR if the service provider is local, then it is eligible for subsidies.",
+    "riskExp": "If the intended use of the vehicle is commercial, OR if its weight is more than {{ weight2 }} {{ wunits }}, OR if its top factory speed is higher than {{ speed2 }} {{ sunits }}, OR if its exhaust-emissions efficiency per person is more than {{ emission2 }} {{ eunits }}, OR if its elevation is above the ground (flying), then it requires a risk assessment.",
+    "streetA": "If the elevation of the vehicle is not above the ground (flying), AND if its weight is less than or equal to {{ weights }} {{ wunits }}, AND if its top factory speed is lower than or equal to {{ speeds }} {{ sunits }}, AND if its space efficiency per person is less than or equal to {{ footprints }} {{ funits }}, AND if its exhaust-emissions efficiency per person is equal to {{ emission }} {{ eunits }}, AND if its ILL-Health value is greater than or equal to {{ healths }} {{ hunits }}, AND if its level of automation is 0, then it belongs to position A.",
+    "streetC": "If the elevation of the vehicle is not above the ground (flying), AND if its top factory speed is lower than or equal to {{ speed2 }} {{ sunits }}, AND if its space efficiency per person is less than or equal to {{ footprint2 }} {{ funits }}, AND if its exhaust-emissions efficiency per person is less than or equal to {{ emission2 }} {{ eunits }}, AND if its level of automation is below or equal to 2, then it belongs to position C.",
+    "streetD": " If the top factory speed of the vehicle is higher than to {{ speed2 }} {{ sunits }}, OR if its space efficiency per person is more than {{ footprint2 }} {{ funits }}, OR if its exhaust-emissions efficiency per person is more than {{ emission2 }} {{ eunits }}, OR if its level of automation is above 2, OR if its elevation is above the ground (flying), then it belongs to position D.",
+    "attTitle": "Just in case, these are the attributes for the vehicle you selected. You can go to the simple model if you want to create a new vehicle with other attributes",
+    "capacity": "Maximum capacity",
+    "weight": "Weight",
+    "footprint": "Space occupied",
+    "emissions": "Emissions",
+    "health": "ILL-Health",
+    "speed": "Top Speed"
   },
   "document": {
     "introPDF": "Este documento es un resumen de las recomendaciones de política {{NUMO}} para un/a {{VEHICLENAME}} en un caso {{USECASE}} , con base en la Tabla Periódica de Movilidad. Puede ser utilizada en Atlantis para realizar el proceso de requisitos de tal forma que se pueda utilizar este vehículo en nuestra gloriosa (aunque ficticia) isla.",
@@ -58,7 +80,7 @@
     "pricesNA": "No hay tarifas asociadas a este vehículo, de acuerdo con la super popular y altamente respetada Oficina de Precios de Atlantis. Debe ser que está utilizando un vehículo lento y ligero. Lo máximo.",
     "subsidyGiven": "Este vehículo puede recibir un subsidio, después de un proceso muy simple que puede solicitar en línea a través del Departamento de Cosas Lindas <1>AQUÍ</1>. Es nuestra manera de decir gracias.",
     "subsidyNone": "Este vehículo no puede recibir subsidios. ¿Tiene plena certeza de usarlo? ¿No prefiere usar otro vehículo con mejores condiciones? Hay muchos de dónde elegir, recuerde que somos un lugar mágico y no hay límites.",
-    "riskReq": "Es necesario hacer una valoración de riesgo de este vehículo. El Departamento de Riesgo tiene muchos detalles AQUÍ.",
+    "riskReq": "A risk assessment is required for this vehicle. The Risk Department contains greater details <1>HERE</1>",
     "riskNotReq": "No es necesario hacer una valoración de riesgo de este vehículo. Nos gusta y esperamos que la pase muy bien al usarlo, aunque recuerde seguir todas las reglas de tránsito."
   },
   "inputPanel": {
@@ -104,7 +126,8 @@
     "equity": "Equidad",
     "joyfulness": "Alegría",
     "personalSafety": "Seguridad personal",
-    "goal1": "Metas de Desarrollo Sostenible"
+    "goal1": "Metas de Desarrollo Sostenible",
+    "savedCorrect": "City saved correctly"
   },
   "attributes": {
     "part1": "Por favor indique cuáles atributos usará para definir vehículos",
@@ -133,20 +156,21 @@
     "minvalue": "Valor mínimo",
     "th1": "Umbral 1",
     "th2": "Umbral 2",
-    "th3": "Umbral 3"
+    "th3": "Umbral 3",
+    "button": "Set Thresholds"
   },
   "useCase": {
     "useCase": "Caso específico",
     "framework": "Modelo",
-    "city": "Elija el modelo que va a usar",
-    "title": "Por favor indique cómo usará el vehículo",
+    "city": "Choose the framework that you are going to use",
+    "title": "Please indicate how you use the vehicle",
     "automation": "Nivel más alto de automatización SAE",
     "fleet": "Tamaño de flota",
     "ride": "Viajaré con otros",
     "charge": "Cobraré a otros",
     "app": "Tengo aplicación digital",
     "local": "Soy local",
-    "pudo": "Abordaje o dejar pasajeros",
+    "pudo": "Pickup and dropoff passengers",
     "enabled": "Habilitado para viajar",
     "elef": "Vuela",
     "elev": "nivel",
@@ -154,12 +178,22 @@
     "placeholder1": "Nombre del caso",
     "defgoals": "Cree un caso personalizado",
     "pregoals": "Seleccione un caso pre-definidos",
-    "setUseCase": "Defina caso"
+    "getRecom": "Get recommendation"
+  },
+  "home": {
+    "title": "See how you can use a vehicle in city streets according to our Periodic Table",
+    "subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). You can choose a vehicle from the existing list below, or go to one of the other sections depending on your interests via the buttons at the bottom or the menus above. ",
+    "link": "Learn why this tool exists and how to offer feedback.",
+    "question": "Looking for greater details?",
+    "button0": "Let me define vehicle attributes",
+    "button1": "Show me detailed policy recommendations",
+    "button2": "Let me define city policies"
   },
   "header": {
     "title": "Tabla Periódica de Movilidad",
     "subtitle": "Una herramienta de NUMO para guiar políticas",
-    "part1": "Esta plataforma ayuda a dar recomendaciones de política con bas en los atributos y casos de vehículos específicos (existentes o hipotéticos). Hay valores predefinidos que puede elegir para aprender las implicaciones de política de vehículos existentes. Puede agregar características personalizadas, o crear nuevos tipos de vehículos.",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also add customized attributes, or create new vehicle types as well. If you would like to see more detailed recommendations for this vehicle, please go to the full model",
     "link": "Aprenda por qué se creó esta herramienta y cómo dar retroalimentación"
   },
   "footer": {
@@ -167,8 +201,8 @@
     "and": "y"
   },
   "routing": {
-    "profiles": "Perfiles vehiculares",
-    "results": "Recomendación de política",
+    "simpleModel": "Simple model",
+    "fullRecs": "Full recommendations",
     "city": "Prioridades de ciudad",
     "attributes": "Atributos de ciudad",
     "thresholds": "Umbrales",

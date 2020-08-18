@@ -34,8 +34,9 @@ function writeJson () {
       // do the thing
       const vehicleArray = {}
       fvehicles.forEach(vehicle => {
+        const vehicleId = vehicle.data.id
         const vehicleName = vehicle.data.name
-        vehicleArray[vehicleName] = vehicleName
+        vehicleArray[vehicleId] = vehicleName
       })
       const newvehicles = {
         ...vehicles,
