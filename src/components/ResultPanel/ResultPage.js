@@ -12,6 +12,7 @@ import api from '../../utils/api'
 
 ResultPage.propTypes = {
   vehicle: PropTypes.shape({
+    id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
     attributes: PropTypes.objectOf(
@@ -34,7 +35,7 @@ function ResultPage ({ vehicle, setVehicle }) {
   const [vehicleset, setSetvehcile] = useState(false)
   const [useCase, setUseCase] = useState({})
   const levels = mapAttributeValuesToLevel(vehicle.attributes)
-  const { t } = useTranslation()
+  const { t } = useTranslation(['translation', 'vehicles'])
   useEffect(() => {
     async function fetchVehicleProfiles () {
       setLoadingProfiles(true)
@@ -87,11 +88,13 @@ function ResultPage ({ vehicle, setVehicle }) {
           search
           selection
           value=""
-          text={vehicle.name}
+          text={
+            vehicle.id == null ? '' : t('vehicles:vehicleNames.' + vehicle.id)
+          }
           loading={isLoadingProfiles}
           options={profiles.map(item => ({
             key: item.id,
-            text: item.name,
+            text: t('vehicles:vehicleNames.' + item.id),
             value: item.id
           }))}
           onChange={handleDropdownChange}

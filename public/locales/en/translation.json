@@ -44,7 +44,7 @@
     "save": "Download complete recomendation with details",
     "flexTitle": "B: Flex zone/PUDO zone",
     "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off",
-    "header1": "These are the recommendations for {{name}} in {{city}} framework for {{case}} use",
+    "header1": "These are the recommendations for {{vname}} in {{cname}} framework for {{name}} use",
     "driversExp": "If the intended use of the vehicle is commercial, OR if its level of automation is above 2, OR if it is elevated above ground (flying), OR if its weight is more than {{ weights }} {{ wunits }} AND if its top factory speed is higher than {{ speed2 }} {{ sunits }}, then it requires a driver license.",
     "operatingExp": "If the intended use of the vehicle is commercial, then it requires an operating license.",
     "dataExpH": "If the vehicle does not transit on the ground level, OR if its weight is more than {{ weight2 }} {{ wunits }}, OR if its top factory speed is higher than {{ speed2 }} {{ sunits }}, then the data-sharing requirements are strict.",

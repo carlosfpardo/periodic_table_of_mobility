@@ -27,6 +27,7 @@ import find from 'lodash/find'
 
 ResultOptions.propTypes = {
   vehicle: PropTypes.shape({
+    id: PropTypes.string,
     image: PropTypes.string,
     name: PropTypes.string,
     attributes: PropTypes.objectOf(
@@ -853,13 +854,14 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     doc.text(vehicle.name, margin, margin + oneLineHeight)
     doc.save('generated.pdf')
   }
-
+  const vname = t('vehicles:vehicleNames.' + vehicle.id)
+  const cname = city.name
   return (
     <div id="printArea" className="box">
       <Header>
-        <Trans i18nKey="header1">
-          These are the recommendations for {vehicle.name} in {city.name}{' '}
-          framework for {name} use
+        <Trans i18nKey="resultOptions.header1">
+          These are the recommendations for {{ vname }} in {{ cname }}
+          framework for {{ name }} use
         </Trans>
       </Header>
       <Grid centered>
