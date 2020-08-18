@@ -15,3 +15,10 @@ source_file = public/locales/en/attributes.json
 source_lang = en
 type = KEYVALUEJSON
 
+[app-periodic-tablo-of-mobility.vehicles-json]
+file_filter = public/locales/<lang>/vehicles.json
+minimum_perc = 0
+source_file = public/locales/en/vehicles.json
+source_lang = en
+type = KEYVALUEJSON
+

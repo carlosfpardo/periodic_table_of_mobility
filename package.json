@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8888/",
   "scripts": {
     "bootstrap": "netlify dev:exec node ./scripts/bootstrap-fauna-database.js",
+    "vehicles": "netlify dev:exec node ./scripts/Vehicle18n.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

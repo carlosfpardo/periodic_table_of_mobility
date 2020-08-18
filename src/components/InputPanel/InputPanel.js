@@ -117,7 +117,6 @@ function InputPanel ({ vehicle, setVehicle }) {
       setSavePending(false)
     })
   }
-
   async function saveToApi (method, vehicle) {
     setSuccess('')
     setError('')
