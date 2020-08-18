@@ -46,7 +46,6 @@ function UseCase ({
   setSetvehcile
 }) {
   const [caseA, setCase] = useState([])
-  const [caseset, setCaseset] = useState(false)
   const [lastUpdate, setLastUpdate] = useState(new Date().toISOString())
   const [profiles, setProfiles] = useState([])
   const [isDefault, setDefault] = useState(false)
@@ -95,16 +94,9 @@ function UseCase ({
       setCity(test)
     }
   }
-  function handleDropdownChange (event, data) {
-    const goals = find(profiles, { name: data.value })
-    setCity(goals)
-  }
   function handleCaseDropdownChange (event, data) {
     const goals = find(caseA, { name: data.value })
     setUseCase(goals)
-    setCaseset(true)
-  }
-  function handleSetUseCase () {
     setSetvehcile(true)
   }
   function handleNameChange (event, data) {
@@ -279,17 +271,7 @@ function UseCase ({
             </Grid.Column>
             <Grid.Column>
               <p>{t('useCase.framework')}</p>
-              <Dropdown
-                search
-                selection
-                text={city.name}
-                options={profiles.map(item => ({
-                  key: item.name,
-                  text: item.name,
-                  value: item.name
-                }))}
-                onChange={handleDropdownChange}
-              />
+              <Segment basic content={city.name} />
             </Grid.Column>
           </Grid.Row>
         </Grid>
@@ -449,28 +431,6 @@ function UseCase ({
               )}
             </Grid>
           </Form>
-          {caseset ? (
-            <>
-              <Segment basic>{t('useCase.city')}</Segment>
-              <Dropdown
-                placeholder={!isLoadingProfiles ? 'Select Loadout' : ''}
-                search
-                selection
-                value={city.name}
-                options={profiles.map(item => ({
-                  key: item.name,
-                  text: item.name,
-                  value: item.name
-                }))}
-                onChange={handleDropdownChange}
-              />
-              <Button onClick={handleSetUseCase}>
-                {t('useCase.getRecom')}
-              </Button>
-            </>
-          ) : (
-            ''
-          )}
         </>
       )}
     </div>
