@@ -42,6 +42,11 @@ function Home ({ setVehicle }) {
               <Header>{t('home.question')}</Header>
             </Grid.Row>
             <Grid.Row columns={2}>
+             <Grid.Column centered="true">
+                <Link to="/simple">
+                  <Button fluid>{t('home.button0')}</Button>
+                </Link>
+              </Grid.Column>
               <Grid.Column>
                 <Link to="/policyRecomendations">
                   <Button fluid>{t('home.button1')}</Button>
