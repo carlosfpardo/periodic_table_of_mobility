@@ -10,7 +10,8 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
-    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the way in which you will use it. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering 
+    their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the way in which you will use it. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
     "part1": "Select a vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
     "part3": "Retrieving uses...",
@@ -20,7 +21,7 @@
     "summary": "Summary",
     "detail": "Detailed recommendation",
     "driverLicense": "Driver license",
-    "operatingLicense": "Operating license",
+    "operatingLicense": "Operator's license",
     "dataRequirements": "Data requirements",
     "dataQuery": "See data requirements",
     "price": "Fees and fines",
