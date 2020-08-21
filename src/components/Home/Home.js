@@ -43,7 +43,7 @@ function Home ({ setVehicle }) {
             </Grid.Row>
             <Grid.Row columns={2}>
              <Grid.Column centered="true">
-                <Link to="/simple">
+                <Link to="/vehicles">
                   <Button fluid>{t('home.button0')}</Button>
                 </Link>
               </Grid.Column>
