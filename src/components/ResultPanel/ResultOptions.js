@@ -46,7 +46,6 @@ ResultOptions.propTypes = {
     rideshare: PropTypes.bool,
     charge: PropTypes.bool,
     app: PropTypes.bool,
-    local: PropTypes.bool,
     pudoPassager: PropTypes.bool,
     elevationF: PropTypes.bool,
     elevationL: PropTypes.bool,
@@ -75,7 +74,6 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     name,
     automation,
     charge,
-    local,
     elevationF,
     elevationL,
     elevationU
@@ -521,7 +519,7 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
     )
   }
   function Subsidy () {
-    const counter = calculateSubsidyRequired(levels, elevation, local)
+    const counter = calculateSubsidyRequired(levels, elevation)
     subsidy = counter
     return (
       <Grid.Row columns={2}>
@@ -542,9 +540,8 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                     If the vehicle transits on the ground level, AND if its
                     exhaust-emissions efficiency per person is equal to
                     {{ emission }} {{ eunits }}, OR if its ILL-Health value is
-                    greater than or equal to {{ healths }} {{ hunits }}, OR if
-                    the service provider is local, then it is eligible for
-                    subsidies.
+                    greater than or equal to {{ healths }} {{ hunits }}, then it
+                    is eligible for subsidies.
                   </Trans>
                 </Header>
               </Modal.Description>
