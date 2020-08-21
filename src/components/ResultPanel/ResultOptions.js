@@ -876,10 +876,10 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                   <VehicleImage vehicle={vehicle} />
                 </Grid.Row>
                 <Grid.Row>
-                  <RadarChart levels={levels} />
+                  <SummaryPolicy levels={levels} />
                 </Grid.Row>
                 <Grid.Row>
-                  <SummaryPolicy levels={levels} />
+                  <RadarChart levels={levels} />
                 </Grid.Row>
               </Grid>
             </div>

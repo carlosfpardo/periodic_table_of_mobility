@@ -10,8 +10,7 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
-    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering 
-    their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the way in which you will use it. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the way in which you will use it. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
     "part1": "Select a vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
     "part3": "Retrieving uses...",
@@ -194,7 +193,7 @@
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
-    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also create new vehicles and define their attributes. If you would like to see more detailed recommendations for this vehicle, please go to the full recommendations",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also create new vehicles and define their attributes. If you would like to see more detailed recommendations for this vehicle, please go to the full recommendations. ",
     "link": "Learn why this tool exists and how to offer feedback."
   },
   "footer": {
