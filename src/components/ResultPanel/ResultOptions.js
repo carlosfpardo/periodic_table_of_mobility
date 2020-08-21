@@ -890,12 +890,12 @@ function ResultOptions ({ levels, vehicle, vehicleset, useCase, city }) {
                 <Grid.Row>
                   <Header>{t('resultOptions.detail')}</Header>
                 </Grid.Row>
+                <Risk />
                 <DriversLicense />
                 <OperatingLicense />
                 <DataRequirement />
                 <PriceRequired />
                 <Subsidy />
-                <Risk />
                 <Grid.Row>
                   <Segment basic>{t('resultOptions.attTitle')}</Segment>
                 </Grid.Row>
