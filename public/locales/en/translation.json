@@ -10,11 +10,11 @@
     "downloadSVG": "Download vector image (SVG)"
   },
   "resultPage": {
-    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the use case and finalizing with the framework. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
+    "part0": "This is a more comprehensive model of the profile of the vehice and how it relates to triggers, uses cases and framework, and is useful for anyone who is seriously considering operating their vehicle in a city based on the NUMO framework. You must begin by selecting a vehicle, followed by the way in which you will use it. Once you've clicked through you'll get a complete recommendation related to each of several relevant policies (licenses, data requirements, pricing issues)",
     "part1": "Select a vehicle",
     "part2": "Please choose from the drop-down menu at the bottom",
-    "part3": "Retrieving use cases...",
-    "part4": "Select pre-loaded use cases"
+    "part3": "Retrieving uses...",
+    "part4": "Select pre-loaded uses"
   },
   "resultOptions": {
     "summary": "Summary",
@@ -29,7 +29,7 @@
     "priceHigh": "High",
     "subsidy": "Subsidy",
     "formRequest": "Yes",
-    "streetAllocation": "Right of way zone allowance",
+    "streetAllocation": "This is where this vehicle is allowed on the streets",
     "sidewalk": "A: Ped realm ",
     "nextPUDO": "B: Flex Zone",
     "nextMove": "C: Travel-lane (close)",
@@ -39,11 +39,11 @@
     "none": "None",
     "loose": "Loose",
     "strict": "Strict",
-    "risk": "Risk assessment",
+    "risk": "Insurance risk assessment",
     "riskDetails": "Assessment Required",
     "save": "Download complete recomendation with details",
     "flexTitle": "B: Flex zone/PUDO zone",
-    "flextext": "Vehicles in this zone are allowed only when below 30 km/h and with an explicit function of pick-up and drop-off",
+    "flextext": "Vehicles in this zone are allowed only when traveling at a speed below 30 km/h and with an explicit function of pick-up and drop-off",
     "header1": "These are the recommendations for {{vname}} in {{cname}} framework for {{name}} use",
     "driversExp": "If the intended use of the vehicle is commercial, OR if its level of automation is above 2, OR if it is elevated above ground (flying), OR if its weight is more than {{ weights }} {{ wunits }} AND if its top factory speed is higher than {{ speed2 }} {{ sunits }}, then it requires a driver license.",
     "operatingExp": "If the intended use of the vehicle is commercial, then it requires an operating license.",
@@ -67,7 +67,7 @@
     "speed": "Top Speed"
   },
   "document": {
-    "introPDF": "This document is a summary of the {{NUMO}} policy recommendation for a {{VEHICLENAME}} in a {{USECASE}} use case, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
+    "introPDF": "This document is a summary of the {{NUMO}} policy recommendation for a {{VEHICLENAME}} in a {{USECASE}} use, based on the Periodic Table of Mobility. It can be used in Atlantis to process requirements in order to use this vehicle in this glorious (albeit fictitious) island.",
     "driversReq": "A driver license is required for this vehicle, more information to request a license can be found <1>HERE</1>",
     "driversNotReq": "A driver license is not required to operate this vehicle. Regardless, please be careful when moving around our city and follow all traffic rules. See <1>HERE</1> the general traffic rules for your beautiful island.",
     "operatingReq": "An operating license is required for this vehicle, more information can be found <1>HERE</1>",
@@ -164,28 +164,28 @@
     "framework": "Framework",
     "city": "Choose the framework that you are going to use",
     "title": "Please indicate how you use the vehicle",
-    "automation": "Highest SEA level of automation",
+    "automation": "Highest SAE level of automation",
     "fleet": "Fleet size",
     "ride": "I will ride with others",
     "charge": "I will charge others",
     "app": "I have a digital app",
     "local": "I am local",
-    "pudo": "Pickup and dropoff passengers",
+    "pudo": "Pickup and drop off passengers",
     "enabled": "Enabled to travel",
     "elef": "flying",
     "elev": "level",
     "eleu": "under",
     "placeholder1": "Name for the use case",
     "defgoals": "Build a custom use case",
-    "pregoals": "Use a prebuild use case",
+    "pregoals": "Use a prebuilt use case",
     "getRecom": "Get recommendation"
   },
   "home": {
     "title": "See how you can use a vehicle in city streets according to our Periodic Table",
-    "subtitle": "See our simple recommendations according to known vehicles by clicking on vehicles below",
-    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). You can choose a vehicle from the existing list below, or go to one of the other sections depending on your interests via the buttons at the bottom or the menus above. ",
+    "subtitle": "See our simple recommendations by clicking on vehicles below",
+    "part1": "This platform helps provide recommendations for policy depending on the attributes and use cases of specific vehicles (existing or hypothetical). You can choose a vehicle from the existing list below, or go to one of the other sections depending on your interests via the menus above. ",
     "link": "Learn why this tool exists and how to offer feedback.",
-    "question": "Looking for greater details?",
+    "question": "Looking for more details?",
     "button0": "Let me define vehicle attributes",
     "button1": "Show me detailed policy recommendations",
     "button2": "Let me define city policies"
@@ -193,7 +193,7 @@
   "header": {
     "title": "Periodic Table of Mobility",
     "subtitle": "A policy guidance tool by NUMO",
-    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also add customized attributes, or create new vehicle types as well. If you would like to see more detailed recommendations for this vehicle, please go to the full model",
+    "part1": "This platform helps provide recommendations for policy based on the depending on the attributes and use cases of specific vehicles (existing or hypothetical). This section helps you use pre-loaded values to learn the policy implications of existing vehicles. You can also create new vehicles and define their attributes. If you would like to see more detailed recommendations for this vehicle, please go to the full recommendations",
     "link": "Learn why this tool exists and how to offer feedback."
   },
   "footer": {
