@@ -12,7 +12,7 @@ import find from 'lodash/find'
 import DataInput from './DataInput'
 import { getNewVehicleId } from '../../utils/uniqueid'
 import ATTRIBUTES from '../../data/attributes_numo.json'
-import { useTranslation, Trans } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import api from '../../utils/api'
 
 function Attributes ({ values = {}, onChange = () => {} }) {
@@ -206,11 +206,7 @@ function InputPanel ({ vehicle, setVehicle }) {
           loading={isLoadingProfiles}
           options={profiles.map(item => ({
             key: item.id,
-            text: (
-              <Trans i18nKey={'vehicles:vehicleNames.' + item.id}>
-                {item.name}
-              </Trans>
-            ),
+            text: t([`vehicles:vehicleNames.${item.id}`, item.name]),
             value: item.id
           }))}
           onChange={handleDropdownChange}

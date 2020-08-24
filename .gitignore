@@ -27,3 +27,4 @@ yarn-error.log*
 .netlify
 functions/periodicimage-firebase-adminsdk-zosmm-cf9b17db40.json
 .env
+debug.log
