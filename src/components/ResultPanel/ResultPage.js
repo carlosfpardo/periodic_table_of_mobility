@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Header, Dropdown, Message } from 'semantic-ui-react'
 import find from 'lodash/find'
-import { useTranslation } from 'react-i18next'
+import { useTranslation, Trans } from 'react-i18next'
 import { mapAttributeValuesToLevel } from '../../utils/binning'
 import ResultOptions from './ResultOptions'
 import UseCase from './UseCase'
@@ -94,7 +94,11 @@ function ResultPage ({ vehicle, setVehicle }) {
           loading={isLoadingProfiles}
           options={profiles.map(item => ({
             key: item.id,
-            text: t('vehicles:vehicleNames.' + item.id),
+            text: (
+              <Trans i18nKey={'vehicles:vehicleNames.' + item.id}>
+                {item.name}
+              </Trans>
+            ),
             value: item.id
           }))}
           onChange={handleDropdownChange}

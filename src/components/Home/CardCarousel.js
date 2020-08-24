@@ -15,7 +15,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import api from '../../utils/api'
-import { useTranslation } from 'react-i18next'
+import { Trans } from 'react-i18next'
 
 CardCarousel.propTypes = {
   setVehicle: PropTypes.func
@@ -23,7 +23,6 @@ CardCarousel.propTypes = {
 function CardCarousel ({ setVehicle }) {
   const [profiles, setProfiles] = useState([])
   const [i, setI] = useState(1)
-  const { t } = useTranslation('vehicles')
   useEffect(() => {
     async function fetchVehicleProfiles () {
       try {
@@ -83,7 +82,11 @@ function CardCarousel ({ setVehicle }) {
                 <Slide key={vehicle.id}>
                   <VehicleImage vehicle={vehicle} />
                   <Link to="/vehicles">
-                    <Header>{t('vehicleNames.' + vehicle.id)}</Header>
+                    <Header>
+                      <Trans i18nKey={'vehicles:vehicleNames.' + vehicle.id}>
+                        {vehicle.name}
+                      </Trans>
+                    </Header>
                   </Link>
                 </Slide>
               ))}
