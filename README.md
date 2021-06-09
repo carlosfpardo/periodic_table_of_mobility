@@ -1,6 +1,6 @@
-# Vehicle profile editor
+# Periodic Table of Mobility
 
-A proof-of-concept developed jointly by the New Urban Mobility Alliance (NUMO) and Streetmix. This profile editor is simplified version of a guidance framework for policies for new vehicles and services. During The second half of 2020 a larger team has been working on this expansion.
+An advanced proof-of-concept initially developed jointly by the New Urban Mobility Alliance (NUMO) and Streetmix. This Periodic Table (originally called "vehicle profile editor") intends to become a guidance framework for policies for new vehicles and services. During The second half of 2020 a larger team has been working on this expansion, and in 2021 I took this up to develop an update.
 
 ## Attributes
 
